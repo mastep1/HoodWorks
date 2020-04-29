@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+<group android:checkableBehavior="none"
+    android:id="@+id/item"
+    >
+    <item
+        android:id="@+id/Menu_Start"
+        android:title="Start"/>
+
+    <item
+        android:id="@+id/Menu_Kreator"
+        android:title="Kreator" />
+    <item
+        android:id="@+id/Menu_Zadania"
+        android:title="Zadania" />
+    <item
+        android:id="@+id/Menu_Ustawienia"
+        android:title="Ustawienia" />
+</group>
+
+</menu>

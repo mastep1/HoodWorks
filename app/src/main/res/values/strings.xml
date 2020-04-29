@@ -1,0 +1,28 @@
+<resources>
+    <string name="app_name">neighborhoodWork</string>
+    <string name="tx1Dolacz">Dołącz!</string>
+    <string name="tx1PrzezFb">przez facebook\'a</string>
+    <string name="tx1Email">użyje e-maila</string>
+    <string name="tx1ZalogujSie">Masz już konto? Zaloguj się</string>
+    <string name="tx2Witaj">Witaj, ponownie!</string>
+    <string name="tx2ZalogujSie">Zaloguj Się</string>
+    <string name="Etx2Email"><p>  </p>email</string>
+    <string name="Etx2Haslo"><p>  </p>hasło</string>
+    <string name="Zaloguj">Zaloguj</string>
+    <string name="tx2Zapomniałes">Zapomniałeś hasła?</string>
+    <string name="tx3UtworzKonto">Utworz Konto!</string>
+    <string name="Etx3Email"><p>  </p>email</string>
+    <string name="Etx3nazwa"><p>  </p>nazwa użytkownika</string>
+    <string name="Etx3Haslo"><p>  </p>hasło</string>
+    <string name="tx3Utworz">Utwórz</string>
+    <string name="tx4Home"> Hood  Works </string>
+    <string name="tx4Praca"> Praca w okolicy </string>
+    <string name="tx4Pracownicy"> Pracownicy w okolicy </string>
+    <string name="tx4OcenaZlecenia"> Zlecone zadania : 17 | Ocena 4,7/5 </string>
+    <string name="tx4OcenaPracy"> Wykonane zlecenia : 193 | Ocena 3,2/5 </string>
+    <string name="tx4SG"> Strona Główna </string>
+    <string name="tx4Chat"> Chat </string>
+    <string name="tx4Mapa"> Mapa </string>
+    <string name="tx4Profil"> Profil </string>
+    <string name="title_activity_maps">Map</string>
+</resources>
