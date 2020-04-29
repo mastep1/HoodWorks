@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">neighborhoodWork</string>
     <string name="tx1Dolacz">Dołącz!</string>
-    <string name="tx1PrzezFb">przez facebook\'a</string>
-    <string name="tx1Email">użyje e-maila</string>
+    <string name="tx1PrzezFb">Konto Google</string>
+    <string name="tx1Email">E-mail lub \nnumer telefonu</string>
     <string name="tx1ZalogujSie">Masz już konto? Zaloguj się</string>
     <string name="tx2Witaj">Witaj, ponownie!</string>
     <string name="tx2ZalogujSie">Zaloguj Się</string>
@@ -12,7 +12,7 @@
     <string name="tx2Zapomniałes">Zapomniałeś hasła?</string>
     <string name="tx3UtworzKonto">Utworz Konto!</string>
     <string name="Etx3Email"><p>  </p>email</string>
-    <string name="Etx3nazwa"><p>  </p>nazwa użytkownika</string>
+    <string name="Etx3nazwa"><p>  </p>Imie i nazwisko</string>
     <string name="Etx3Haslo"><p>  </p>hasło</string>
     <string name="tx3Utworz">Utwórz</string>
     <string name="tx4Home"> Hood  Works </string>
