@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Home">
+    tools:context=".Chat">
 
     <ImageView
-        android:id="@+id/img4Menu"
+        android:id="@+id/img5Menu"
         android:layout_width="70dp"
         android:layout_height="70dp"
         android:padding="10dp"
@@ -16,13 +16,13 @@
         app:srcCompat="@drawable/menu" />
 
     <TextView
-        android:id="@+id/tx4MainNapis"
+        android:id="@+id/tx5MainNapis"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:paddingTop="5dp"
         android:paddingBottom="15dp"
-        android:text="@string/tx4Home"
+        android:text="@string/tx5Main"
         android:textAlignment="center"
         android:textColor="#131313"
         android:textSize="30sp"
@@ -33,7 +33,7 @@
 
 
     <ImageView
-        android:id="@+id/img4filter"
+        android:id="@+id/img5filter"
         android:layout_width="50dp"
         android:layout_height="55dp"
         android:layout_marginTop="10dp"
@@ -42,19 +42,39 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/filter" />
 
-    <fragment
-        android:id="@+id/mapView4"
-        android:name="com.google.android.gms.maps.SupportMapFragment"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rc5"
         android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="@+id/l4MenuDown"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tx4MainNapis"
-        tools:context=".Home" />
+        app:layout_constraintTop_toBottomOf="@+id/img5Menu" />
+
+    <LinearLayout
+        android:id="@+id/l5Koniec"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rc5">
+
+        <TextView
+            android:id="@+id/tx5Koniec"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="20dp"
+            android:text="Nie masz więcej kontaktów"
+            android:textAlignment="center"
+            android:textColor="#878282"
+            android:textSize="24sp" />
+    </LinearLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/l4MenuDown"
+        android:id="@+id/l5MenuDown"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="#BFFFFDFD"
@@ -64,32 +84,33 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <ImageView
-            android:id="@+id/img4Chat"
-            android:layout_width="65dp"
-            android:layout_height="50dp"
+            android:id="@+id/img5Chat"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
             android:layout_marginStart="35dp"
-            android:layout_marginBottom="5dp"
+            android:layout_marginBottom="10dp"
             android:background="@android:color/transparent"
             android:paddingLeft="5dp"
+            android:paddingTop="5dp"
             android:paddingRight="5dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:srcCompat="@drawable/poprawione" />
 
         <ImageView
-            android:id="@+id/img4Mapa"
-            android:layout_width="75dp"
-            android:layout_height="75dp"
-            android:layout_marginBottom="15dp"
+            android:id="@+id/img5Mapa"
+            android:layout_width="70dp"
+            android:layout_height="55dp"
+            android:layout_marginBottom="5dp"
             android:paddingLeft="5dp"
             android:paddingRight="5dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/img4Profil"
-            app:layout_constraintStart_toEndOf="@+id/img4Chat"
+            app:layout_constraintEnd_toStartOf="@+id/img5Profil"
+            app:layout_constraintStart_toEndOf="@+id/img5Chat"
             app:srcCompat="@drawable/map" />
 
         <ImageView
-            android:id="@+id/img4Profil"
+            android:id="@+id/img5Profil"
             android:layout_width="65dp"
             android:layout_height="50dp"
             android:layout_marginEnd="35dp"

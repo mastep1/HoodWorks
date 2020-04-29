@@ -4,31 +4,16 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.PopupMenu
-import com.google.android.gms.maps.*
-import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.MarkerOptions
-import kotlinx.android.synthetic.main.activity_home.*
+import androidx.recyclerview.widget.LinearLayoutManager
+import kotlinx.android.synthetic.main.activity_chat.*
 
-
-
-class Home : AppCompatActivity(), OnMapReadyCallback {
-
-    private lateinit var mMap: GoogleMap
+class Chat : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_home)
+        setContentView(R.layout.activity_chat)
 
-        img4Chat.setOnClickListener {
-            val chat = Intent(applicationContext, Chat::class.java)
-            startActivity(chat)
-        }
-
-        val mapFragment = supportFragmentManager
-            .findFragmentById(R.id.mapView4) as SupportMapFragment
-        mapFragment.getMapAsync(this)
-
-        img4Menu.setOnClickListener {
+        img5Menu.setOnClickListener {
             val fastMenu = PopupMenu(this, it)
             fastMenu.setOnMenuItemClickListener { item ->
                 when (item.itemId) {
@@ -58,14 +43,17 @@ class Home : AppCompatActivity(), OnMapReadyCallback {
             fastMenu.inflate(R.menu.main_menu)
             fastMenu.show()
         }
-    }
-    override fun onMapReady(googleMap: GoogleMap) {
-        mMap = googleMap
-        mMap.isIndoorEnabled = true
 
-        val sydney = LatLng(52.189, 20.828)
-        mMap.addMarker(MarkerOptions().position(sydney).title("Marker"))
-        mMap.addMarker(MarkerOptions().position(sydney).title("Marker"))
-        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(sydney, 16f))
+        img5Mapa.setOnClickListener {
+            val mapa = Intent(applicationContext, Home::class.java)
+            startActivity(mapa)
+        }
+
+
+        rc5.apply {
+            layoutManager = LinearLayoutManager(this@Chat)
+            addItemDecoration(TopSpacingItemDecoration(30))
+            adapter = AdapterChat()
+        }
     }
 }
