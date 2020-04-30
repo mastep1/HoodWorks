@@ -6,7 +6,7 @@
     <string name="tx1ZalogujSie">Masz już konto? Zaloguj się</string>
     <string name="tx2Witaj">Witaj, ponownie!</string>
     <string name="tx2ZalogujSie">Zaloguj Się</string>
-    <string name="Etx2Email"><p>  </p>email</string>
+    <string name="Etx2Email"><p>  </p>E-mail</string>
     <string name="Etx2Haslo"><p>  </p>hasło</string>
     <string name="Zaloguj">Zaloguj</string>
     <string name="tx2Zapomniałes">Zapomniałeś hasła?</string>
@@ -26,4 +26,7 @@
     <string name="tx4Profil"> Profil </string>
     <string name="title_activity_maps">Map</string>
     <string name="tx5Main">Chat</string>
+    <string name="Etx7Tel"><p>  </p>Numer telefonu</string>
+    <string name="tx3Wolisz">Aby użyć telefonu Kliknij Tutaj!</string>
+    <string name="tx7Wolisz">Aby użyć e-maila Kliknij Tutaj!</string>
 </resources>
