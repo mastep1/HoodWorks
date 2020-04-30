@@ -3,11 +3,11 @@ package com.example.neighborhoodwork
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import kotlinx.android.synthetic.main.activity_utworz_konto_email.*
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
-import android.widget.Toast
+import kotlinx.android.synthetic.main.activity_utworz_konto_email.*
 
 class utworzKontoEmail : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
@@ -47,11 +47,11 @@ class utworzKontoEmail : AppCompatActivity() {
 
     fun sprawdziDane() : Boolean{
         var poprawnosc = false
-        if(Etx3Tel.length()>5&&Etx3Nazwa.text.length>6&&Etx3Haslo.text.length>=8){
+        if(Etx3Email.length()>5&&Etx3Nazwa.text.length>6&&Etx3Haslo.text.length>=8){
             poprawnosc = true
         };else{
 
-            if(Etx3Tel.length()<=5){
+            if(Etx3Email.length()<=5){
                 img3warning1.visibility = View.VISIBLE
                 tx3warning1.visibility = View.VISIBLE
                 tx3warning1.setText("Podano nie poprawny e-mail")
@@ -85,7 +85,7 @@ class utworzKontoEmail : AppCompatActivity() {
     }
 
     fun dodajUzytkownika(){
-        auth.createUserWithEmailAndPassword(Etx3Tel.text.toString(), Etx3Haslo.text.toString())
+        auth.createUserWithEmailAndPassword(Etx3Email.text.toString(), Etx3Haslo.text.toString())
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
                     val user = auth.currentUser

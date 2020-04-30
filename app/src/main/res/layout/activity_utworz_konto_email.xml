@@ -18,7 +18,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/Etx3Tel"
+        android:id="@+id/Etx3Email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="70dp"
@@ -40,7 +40,7 @@
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Etx3Tel" />
+        app:layout_constraintTop_toBottomOf="@+id/Etx3Email" />
 
     <EditText
         android:id="@+id/Etx3Haslo"
@@ -85,8 +85,8 @@
         android:layout_marginStart="5dp"
         android:tint="#ED0303"
         android:visibility="invisible"
-        app:layout_constraintStart_toEndOf="@+id/Etx3Tel"
-        app:layout_constraintTop_toTopOf="@+id/Etx3Tel"
+        app:layout_constraintStart_toEndOf="@+id/Etx3Email"
+        app:layout_constraintTop_toTopOf="@+id/Etx3Email"
         app:srcCompat="@drawable/warning" />
 
     <ImageView
@@ -118,8 +118,8 @@
         android:layout_marginStart="10dp"
         android:textColor="#ED0303"
         android:textSize="12sp"
-        app:layout_constraintStart_toStartOf="@+id/Etx3Tel"
-        app:layout_constraintTop_toBottomOf="@+id/Etx3Tel" />
+        app:layout_constraintStart_toStartOf="@+id/Etx3Email"
+        app:layout_constraintTop_toBottomOf="@+id/Etx3Email" />
 
     <TextView
         android:id="@+id/tx3warning2"
@@ -147,7 +147,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:text="@string/tx3Wolisz"
-        app:layout_constraintStart_toStartOf="@+id/Etx3Tel"
+        app:layout_constraintStart_toStartOf="@+id/Etx3Email"
         app:layout_constraintTop_toBottomOf="@+id/tx3warning1" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
