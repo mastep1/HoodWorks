@@ -2,22 +2,32 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     >
-<group android:checkableBehavior="none"
-    android:id="@+id/item"
-    >
     <item
-        android:id="@+id/Menu_Start"
-        android:title="Start"/>
-
+        android:id="@+id/Menu_Mapa"
+        android:title="Mapa"
+        android:icon="@drawable/beer"/>
     <item
-        android:id="@+id/Menu_Kreator"
-        android:title="Kreator" />
+        android:id="@+id/Menu_Chat"
+        android:title="Chat"
+        android:icon="@drawable/beer"/>
     <item
-        android:id="@+id/Menu_Zadania"
-        android:title="Zadania" />
+        android:id="@+id/Menu_Dodaj_Zlecenie"
+        android:title="Dodaj Zlecenie"
+        android:icon="@drawable/beer"/>
+    <item
+        android:id="@+id/Menu_Zglosc_prace"
+        android:title="Zgłoś chęć do pracy"
+        android:icon="@drawable/beer"/>
+    <item
+        android:id="@+id/Menu_Profil"
+        android:title="Profil"
+        android:icon="@drawable/beer"/>
     <item
         android:id="@+id/Menu_Ustawienia"
-        android:title="Ustawienia" />
-</group>
-
+        android:title="Ustawienia"
+        android:icon="@drawable/beer"/>
+    <item
+        android:id="@+id/Menu_Wyloguj"
+        android:title="Wyloguj"
+        android:icon="@drawable/beer"/>
 </menu>

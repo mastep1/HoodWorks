@@ -43,8 +43,6 @@ class utworzNrTel : AppCompatActivity() {
 
            }
        }
-
-
    }
 
 
