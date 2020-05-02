@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1008927315255",
+    "firebase_url": "https://hoodworks-6948c.firebaseio.com",
+    "project_id": "hoodworks-6948c",
+    "storage_bucket": "hoodworks-6948c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1008927315255:android:58234246bb26fe481b76b2",
+        "android_client_info": {
+          "package_name": "com.example.neighborhoodwork"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1008927315255-p714jbb6geriqcfla3kduul58dcteu27.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA_eIV2khSOjDCH7DoWr2dfuLwHi-XLI3w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1008927315255-p714jbb6geriqcfla3kduul58dcteu27.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
