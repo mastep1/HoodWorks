@@ -22,6 +22,11 @@ class Home : AppCompatActivity(), OnMapReadyCallback {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
 
+
+        tx4MainNapis.setOnClickListener {
+            val chat = Intent(applicationContext, test10::class.java)
+            startActivity(chat)
+        }
         img4Chat.setOnClickListener {
             val chat = Intent(applicationContext, Chat::class.java)
             startActivity(chat)
