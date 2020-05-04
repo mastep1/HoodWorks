@@ -24,7 +24,7 @@
         android:paddingBottom="15dp"
         android:text="@string/tx4Home"
         android:textAlignment="center"
-        android:textColor="#EC1919"
+        android:textColor="#000000"
         android:textSize="30sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
