@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".utworzKontoEmail">
-
+    tools:context=".utworzNrTel">
     <TextView
-        android:id="@+id/tx3UtworzKonto"
+        android:id="@+id/tx7UtworzKonto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="130dp"
@@ -18,20 +18,20 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/Etx3Email"
+        android:id="@+id/Etx7Tel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="70dp"
         android:editable="false"
         android:ems="10"
-        android:hint="@string/Etx3Email"
-        android:inputType="textEmailAddress"
+        android:hint="@string/Etx7Tel"
+        android:inputType="phone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tx3UtworzKonto" />
+        app:layout_constraintTop_toBottomOf="@+id/tx7UtworzKonto" />
 
     <EditText
-        android:id="@+id/Etx3Nazwa"
+        android:id="@+id/Etx7Nazwa"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
@@ -40,10 +40,10 @@
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Etx3Email" />
+        app:layout_constraintTop_toBottomOf="@+id/Etx7Tel" />
 
     <EditText
-        android:id="@+id/Etx3Haslo"
+        android:id="@+id/Etx7Haslo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
@@ -52,20 +52,20 @@
         android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Etx3Nazwa" />
+        app:layout_constraintTop_toBottomOf="@+id/Etx7Nazwa" />
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/card3"
+        android:id="@+id/card7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="70dp"
         app:cardCornerRadius="100dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Etx3Haslo">
+        app:layout_constraintTop_toBottomOf="@+id/Etx7Haslo">
 
         <TextView
-            android:id="@+id/tx3Utworz"
+            android:id="@+id/tx7Utworz"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="#0db3ff"
@@ -79,75 +79,74 @@
     </androidx.cardview.widget.CardView>
 
     <ImageView
-        android:id="@+id/img3warning1"
+        android:id="@+id/img7warning1"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginStart="5dp"
         android:tint="#ED0303"
         android:visibility="invisible"
-        app:layout_constraintStart_toEndOf="@+id/Etx3Email"
-        app:layout_constraintTop_toTopOf="@+id/Etx3Email"
+        app:layout_constraintStart_toEndOf="@+id/Etx7Tel"
+        app:layout_constraintTop_toTopOf="@+id/Etx7Tel"
         app:srcCompat="@drawable/warning" />
 
     <ImageView
-        android:id="@+id/img3warning2"
+        android:id="@+id/img7warning2"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginStart="5dp"
         android:tint="#ED0303"
         android:visibility="invisible"
-        app:layout_constraintStart_toEndOf="@+id/Etx3Nazwa"
-        app:layout_constraintTop_toTopOf="@+id/Etx3Nazwa"
+        app:layout_constraintStart_toEndOf="@+id/Etx7Nazwa"
+        app:layout_constraintTop_toTopOf="@+id/Etx7Nazwa"
         app:srcCompat="@drawable/warning" />
 
     <ImageView
-        android:id="@+id/img3warning3"
+        android:id="@+id/img7warning3"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginStart="5dp"
         android:tint="#ED0303"
         android:visibility="invisible"
-        app:layout_constraintStart_toEndOf="@+id/Etx3Haslo"
-        app:layout_constraintTop_toTopOf="@+id/Etx3Haslo"
+        app:layout_constraintStart_toEndOf="@+id/Etx7Haslo"
+        app:layout_constraintTop_toTopOf="@+id/Etx7Haslo"
         app:srcCompat="@drawable/warning" />
 
     <TextView
-        android:id="@+id/tx3warning1"
+        android:id="@+id/tx7warning1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:textColor="#ED0303"
         android:textSize="12sp"
-        app:layout_constraintStart_toStartOf="@+id/Etx3Email"
-        app:layout_constraintTop_toBottomOf="@+id/Etx3Email" />
+        app:layout_constraintStart_toStartOf="@+id/Etx7Tel"
+        app:layout_constraintTop_toBottomOf="@+id/Etx7Tel" />
 
     <TextView
-        android:id="@+id/tx3warning2"
+        android:id="@+id/tx7warning2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:textColor="#ED0303"
         android:textSize="12sp"
-        app:layout_constraintStart_toStartOf="@+id/Etx3Nazwa"
-        app:layout_constraintTop_toBottomOf="@+id/Etx3Nazwa" />
+        app:layout_constraintStart_toStartOf="@+id/Etx7Nazwa"
+        app:layout_constraintTop_toBottomOf="@+id/Etx7Nazwa" />
 
     <TextView
-        android:id="@+id/tx3warning3"
+        android:id="@+id/tx7warning3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:textColor="#ED0303"
         android:textSize="12sp"
-        app:layout_constraintStart_toStartOf="@+id/Etx3Haslo"
-        app:layout_constraintTop_toBottomOf="@+id/Etx3Haslo" />
+        app:layout_constraintStart_toStartOf="@+id/Etx7Haslo"
+        app:layout_constraintTop_toBottomOf="@+id/Etx7Haslo" />
 
     <TextView
-        android:id="@+id/tx3WoliszUzycTel"
+        android:id="@+id/tx7Wolisz"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
-        android:text="@string/tx3Wolisz"
-        app:layout_constraintStart_toStartOf="@+id/Etx3Email"
-        app:layout_constraintTop_toBottomOf="@+id/tx3warning1" />
-
+        android:text="@string/tx7Wolisz"
+        app:layout_constraintStart_toStartOf="@+id/Etx7Tel"
+        app:layout_constraintTop_toBottomOf="@+id/tx7warning1" />
 </androidx.constraintlayout.widget.ConstraintLayout>

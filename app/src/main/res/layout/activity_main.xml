@@ -74,7 +74,7 @@
                 android:layout_marginTop="7dp"
                 android:text="@string/tx1Email"
                 android:textColor="#000000"
-                android:textSize="18sp" />
+                android:textSize="15sp" />
         </androidx.cardview.widget.CardView>
 
     </LinearLayout>
