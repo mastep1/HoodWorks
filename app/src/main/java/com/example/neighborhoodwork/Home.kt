@@ -8,6 +8,7 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import kotlinx.android.synthetic.main.activity_home.*
@@ -68,12 +69,25 @@ class Home : AppCompatActivity(), OnMapReadyCallback {
         }
     }
     override fun onMapReady(googleMap: GoogleMap) {
-        mMap = googleMap
-        mMap.isIndoorEnabled = true
+        var testowyZnacznik = Zadanie("52.189", "20.828")
+        dane.zadania.add(testowyZnacznik)
+        var testowyZnacznik2 = Zadanie("53.189", "21.828")
+        dane.zadania.add(testowyZnacznik2)
+        ///// To tylko na chwile (na góże)
 
-        val sydney = LatLng(52.189, 20.828)
-        mMap.addMarker(MarkerOptions().position(sydney).title("Marker"))
-        mMap.addMarker(MarkerOptions().position(sydney).title("Marker"))
-        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(sydney, 16f))
+        znacznik(googleMap)
     }
+
+
+fun znacznik(mapa : GoogleMap){
+    var i = 0
+    while(i<dane.zadania.size){
+        val wspolrzedne = LatLng(dane.zadania[i].x.toDouble(), dane.zadania[i].y.toDouble())
+        mapa.addMarker(MarkerOptions().position(wspolrzedne).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA)))
+        mapa.animateCamera(CameraUpdateFactory.newLatLngZoom(wspolrzedne, 16f))
+        i++
+    }
+
+}
+
 }
