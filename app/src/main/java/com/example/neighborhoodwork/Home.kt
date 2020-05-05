@@ -1,6 +1,8 @@
 package com.example.neighborhoodwork
 
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.widget.PopupMenu
 import androidx.appcompat.app.AppCompatActivity
@@ -78,16 +80,21 @@ class Home : AppCompatActivity(), OnMapReadyCallback {
         znacznik(googleMap)
     }
 
-
 fun znacznik(mapa : GoogleMap){
     var i = 0
     while(i<dane.zadania.size){
         val wspolrzedne = LatLng(dane.zadania[i].x.toDouble(), dane.zadania[i].y.toDouble())
-        mapa.addMarker(MarkerOptions().position(wspolrzedne).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA)))
+        mapa.addMarker(MarkerOptions().position(wspolrzedne).icon(BitmapDescriptorFactory.fromResource(R.drawable.marker)))
         mapa.animateCamera(CameraUpdateFactory.newLatLngZoom(wspolrzedne, 16f))
         i++
     }
 
+
+
 }
+    fun ustawMarkr(name : String, x : Int, y : Int): Bitmap {
+        var marker = BitmapFactory.decodeResource(resources, resources.getIdentifier(name, "drawble", packageName))
+        return Bitmap.createScaledBitmap(marker, x, y, false)
+    }
 
 }
