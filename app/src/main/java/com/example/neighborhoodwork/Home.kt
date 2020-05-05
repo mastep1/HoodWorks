@@ -73,28 +73,35 @@ class Home : AppCompatActivity(), OnMapReadyCallback {
     override fun onMapReady(googleMap: GoogleMap) {
         var testowyZnacznik = Zadanie("52.189", "20.828")
         dane.zadania.add(testowyZnacznik)
-        var testowyZnacznik2 = Zadanie("53.189", "21.828")
-        dane.zadania.add(testowyZnacznik2)
         ///// To tylko na chwile (na góże)
-
         znacznik(googleMap)
+        googleMap.setOnMarkerClickListener { marker ->
+            if (marker.isInfoWindowShown) {
+                marker.hideInfoWindow()
+            } else {
+                marker.showInfoWindow()
+            }
+            true
+
+        }
     }
+
 
 fun znacznik(mapa : GoogleMap){
     var i = 0
     while(i<dane.zadania.size){
         val wspolrzedne = LatLng(dane.zadania[i].x.toDouble(), dane.zadania[i].y.toDouble())
-        mapa.addMarker(MarkerOptions().position(wspolrzedne).icon(BitmapDescriptorFactory.fromResource(R.drawable.marker)))
+        mapa.addMarker(MarkerOptions().position(wspolrzedne).icon(BitmapDescriptorFactory.fromResource(R.drawable.marker)).title("Moja Chałopa tu stoji"))
         mapa.animateCamera(CameraUpdateFactory.newLatLngZoom(wspolrzedne, 16f))
         i++
     }
-
-
-
 }
+
     fun ustawMarkr(name : String, x : Int, y : Int): Bitmap {
         var marker = BitmapFactory.decodeResource(resources, resources.getIdentifier(name, "drawble", packageName))
         return Bitmap.createScaledBitmap(marker, x, y, false)
     }
 
 }
+
+
