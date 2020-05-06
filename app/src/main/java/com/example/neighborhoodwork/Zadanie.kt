@@ -1,6 +1,6 @@
 package com.example.neighborhoodwork
 
 data  class Zadanie (
-    var x : String,
-    var y : String
+    var x : String = "",
+    var y : String = ""
 )
