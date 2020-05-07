@@ -1,4 +1,4 @@
-package com.example.neighborhoodwork
+package com.example.neighborhoodwor
 
 data  class Zadanie (
     var x : String = "",

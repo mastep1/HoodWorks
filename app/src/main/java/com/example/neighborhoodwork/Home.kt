@@ -3,6 +3,7 @@ package com.example.neighborhoodwork
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.example.neighborhoodwor.Zadanie
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -18,7 +19,6 @@ import kotlin.properties.Delegates
 class Home : AppCompatActivity(), OnMapReadyCallback {
 
     private lateinit var mMap: GoogleMap
-     var fake by Delegates.notNull<Int>()
     lateinit var myRef : DatabaseReference
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,7 +37,6 @@ class Home : AppCompatActivity(), OnMapReadyCallback {
                     dane.zadania.add(element!!)
                 }
             }
-
         })
 
         img4Menu.setOnClickListener {
