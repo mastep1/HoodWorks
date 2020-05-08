@@ -1,7 +1,7 @@
 package com.example.neighborhoodwork
 
-import com.example.neighborhoodwor.Zadanie
+import com.example.neighborhoodwor.ZadanieModel
 
 object dane {
-    var zadania = arrayListOf<Zadanie>()
+    var zadania = arrayListOf<ZadanieModel>()
 }

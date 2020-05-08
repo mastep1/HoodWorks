@@ -1,6 +1,6 @@
 package com.example.neighborhoodwor
 
-data  class Zadanie (
+data  class ZadanieModel (
     var x : String = "",
     var y : String = ""
 )
