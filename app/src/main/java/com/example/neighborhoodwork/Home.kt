@@ -23,7 +23,9 @@ class Home : AppCompatActivity(), OnMapReadyCallback {
 
     private lateinit var mMap: GoogleMap
     lateinit var myRef : DatabaseReference
+
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
 
@@ -37,15 +39,17 @@ class Home : AppCompatActivity(), OnMapReadyCallback {
             startActivity(chat)
         }
 
-        val mapFragment = supportFragmentManager
-            .findFragmentById(R.id.mapView4) as SupportMapFragment
-            mapFragment.getMapAsync(this)
+        val mapFragment = supportFragmentManager.findFragmentById(R.id.mapView4) as SupportMapFragment
+        mapFragment.getMapAsync(this)
     }
+
     override fun onMapReady(googleMap: GoogleMap) {
-        var jedenRaz = 0
+
         val fireBase = FirebaseDatabase.getInstance()
         myRef = fireBase.getReference("Zadania")
+
         myRef.addValueEventListener(object : ValueEventListener {
+
             override fun onCancelled(p0: DatabaseError) {
             }
 
@@ -53,17 +57,21 @@ class Home : AppCompatActivity(), OnMapReadyCallback {
                 for(i in dataSnapshot.children){
                     val element = i.getValue(ZadanieModel::class.java)
                     dane.zadania.add(element!!)
+                   znaczniki(googleMap)
                 }
-                if(jedenRaz == 0) {
-                    onMapReady(googleMap)
-                    Toast.makeText(applicationContext, "Odświeżono", Toast.LENGTH_SHORT).show()
-                    jedenRaz = 2
-                }
-
             }
         })
-        znacznik(googleMap)
-        //// TU COŚ NIE DZIŁA
+    }
+
+    fun znaczniki(googleMap : GoogleMap){
+     var i = 0
+        while(i<dane.zadania.size){
+                val wspolrzedne = LatLng(dane.zadania[i].x.toDouble(), dane.zadania[i].y.toDouble())
+            googleMap.addMarker(MarkerOptions().position(wspolrzedne).icon(BitmapDescriptorFactory.fromResource(R.drawable.marker)).title("Moja Chałopa tu stoji"))
+            googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(wspolrzedne, 16f))
+                 i++
+         }
+
         googleMap.setOnMarkerClickListener { marker ->
             if (marker.isInfoWindowShown) {
                 Toast.makeText(applicationContext, "ukryto", Toast.LENGTH_SHORT).show()
@@ -75,16 +83,6 @@ class Home : AppCompatActivity(), OnMapReadyCallback {
             true
 
         }
-    }
-
-    fun znacznik(mapa : GoogleMap){
-     var i = 0
-        while(i<dane.zadania.size){
-                val wspolrzedne = LatLng(dane.zadania[i].x.toDouble(), dane.zadania[i].y.toDouble())
-                mapa.addMarker(MarkerOptions().position(wspolrzedne).icon(BitmapDescriptorFactory.fromResource(R.drawable.marker)).title("Moja Chałopa tu stoji"))
-                mapa.animateCamera(CameraUpdateFactory.newLatLngZoom(wspolrzedne, 16f))
-                 i++
-         }
     }
 
 }
