@@ -6,6 +6,19 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <TextView
+        android:id="@+id/tx1Dolacz"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="267dp"
+        android:text="@string/tx1Dolacz"
+        android:textColor="#000000"
+        android:textSize="65sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <LinearLayout
         android:id="@+id/l1"
         android:layout_width="wrap_content"
@@ -19,78 +32,90 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.499">
 
-        <TextView
-            android:id="@+id/tx1Dolacz"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
-            android:text="@string/tx1Dolacz"
-            android:textColor="#000000"
-            android:textSize="65sp"
-            android:textStyle="bold" />
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/Card1FB"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="15dp"
-            app:cardCornerRadius="100dp">
-
-            <ImageView
-                android:id="@+id/img1FB"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                app:srcCompat="@drawable/fb" />
-
-            <TextView
-                android:id="@+id/tx1FB"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="60dp"
-                android:layout_marginTop="7dp"
-                android:text="@string/tx1PrzezFb"
-                android:textColor="#000000"
-                android:textSize="18sp" />
-       </androidx.cardview.widget.CardView>
-
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/Card1Email"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:cardCornerRadius="100dp">
-
-            <ImageView
-                android:id="@+id/img1Email"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                app:srcCompat="@drawable/email" />
-
-            <TextView
-                android:id="@+id/tx1Email"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="60dp"
-                android:layout_marginTop="7dp"
-                android:text="@string/tx1Email"
-                android:textColor="#000000"
-                android:textSize="15sp" />
-        </androidx.cardview.widget.CardView>
 
     </LinearLayout>
-
-
 
     <TextView
         android:id="@+id/tx1ZalogujSie"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="25dp"
         android:text="@string/tx1ZalogujSie"
         android:textColor="#0C0C0C"
-        android:textSize="18sp"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Constraint1ikony" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/Constraint1ikony"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/l1" />
+        app:layout_constraintTop_toBottomOf="@+id/tx1Dolacz">
+
+        <TextView
+            android:id="@+id/tx2Utworz"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:text="@string/tx1Utworz"
+            android:textColor="#090909"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/img1Email"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            app:layout_constraintEnd_toStartOf="@+id/img1FB"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tx2Utworz"
+            app:srcCompat="@drawable/email" />
+
+        <ImageView
+            android:id="@+id/img1FB"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            app:layout_constraintEnd_toStartOf="@+id/img1Google"
+            app:layout_constraintStart_toEndOf="@+id/img1Email"
+            app:layout_constraintTop_toBottomOf="@+id/tx2Utworz"
+            app:srcCompat="@drawable/fb" />
+
+        <ImageView
+            android:id="@+id/img1Google"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            app:layout_constraintEnd_toStartOf="@+id/img1Phone"
+            app:layout_constraintStart_toEndOf="@+id/img1FB"
+            app:layout_constraintTop_toBottomOf="@+id/tx2Utworz"
+            app:srcCompat="@drawable/common_google_signin_btn_icon_dark" />
+
+        <ImageView
+            android:id="@+id/img1Phone"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="25dp"
+            android:tint="#C50909"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/img1Google"
+            app:layout_constraintTop_toBottomOf="@+id/tx2Utworz"
+            app:srcCompat="@drawable/fui_ic_phone_white_24dp" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
