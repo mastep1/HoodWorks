@@ -17,9 +17,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".Google_Sign_In" />
-        <activity android:name=".DodajZlecenie" />
+        <activity android:name=".DodajZlecenie"></activity>
+        <activity android:name=".test10" />
         <activity android:name=".utworzNrTel" />
+        <activity android:name=".Verification" />
         <activity android:name=".Chat" />
 
         <meta-data

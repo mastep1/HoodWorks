@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">neighborhoodWork</string>
     <string name="tx1Dolacz">Dołącz!</string>
-    <string name="tx1Utworz">Utworz konto</string>
+    <string name="tx1PrzezFb">Konto Google</string>
     <string name="tx1Email">E-mail lub \nnumer telefonu</string>
     <string name="tx1ZalogujSie">Masz już konto? Zaloguj się</string>
     <string name="tx2Witaj">Witaj, ponownie!</string>
@@ -30,6 +30,4 @@
     <string name="tx3Wolisz">Aby użyć telefonu Kliknij Tutaj!</string>
     <string name="tx7Wolisz">Aby użyć e-maila Kliknij Tutaj!</string>
     <string name="tx10Imie">Jakub Gołos</string>
-    <string name="facebook_application_id" translatable="false">226052328835750</string>
-    <string name="facebook_login_protocol_scheme" translatable="false">fb226052328835750</string>
 </resources>
