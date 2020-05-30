@@ -23,37 +23,25 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        auth = FirebaseAuth.getInstance()
-        val currentUser = auth.currentUser
-        updateUI(currentUser)
-
+         auth = FirebaseAuth.getInstance()
+         val currentUser = auth.currentUser
+         updateUI(currentUser)
         tx1ZalogujSie.setOnClickListener{
-            var nowaAktywnosc = Intent(applicationContext, Loguj::class.java)
-            startActivity(nowaAktywnosc)
+            var nowaAktywnosc3 = Intent(applicationContext, Loguj::class.java)
+            startActivity(nowaAktywnosc3)
         }
 
         Constraint1ikony.setOnClickListener {
-            var Home = Intent(applicationContext, Home::class.java)
-            startActivity(Home)
+            var samo = Intent(applicationContext, Samouczek::class.java)
+            startActivity(samo)
         }
-
-
     }
 
     fun updateUI(currentUser : FirebaseUser?){
         if(currentUser != null){
-            if(currentUser.isEmailVerified){
-                var nowaAktywnosc = Intent(applicationContext, Home::class.java)
-                startActivity(nowaAktywnosc)
-                finish()
-            };else {
-                var nowaAktywnosc = Intent(applicationContext, Home::class.java)
-                startActivity(nowaAktywnosc)
-                finish()
-               Toast.makeText(applicationContext, "Zweryfikuj swojego E-maila", Toast.LENGTH_LONG).show()
-            }
+        var nowaAktywnosc = Intent(applicationContext, Home::class.java)
+        startActivity(nowaAktywnosc)
+        finish()
         }
     }
-
-
 }

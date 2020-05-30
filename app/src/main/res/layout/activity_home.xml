@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<androidx.drawerlayout.widget.DrawerLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".Chat"
-    android:layout_height="match_parent"
+    android:id="@+id/drawler4"
     android:layout_width="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="match_parent"
+    tools:context=".Chat"
+    android:fitsSystemWindows="true">
+
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -15,18 +17,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            tools:context=".Home">
-
-            <ImageView
-                android:id="@+id/img4Menu"
-                android:layout_width="70dp"
-                android:layout_height="70dp"
-                android:padding="10dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/menu" />
-
+            android:layout_height="match_parent">
             <TextView
                 android:id="@+id/tx4MainNapis"
                 android:layout_width="wrap_content"
@@ -43,6 +34,14 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
+            <ImageView
+                android:id="@+id/img4Menu"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:padding="10dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/menu" />
 
             <ImageView
                 android:id="@+id/img4filter"
@@ -54,78 +53,97 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/filter" />
 
-            <fragment
-                android:id="@+id/mapView4"
-                android:name="com.google.android.gms.maps.SupportMapFragment"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraint4"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                app:layout_constraintBottom_toBottomOf="@+id/l4MenuDown"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tx4MainNapis"
-                tools:context=".Home" />
+                tools:context=".Home">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/l4MenuDown"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:background="#BFFFFDFD"
-                android:orientation="horizontal"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent">
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/CC"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
-                <ImageView
-                    android:id="@+id/img4Chat"
-                    android:layout_width="65dp"
-                    android:layout_height="50dp"
-                    android:layout_marginStart="35dp"
-                    android:layout_marginBottom="5dp"
-                    android:background="@android:color/transparent"
-                    android:paddingLeft="5dp"
-                    android:paddingRight="5dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:srcCompat="@drawable/poprawione" />
 
-                <ImageView
-                    android:id="@+id/img4Mapa"
-                    android:layout_width="75dp"
-                    android:layout_height="75dp"
-                    android:layout_marginBottom="15dp"
-                    android:paddingLeft="5dp"
-                    android:paddingRight="5dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/img4Profil"
-                    app:layout_constraintStart_toEndOf="@+id/img4Chat"
-                    app:srcCompat="@drawable/map" />
 
-                <ImageView
-                    android:id="@+id/img4Profil"
-                    android:layout_width="65dp"
-                    android:layout_height="50dp"
-                    android:layout_marginEnd="35dp"
-                    android:layout_marginBottom="5dp"
-                    android:paddingLeft="5dp"
-                    android:paddingRight="5dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:srcCompat="@drawable/boy" />
+
+                    <fragment
+                        android:id="@+id/mapView4"
+                        android:name="com.google.android.gms.maps.SupportMapFragment"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <LinearLayout
+                        android:id="@+id/l4fragment"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="25dp"
+                        android:orientation="horizontal"
+                        app:layout_constraintBottom_toTopOf="@+id/l4MenuDown"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"></LinearLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/l4MenuDown"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:background="#BFFFFDFD"
+                        android:orientation="horizontal"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent">
+
+                        <ImageView
+                            android:id="@+id/img4Chat"
+                            android:layout_width="70dp"
+                            android:layout_height="55dp"
+                            android:layout_marginBottom="5dp"
+                            android:background="@android:color/transparent"
+                            android:paddingLeft="5dp"
+                            android:paddingTop="5dp"
+                            android:paddingRight="5dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/img4Mapa"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:srcCompat="@drawable/poprawione" />
+
+                        <ImageView
+                            android:id="@+id/img4Mapa"
+                            android:layout_width="80dp"
+                            android:layout_height="70dp"
+                            android:layout_marginBottom="10dp"
+                            android:paddingLeft="5dp"
+                            android:paddingRight="5dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/img4Profil"
+                            app:layout_constraintStart_toEndOf="@+id/img4Chat"
+                            app:srcCompat="@drawable/map" />
+
+                        <ImageView
+                            android:id="@+id/img4Profil"
+                            android:layout_width="70dp"
+                            android:layout_height="55dp"
+                            android:layout_marginBottom="5dp"
+                            android:paddingLeft="5dp"
+                            android:paddingRight="5dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/img4Mapa"
+                            app:srcCompat="@drawable/boy" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
 
             </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <LinearLayout
-                android:id="@+id/l4Fragment"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="100dp"
-                android:background="#E10D0D"
-                android:gravity="center"
-                android:orientation="vertical"
-                app:layout_constraintBottom_toTopOf="@+id/l4MenuDown"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"></LinearLayout>
-
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
@@ -135,7 +153,11 @@
         android:id="@+id/menu4"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
+        android:background="#F3F3F3"
         android:layout_gravity="start"
-        app:menu="@menu/main_menu"></com.google.android.material.navigation.NavigationView>
+        android:fitsSystemWindows="true"
+        app:menu="@menu/main_menu">
+
+    </com.google.android.material.navigation.NavigationView>
 
 </androidx.drawerlayout.widget.DrawerLayout>

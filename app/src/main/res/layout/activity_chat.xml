@@ -2,6 +2,7 @@
 
 
 <androidx.drawerlayout.widget.DrawerLayout
+    android:id="@+id/drawer5"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".Chat"
@@ -18,7 +19,7 @@
             android:layout_height="match_parent">
 
             <ImageView
-                android:id="@+id/img5Menuuuu"
+                android:id="@+id/img5Menu"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:padding="10dp"
@@ -60,7 +61,7 @@
                 android:layout_marginTop="10dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/img5Menuuuu" />
+                app:layout_constraintTop_toBottomOf="@+id/img5Menu" />
 
             <LinearLayout
                 android:id="@+id/l5Koniec"
@@ -98,13 +99,13 @@
                     android:id="@+id/img5Chat"
                     android:layout_width="70dp"
                     android:layout_height="70dp"
-                    android:layout_marginStart="35dp"
                     android:layout_marginBottom="10dp"
                     android:background="@android:color/transparent"
                     android:paddingLeft="5dp"
                     android:paddingTop="5dp"
                     android:paddingRight="5dp"
                     app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/img5Mapa"
                     app:layout_constraintStart_toStartOf="parent"
                     app:srcCompat="@drawable/poprawione" />
 
@@ -122,14 +123,14 @@
 
                 <ImageView
                     android:id="@+id/img5Profil"
-                    android:layout_width="65dp"
+                    android:layout_width="70dp"
                     android:layout_height="50dp"
-                    android:layout_marginEnd="35dp"
                     android:layout_marginBottom="5dp"
                     android:paddingLeft="5dp"
                     android:paddingRight="5dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/img5Mapa"
                     app:srcCompat="@drawable/boy" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>

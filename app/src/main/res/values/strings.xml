@@ -15,7 +15,7 @@
     <string name="Etx3nazwa"><p>  </p>Imie i nazwisko</string>
     <string name="Etx3Haslo"><p>  </p>hasło</string>
     <string name="tx3Utworz">Utwórz</string>
-    <string name="tx4Home"> Hood  Works </string>
+    <string name="tx4Home"> Mapa </string>
     <string name="tx4Praca"> Praca w okolicy </string>
     <string name="tx4Pracownicy"> Pracownicy w okolicy </string>
     <string name="tx4OcenaZlecenia"> Zlecone zadania : 17 | Ocena 4,7/5 </string>
@@ -32,4 +32,8 @@
     <string name="tx10Imie">Jakub Gołos</string>
     <string name="facebook_application_id" translatable="false">226052328835750</string>
     <string name="facebook_login_protocol_scheme" translatable="false">fb226052328835750</string>
+    <string name="open">otwarto</string>
+    <string name="close">zamknieto</string>
+    <string name="tx5KoniecRC">Nie masz więcej kontaktów</string>
+    <string name="tx6Main">Twój Profil</string>
 </resources>

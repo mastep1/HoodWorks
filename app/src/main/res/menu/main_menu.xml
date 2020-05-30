@@ -1,33 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    >
-    <item
-        android:id="@+id/Menu_Mapa"
-        android:title="Mapa"
-        android:icon="@drawable/beer"/>
-    <item
-        android:id="@+id/Menu_Chat"
-        android:title="Chat"
-        android:icon="@drawable/beer"/>
-    <item
-        android:id="@+id/Menu_Dodaj_Zlecenie"
-        android:title="Dodaj Zlecenie"
-        android:icon="@drawable/beer"/>
-    <item
-        android:id="@+id/Menu_Zglosc_prace"
-        android:title="Zgłoś chęć do pracy"
-        android:icon="@drawable/beer"/>
-    <item
-        android:id="@+id/Menu_Profil"
-        android:title="Profil"
-        android:icon="@drawable/beer"/>
-    <item
-        android:id="@+id/Menu_Ustawienia"
-        android:title="Ustawienia"
-        android:icon="@drawable/beer"/>
-    <item
-        android:id="@+id/Menu_Wyloguj"
-        android:title="Wyloguj"
-        android:icon="@drawable/beer"/>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn = "nav_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/Menu_Mapa"
+            android:icon="@drawable/map"
+            android:title="Mapa" />
+        <item
+            android:id="@+id/Menu_Chat"
+            android:icon="@drawable/poprawione"
+            android:title="Chat" />
+        <item
+            android:id="@+id/Menu_Profil"
+            android:icon="@drawable/boy"
+            android:title="Profil" />
+        <item
+            android:id="@+id/Menu_Dodaj_Zlecenie"
+            android:title="Dodaj Zlecenie"
+            android:icon="@drawable/beer"/>
+        <item
+            android:id="@+id/Menu_Zglosc_prace"
+            android:title="Zgłoś chęć do pracy"
+            android:icon="@drawable/beer"/>
+        <item
+            android:id="@+id/Menu_Ustawienia"
+            android:title="Ustawienia"
+            android:icon="@drawable/beer"/>
+        <item
+            android:id="@+id/Menu_Wyloguj"
+            android:title="Wyloguj"
+            android:icon="@drawable/beer"/>
+    </group>
+
 </menu>
