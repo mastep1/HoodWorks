@@ -69,6 +69,11 @@ class Profil : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListe
             overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
         }
 
+        fab6.setOnClickListener {
+            val editProfil = Intent(applicationContext,  EditProfil::class.java)
+            startActivity(editProfil)
+        }
+
     }
 
 

@@ -2,6 +2,7 @@ package com.example.neighborhoodwork
 
 import android.app.Activity
 import android.content.Intent
+import android.view.View
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.text.AlteredCharSequence.make
@@ -25,6 +26,7 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.material.navigation.NavigationView
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.*
@@ -60,11 +62,10 @@ class Home : AppCompatActivity(), OnMapReadyCallback, NavigationView.OnNavigatio
         )
 
         val currentUser = auth.currentUser
-        updateUI(currentUser)
+
 
         val map = supportFragmentManager.findFragmentById(R.id.mapView4) as SupportMapFragment
         map.getMapAsync(this)
-
 
         dateUser(currentUser)
 
@@ -127,7 +128,8 @@ class Home : AppCompatActivity(), OnMapReadyCallback, NavigationView.OnNavigatio
             {
                 user.email = currentUser.email.toString()
                 if(!currentUser.isEmailVerified){
-                    Toast.makeText(applicationContext, "Zweryfikuj swoje konto email ${currentUser.email}", Toast.LENGTH_LONG).show()
+                    Snackbar.make(constraint4, "Zweryfikuj swoje konto e-mail ${currentUser.email}", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show()
                 }
             }
             if(currentUser.phoneNumber != null)
@@ -196,13 +198,7 @@ class Home : AppCompatActivity(), OnMapReadyCallback, NavigationView.OnNavigatio
         }
     }
 
-    fun updateUI(currentUser: FirebaseUser?) {
-        if (currentUser != null) {
-            if (!currentUser.isEmailVerified) {
-                Toast.makeText(applicationContext, "Zweryfikuj swojego e-maila", Toast.LENGTH_LONG).show()
-            }
-        }
-    }
+
 
     override fun onNavigationItemSelected(p0: MenuItem): Boolean {
         when (p0.itemId) {

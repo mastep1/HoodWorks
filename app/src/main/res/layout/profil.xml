@@ -53,14 +53,27 @@
                 app:srcCompat="@drawable/filter" />
 
 
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fab6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="15dp"
+                android:clickable="true"
+                android:tint="#FF9800"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/ScrolView6"
+                app:layout_constraintTop_toBottomOf="@+id/img6filter"
+                app:srcCompat="@drawable/folating_button" />
+
             <ScrollView
                 android:id="@+id/ScrolView6"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_marginTop="20dp"
+                android:layout_marginEnd="-1dp"
                 app:layout_constraintBottom_toTopOf="@+id/l6ButtomMenu"
-                app:layout_constraintTop_toBottomOf="@+id/tx6MainNapis"
-                tools:layout_editor_absoluteX="50dp">
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tx6MainNapis">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"

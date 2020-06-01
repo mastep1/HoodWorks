@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/l7Main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".EditProfil">
+
+    <EditText
+        android:id="@+id/Etx7Email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="35dp"
+        android:ems="10"
+        android:inputType="textEmailAddress"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tx7ZmianyEmail" />
+
+    <TextView
+        android:id="@+id/tx7Email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="35dp"
+        android:layout_marginTop="10dp"
+        android:text="E-mail"
+        android:textAllCaps="true"
+        android:textColor="#000000"
+        android:textSize="22sp"
+        android:textStyle="bold|italic"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/divider7_1" />
+
+    <TextView
+        android:id="@+id/tx7Imie"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="35dp"
+        android:layout_marginTop="20dp"
+        android:text="Imie i Nazwisko"
+        android:textAllCaps="true"
+        android:textColor="#000000"
+        android:textSize="22sp"
+        android:textStyle="bold|italic"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/Etx7Imie"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="35dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tx7ZmianyImie" />
+
+    <View
+        android:id="@+id/divider7_1"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginTop="10dp"
+        android:background="#FF0000"
+        app:layout_constraintTop_toBottomOf="@+id/Etx7Imie"
+        tools:layout_editor_absoluteX="1dp" />
+
+    <View
+        android:id="@+id/diver7_2"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginTop="10dp"
+        android:background="#FF0E0E"
+        app:layout_constraintTop_toBottomOf="@+id/Etx7Email"
+        tools:layout_editor_absoluteX="1dp" />
+
+    <TextView
+        android:id="@+id/tx7Tel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="35dp"
+        android:layout_marginTop="10dp"
+        android:text="Numer telefonu"
+        android:textAllCaps="true"
+        android:textColor="#000000"
+        android:textSize="22sp"
+        android:textStyle="bold|italic"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/diver7_2" />
+
+    <EditText
+        android:id="@+id/Etx7Tel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="35dp"
+        android:ems="10"
+        android:inputType="phone"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tx7ZmianyTel" />
+
+    <View
+        android:id="@+id/divider7_3"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginTop="10dp"
+        android:background="#F40000"
+        app:layout_constraintTop_toBottomOf="@+id/Etx7Tel"
+        tools:layout_editor_absoluteX="1dp" />
+
+    <TextView
+        android:id="@+id/tx7Opis"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="35dp"
+        android:layout_marginTop="10dp"
+        android:text="Opis Twojego Profilu"
+        android:textAllCaps="true"
+        android:textColor="#000000"
+        android:textSize="22sp"
+        android:textStyle="bold|italic"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/divider7_3" />
+
+    <EditText
+        android:id="@+id/Etx7Opis"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="35dp"
+        android:ems="10"
+        android:gravity="start|top"
+        android:inputType="textMultiLine"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tx7ZmianyOpis" />
+
+    <TextView
+        android:id="@+id/tx7ZmianyImie"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Wprowadzono Zmiany"
+        android:textColor="#FFC107"
+        android:textSize="17sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/tx7Imie"
+        app:layout_constraintTop_toBottomOf="@+id/tx7Imie" />
+
+    <TextView
+        android:id="@+id/tx7ZmianyEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Wprowadzono Zmiany"
+        android:textColor="#FFC107"
+        android:textSize="17sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/tx7Email"
+        app:layout_constraintTop_toBottomOf="@+id/tx7Email" />
+
+    <TextView
+        android:id="@+id/tx7ZmianyTel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Wprowadzono Zmiany"
+        android:textColor="#FFC107"
+        android:textSize="17sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/tx7Tel"
+        app:layout_constraintTop_toBottomOf="@+id/tx7Tel" />
+
+    <TextView
+        android:id="@+id/tx7ZmianyOpis"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Wprowadzono Zmiany"
+        android:textColor="#FFC107"
+        android:textSize="17sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/tx7Opis"
+        app:layout_constraintTop_toBottomOf="@+id/tx7Opis" />
+</androidx.constraintlayout.widget.ConstraintLayout>
