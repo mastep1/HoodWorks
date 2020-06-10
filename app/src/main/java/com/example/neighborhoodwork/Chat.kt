@@ -10,8 +10,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.firebase.ui.auth.AuthUI
 import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_chat.*
-import kotlinx.android.synthetic.main.activity_dodaj_zlecenie.*
-import kotlinx.android.synthetic.main.activity_home.*
 
 class Chat : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
@@ -19,30 +17,30 @@ class Chat : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListene
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chat)
 
-        rc5.apply {
+        rc3.apply {
             layoutManager = LinearLayoutManager(this@Chat)
             addItemDecoration(TopSpacingItemDecoration(30))
             adapter = AdapterChat()
         }
 
-        img5Menu.setOnClickListener {
-            if(drawer5.isDrawerOpen(GravityCompat.START)){
-                drawer5.closeDrawer(GravityCompat.START)
+        img3Menu.setOnClickListener {
+            if(drawer3.isDrawerOpen(GravityCompat.START)){
+                drawer3.closeDrawer(GravityCompat.START)
             }
             else{
-                drawer5.openDrawer(GravityCompat.START)
+                drawer3.openDrawer(GravityCompat.START)
             }
         }
 
-        menu5.setNavigationItemSelectedListener(this)
+        menu3.setNavigationItemSelectedListener(this)
 
-        img5Mapa.setOnClickListener {
+        img3Mapa.setOnClickListener {
             val mapa = Intent(applicationContext, Home::class.java)
             startActivity(mapa)
             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
         }
 
-        img5Profil.setOnClickListener {
+        img3Profil.setOnClickListener {
             val profil = Intent(applicationContext, Profil::class.java)
             startActivity(profil)
             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
@@ -80,7 +78,7 @@ class Chat : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListene
                 finish()
             }
         }
-        drawer5.closeDrawer(GravityCompat.START)
+        drawer3.closeDrawer(GravityCompat.START)
         return true
     }
 }

@@ -7,16 +7,19 @@
     android:layout_height="match_parent"
     tools:context=".EditProfil">
 
-    <EditText
-        android:id="@+id/Etx7Email"
+    <TextView
+        android:id="@+id/tx7Imie"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="35dp"
-        android:ems="10"
-        android:inputType="textEmailAddress"
-        android:textSize="20sp"
+        android:layout_marginTop="20dp"
+        android:text="Imie i Nazwisko"
+        android:textAllCaps="true"
+        android:textColor="#000000"
+        android:textSize="22sp"
+        android:textStyle="bold|italic"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tx7ZmianyEmail" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tx7Email"
@@ -32,19 +35,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/divider7_1" />
 
-    <TextView
-        android:id="@+id/tx7Imie"
+    <EditText
+        android:id="@+id/Etx7Email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="35dp"
-        android:layout_marginTop="20dp"
-        android:text="Imie i Nazwisko"
-        android:textAllCaps="true"
-        android:textColor="#000000"
-        android:textSize="22sp"
-        android:textStyle="bold|italic"
+        android:ems="10"
+        android:freezesText="false"
+        android:inputType="textEmailAddress"
+        android:selectAllOnFocus="false"
+        android:singleLine="false"
+        android:textColor="#03A9F4"
+        android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/tx7ZmianyEmail" />
 
     <EditText
         android:id="@+id/Etx7Imie"
@@ -53,6 +57,7 @@
         android:layout_marginStart="35dp"
         android:ems="10"
         android:inputType="textPersonName"
+        android:textColor="#03A9F4"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tx7ZmianyImie" />
 
@@ -95,6 +100,7 @@
         android:layout_marginStart="35dp"
         android:ems="10"
         android:inputType="phone"
+        android:textColor="#03A9F4"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tx7ZmianyTel" />
@@ -130,7 +136,7 @@
         android:ems="10"
         android:gravity="start|top"
         android:inputType="textMultiLine"
-        android:textColor="#000000"
+        android:textColor="#03A9F4"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tx7ZmianyOpis" />
@@ -143,6 +149,7 @@
         android:textColor="#FFC107"
         android:textSize="17sp"
         android:textStyle="bold"
+        android:visibility="gone"
         app:layout_constraintStart_toStartOf="@+id/tx7Imie"
         app:layout_constraintTop_toBottomOf="@+id/tx7Imie" />
 
@@ -154,6 +161,7 @@
         android:textColor="#FFC107"
         android:textSize="17sp"
         android:textStyle="bold"
+        android:visibility="gone"
         app:layout_constraintStart_toStartOf="@+id/tx7Email"
         app:layout_constraintTop_toBottomOf="@+id/tx7Email" />
 
@@ -165,6 +173,7 @@
         android:textColor="#FFC107"
         android:textSize="17sp"
         android:textStyle="bold"
+        android:visibility="gone"
         app:layout_constraintStart_toStartOf="@+id/tx7Tel"
         app:layout_constraintTop_toBottomOf="@+id/tx7Tel" />
 
@@ -176,6 +185,34 @@
         android:textColor="#FFC107"
         android:textSize="17sp"
         android:textStyle="bold"
+        android:visibility="gone"
         app:layout_constraintStart_toStartOf="@+id/tx7Opis"
         app:layout_constraintTop_toBottomOf="@+id/tx7Opis" />
+
+    <Button
+        android:id="@+id/BT7Commmit"
+        android:layout_width="0dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="65dp"
+        android:layout_marginTop="45dp"
+        android:layout_marginEnd="65dp"
+        android:backgroundTint="#03A9F4"
+        android:text="Potwierdź"
+        android:textColor="#FFFFFF"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Etx7Opis" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/FAB7Commit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="15dp"
+        android:clickable="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/folating_button" />
 </androidx.constraintlayout.widget.ConstraintLayout>

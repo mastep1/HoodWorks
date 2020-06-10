@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/l1Main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
@@ -19,37 +20,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <LinearLayout
-        android:id="@+id/l1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="50dp"
-        android:gravity="center|center_horizontal|top"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.499">
-
-
-    </LinearLayout>
-
-    <TextView
-        android:id="@+id/tx1ZalogujSie"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
-        android:text="@string/tx1ZalogujSie"
-        android:textColor="#0C0C0C"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Constraint1ikony" />
-
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/Constraint1ikony"
+        android:id="@+id/l1Ikony"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
@@ -57,7 +29,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tx1Dolacz">
 
         <TextView
-            android:id="@+id/tx2Utworz"
+            android:id="@+id/tx1Utworz"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="25dp"
@@ -77,7 +49,7 @@
             android:layout_marginEnd="10dp"
             app:layout_constraintEnd_toStartOf="@+id/img1FB"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tx2Utworz"
+            app:layout_constraintTop_toBottomOf="@+id/tx1Utworz"
             app:srcCompat="@drawable/email" />
 
         <ImageView
@@ -89,7 +61,7 @@
             android:layout_marginEnd="10dp"
             app:layout_constraintEnd_toStartOf="@+id/img1Google"
             app:layout_constraintStart_toEndOf="@+id/img1Email"
-            app:layout_constraintTop_toBottomOf="@+id/tx2Utworz"
+            app:layout_constraintTop_toBottomOf="@+id/tx1Utworz"
             app:srcCompat="@drawable/fb" />
 
         <ImageView
@@ -101,7 +73,7 @@
             android:layout_marginEnd="10dp"
             app:layout_constraintEnd_toStartOf="@+id/img1Phone"
             app:layout_constraintStart_toEndOf="@+id/img1FB"
-            app:layout_constraintTop_toBottomOf="@+id/tx2Utworz"
+            app:layout_constraintTop_toBottomOf="@+id/tx1Utworz"
             app:srcCompat="@drawable/common_google_signin_btn_icon_dark" />
 
         <ImageView
@@ -114,8 +86,21 @@
             android:tint="#C50909"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/img1Google"
-            app:layout_constraintTop_toBottomOf="@+id/tx2Utworz"
+            app:layout_constraintTop_toBottomOf="@+id/tx1Utworz"
             app:srcCompat="@drawable/fui_ic_phone_white_24dp" />
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/tx1ZalogujSie"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:text="@string/tx1ZalogujSie"
+        android:textColor="#0C0C0C"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/l1Ikony" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

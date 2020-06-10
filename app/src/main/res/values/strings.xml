@@ -36,4 +36,7 @@
     <string name="close">zamknieto</string>
     <string name="tx5KoniecRC">Nie masz więcej kontaktów</string>
     <string name="tx6Main">Twój Profil</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

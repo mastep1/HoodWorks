@@ -10,8 +10,9 @@
     tools:context=".Chat">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/lMain6"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content">
 
         <ImageView
             android:id="@+id/img6Profil"

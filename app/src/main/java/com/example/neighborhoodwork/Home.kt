@@ -1,39 +1,28 @@
 package com.example.neighborhoodwork
 
-import android.app.Activity
 import android.content.Intent
-import android.view.View
-import android.content.pm.PackageManager
 import android.os.Bundle
-import android.text.AlteredCharSequence.make
-import android.text.BoringLayout.make
-import android.util.Base64
-import android.util.Base64.encodeToString
-import android.util.Log
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import com.example.neighborhoodwor.ZadanieModel
 import com.firebase.ui.auth.AuthUI
-import com.firebase.ui.auth.data.model.User
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.GoogleMap.OnInfoWindowClickListener
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.*
-import kotlinx.android.synthetic.main.activity_dodaj_zlecenie.*
 import kotlinx.android.synthetic.main.activity_home.*
 import java.util.*
-
 
 
 class Home : AppCompatActivity(), OnMapReadyCallback, NavigationView.OnNavigationItemSelectedListener {
@@ -42,7 +31,6 @@ class Home : AppCompatActivity(), OnMapReadyCallback, NavigationView.OnNavigatio
     val MY_REQUEST_CODE: Int = 2807
     private lateinit var auth: FirebaseAuth
 
-    private lateinit var mMap: GoogleMap
     lateinit var myRef: DatabaseReference
 
     lateinit var userData: DatabaseReference
@@ -52,6 +40,7 @@ class Home : AppCompatActivity(), OnMapReadyCallback, NavigationView.OnNavigatio
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
+
 
         auth = FirebaseAuth.getInstance()
         providers = Arrays.asList<AuthUI.IdpConfig>(
@@ -63,34 +52,39 @@ class Home : AppCompatActivity(), OnMapReadyCallback, NavigationView.OnNavigatio
 
         val currentUser = auth.currentUser
 
-
-        val map = supportFragmentManager.findFragmentById(R.id.mapView4) as SupportMapFragment
+        val map = supportFragmentManager.findFragmentById(R.id.mapView2) as SupportMapFragment
         map.getMapAsync(this)
+
+
+
+
 
         dateUser(currentUser)
 
-        img4Menu.setOnClickListener {
-            if(drawler4.isDrawerOpen(GravityCompat.START)){
-                drawler4.closeDrawer(GravityCompat.START)
+        img2Menu.setOnClickListener {
+            if(drawler2.isDrawerOpen(GravityCompat.START)){
+                drawler2.closeDrawer(GravityCompat.START)
             }
             else{
-                drawler4.openDrawer(GravityCompat.START)
+                drawler2.openDrawer(GravityCompat.START)
             }
         }
 
-        menu4.setNavigationItemSelectedListener(this)
+        menu2.setNavigationItemSelectedListener(this)
 
-        img4Chat.setOnClickListener {
+        img2Chat.setOnClickListener {
             val chat = Intent(applicationContext, Chat::class.java)
             startActivity(chat)
             overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
         }
 
-        img4Profil.setOnClickListener {
+        img2Profil.setOnClickListener {
             val profil = Intent(applicationContext, Profil::class.java)
             startActivity(profil)
             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
         }
+
+
 
     }
 
@@ -128,7 +122,7 @@ class Home : AppCompatActivity(), OnMapReadyCallback, NavigationView.OnNavigatio
             {
                 user.email = currentUser.email.toString()
                 if(!currentUser.isEmailVerified){
-                    Snackbar.make(constraint4, "Zweryfikuj swoje konto e-mail ${currentUser.email}", Snackbar.LENGTH_LONG)
+                    Snackbar.make(l2Content, "Zweryfikuj swoje konto e-mail ${currentUser.email}", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show()
                 }
             }
@@ -152,6 +146,8 @@ class Home : AppCompatActivity(), OnMapReadyCallback, NavigationView.OnNavigatio
 
     override fun onMapReady(googleMap: GoogleMap) {
 
+        googleMap.setInfoWindowAdapter(InfoWindowAdapter(this))
+
         val fireBase = FirebaseDatabase.getInstance()
         myRef = fireBase.getReference("Zadania")
 
@@ -168,15 +164,19 @@ class Home : AppCompatActivity(), OnMapReadyCallback, NavigationView.OnNavigatio
                 }
             }
         })
+
+
     }
 
     fun znaczniki(googleMap: GoogleMap) {
         var i = 0
         while (i < dane.zadania.size) {
+
             val wspolrzedne = LatLng(dane.zadania[i].x.toDouble(), dane.zadania[i].y.toDouble())
             googleMap.addMarker(
                 MarkerOptions().position(wspolrzedne)
                     .icon(BitmapDescriptorFactory.fromResource(R.drawable.marker))
+                    .snippet("${dane.zadania[i].img}")
             )
             if(i == dane.zadania.size - 1){
                 googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(wspolrzedne, 16f))
@@ -184,20 +184,25 @@ class Home : AppCompatActivity(), OnMapReadyCallback, NavigationView.OnNavigatio
             i++
         }
 
+
         googleMap.setOnMarkerClickListener { marker ->
             if (marker.isInfoWindowShown) {
                 marker.hideInfoWindow()
             } else {
-                val fm = supportFragmentManager
-                val F_Map = F_MapWindow()
-                fm.beginTransaction().add(R.id.l4fragment, F_Map).commit()
-                Toast.makeText(applicationContext, "${marker.id}", Toast.LENGTH_SHORT).show()
+                marker.showInfoWindow()
+
             }
             true
 
         }
-    }
 
+        googleMap.setOnInfoWindowClickListener(OnInfoWindowClickListener { arg0 ->
+            var tt = arg0.snippet
+            Toast.makeText(applicationContext, tt, Toast.LENGTH_SHORT).show()
+        })
+
+
+    }
 
 
     override fun onNavigationItemSelected(p0: MenuItem): Boolean {
@@ -230,7 +235,7 @@ class Home : AppCompatActivity(), OnMapReadyCallback, NavigationView.OnNavigatio
                 }
             }
         }
-        drawler4.closeDrawer(GravityCompat.START)
+        drawler2.closeDrawer(GravityCompat.START)
         return true
     }
 

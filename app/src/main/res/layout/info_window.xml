@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/l8Main"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#CCFFFFFF">
+
+    <ImageView
+        android:id="@+id/img8Info"
+        android:layout_width="105dp"
+        android:layout_height="105dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tx8Info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="Spacer z psem"
+        android:textColor="#0B0B0B"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="@+id/img8Info"
+        app:layout_constraintStart_toStartOf="@+id/img8Info"
+        app:layout_constraintTop_toBottomOf="@+id/img8Info" />
+
+    <ImageView
+        android:id="@+id/img8Length"
+        android:layout_width="45dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="5dp"
+        app:layout_constraintEnd_toStartOf="@+id/tx8Length"
+        app:layout_constraintTop_toBottomOf="@+id/tx8Info"
+        app:srcCompat="@drawable/boy" />
+
+    <TextView
+        android:id="@+id/tx8Length"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="45dp"
+        android:text="20 min"
+        android:textColor="#4CAF50"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/img8Length"
+        app:layout_constraintEnd_toStartOf="@+id/D8_1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/img8Length" />
+
+    <View
+        android:id="@+id/D8_1"
+        android:layout_width="2dp"
+        android:layout_height="75dp"
+        android:layout_marginTop="5dp"
+        android:background="#ED0202"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tx8Info" />
+
+    <ImageView
+        android:id="@+id/img8Wynagrodzenie"
+        android:layout_width="45dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="5dp"
+        app:layout_constraintEnd_toStartOf="@+id/tx8Wynagrodzenie"
+        app:layout_constraintTop_toBottomOf="@+id/tx8Info"
+        app:srcCompat="@drawable/boy" />
+
+    <TextView
+        android:id="@+id/tx8Wynagrodzenie"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="45dp"
+        android:text="35 PLN"
+        android:textColor="#4CAF50"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/img8Wynagrodzenie"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/D8_1"
+        app:layout_constraintTop_toTopOf="@+id/img8Wynagrodzenie" />
+
+    <TextView
+        android:id="@+id/tx8Lokalizacja"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Lokalizacja"
+        android:textColor="#4CAF50"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/D8_1"
+        app:layout_constraintStart_toStartOf="@+id/D8_1"
+        app:layout_constraintTop_toBottomOf="@+id/D8_1" />
+
+    <TextView
+        android:id="@+id/tx8Adres"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="ul. Żbikowska 44"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/tx8Lokalizacja"
+        app:layout_constraintStart_toStartOf="@+id/tx8Lokalizacja"
+        app:layout_constraintTop_toBottomOf="@+id/tx8Lokalizacja" />
+
+    <ImageView
+        android:id="@+id/img8Lokalizacja"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginEnd="10dp"
+        app:layout_constraintEnd_toStartOf="@+id/tx8Adres"
+        app:layout_constraintTop_toTopOf="@+id/tx8Lokalizacja"
+        app:srcCompat="@drawable/map" />
+
+    <Button
+        android:id="@+id/BT8Opis"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:layout_marginBottom="10dp"
+        android:backgroundTint="#03A9F4"
+        android:padding="15dp"
+        android:text="Zobacz pełen opis"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tx8Adres" />
+</androidx.constraintlayout.widget.ConstraintLayout>

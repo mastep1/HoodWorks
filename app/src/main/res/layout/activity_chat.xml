@@ -2,7 +2,7 @@
 
 
 <androidx.drawerlayout.widget.DrawerLayout
-    android:id="@+id/drawer5"
+    android:id="@+id/drawer3"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".Chat"
@@ -11,15 +11,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <FrameLayout
+        android:id="@+id/FramyLayout3"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/l3Main"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <ImageView
-                android:id="@+id/img5Menu"
+                android:id="@+id/img3Menu"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:padding="10dp"
@@ -28,7 +30,7 @@
                 app:srcCompat="@drawable/menu" />
 
             <TextView
-                android:id="@+id/tx5MainNapis"
+                android:id="@+id/tx3MainNapis"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
@@ -45,7 +47,7 @@
 
 
             <ImageView
-                android:id="@+id/img5filter"
+                android:id="@+id/img3filter"
                 android:layout_width="45dp"
                 android:layout_height="50dp"
                 android:layout_marginTop="10dp"
@@ -55,26 +57,26 @@
                 app:srcCompat="@drawable/filter" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rc5"
+                android:id="@+id/rc3"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/img5Menu" />
+                app:layout_constraintTop_toBottomOf="@+id/img3Menu" />
 
             <LinearLayout
-                android:id="@+id/l5Koniec"
+                android:id="@+id/l3Koniec"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/rc5">
+                app:layout_constraintTop_toBottomOf="@+id/rc3">
 
                 <TextView
-                    android:id="@+id/tx5Koniec"
+                    android:id="@+id/tx3Koniec"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -86,7 +88,7 @@
             </LinearLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/l5MenuDown"
+                android:id="@+id/l3MenuDown"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:background="#BFFFFDFD"
@@ -96,7 +98,7 @@
                 app:layout_constraintStart_toStartOf="parent">
 
                 <ImageView
-                    android:id="@+id/img5Chat"
+                    android:id="@+id/img3Chat"
                     android:layout_width="70dp"
                     android:layout_height="70dp"
                     android:layout_marginBottom="10dp"
@@ -105,24 +107,24 @@
                     android:paddingTop="5dp"
                     android:paddingRight="5dp"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/img5Mapa"
+                    app:layout_constraintEnd_toStartOf="@+id/img3Mapa"
                     app:layout_constraintStart_toStartOf="parent"
                     app:srcCompat="@drawable/poprawione" />
 
                 <ImageView
-                    android:id="@+id/img5Mapa"
+                    android:id="@+id/img3Mapa"
                     android:layout_width="70dp"
                     android:layout_height="55dp"
                     android:layout_marginBottom="5dp"
                     android:paddingLeft="5dp"
                     android:paddingRight="5dp"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/img5Profil"
-                    app:layout_constraintStart_toEndOf="@+id/img5Chat"
+                    app:layout_constraintEnd_toStartOf="@+id/img3Profil"
+                    app:layout_constraintStart_toEndOf="@+id/img3Chat"
                     app:srcCompat="@drawable/map" />
 
                 <ImageView
-                    android:id="@+id/img5Profil"
+                    android:id="@+id/img3Profil"
                     android:layout_width="70dp"
                     android:layout_height="50dp"
                     android:layout_marginBottom="5dp"
@@ -130,7 +132,7 @@
                     android:paddingRight="5dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/img5Mapa"
+                    app:layout_constraintStart_toEndOf="@+id/img3Mapa"
                     app:srcCompat="@drawable/boy" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -141,7 +143,7 @@
     </FrameLayout>
 
     <com.google.android.material.navigation.NavigationView
-        android:id="@+id/menu5"
+        android:id="@+id/menu3"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"

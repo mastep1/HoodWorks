@@ -17,59 +17,59 @@ class Profil : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListe
         super.onCreate(savedInstanceState)
         setContentView(R.layout.profil)
 
-        tx6Imie.text = user.imie
-        ratingBar6.rating = user.rating.toFloat()
-        tx6Ukonczone1.text = user.ukonczone.toString()
-        tx6Dni1.text = user.dni.toString()
-        tx6Like.text = user.like.toString()
-        tx6DisLike.text = user.dislike.toString()
-        tx6Opis2.text = user.opis
+        tx4Imie.text = user.imie
+        ratingBar4.rating = user.rating.toFloat()
+        tx4Ukonczone1.text = user.ukonczone.toString()
+        tx4Dni1.text = "${user.dni} dni"
+        tx4Like.text = user.like.toString()
+        tx4DisLike.text = user.dislike.toString()
+        tx4Opis2.text = user.opis
 
 
         if(user.email=="")
         {
-            tx6Email.text = "Nie podano"
+            tx4Email.text = "Nie podano"
         };else{
-            tx6Email.text = user.email
+            tx4Email.text = user.email
         }
 
 
         if(user.tel=="")
         {
-            tx6Tel.text = "Nie podano"
+            tx4Tel.text = "Nie podano"
         };else{
-            tx6Tel.text = user.tel
+            tx4Tel.text = user.tel
         }
 
 
 
-        img6Menu.setOnClickListener {
-            if(drawer6.isDrawerOpen(GravityCompat.START)){
-                drawer6.closeDrawer(GravityCompat.START)
+        img4Menu.setOnClickListener {
+            if(drawer4.isDrawerOpen(GravityCompat.START)){
+                drawer4.closeDrawer(GravityCompat.START)
             }
             else{
-                drawer6.openDrawer(GravityCompat.START)
+                drawer4.openDrawer(GravityCompat.START)
             }
         }
 
 
-        menu6.setNavigationItemSelectedListener(this)
+        menu4.setNavigationItemSelectedListener(this)
 
 
-        img6Mapa.setOnClickListener {
+        img4Mapa.setOnClickListener {
             val map = Intent(applicationContext,  Home::class.java)
             startActivity(map)
             overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
         }
 
 
-        img6Chat.setOnClickListener {
+        img4Chat.setOnClickListener {
             val chat = Intent(applicationContext,  Chat::class.java)
             startActivity(chat)
             overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
         }
 
-        fab6.setOnClickListener {
+        FAB4.setOnClickListener {
             val editProfil = Intent(applicationContext,  EditProfil::class.java)
             startActivity(editProfil)
         }
@@ -107,7 +107,7 @@ class Profil : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListe
                 }
             }
         }
-        drawer6.closeDrawer(GravityCompat.START)
+        drawer4.closeDrawer(GravityCompat.START)
         return true
     }
 }

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.drawerlayout.widget.DrawerLayout
-    android:id="@+id/drawer6"
+    android:id="@+id/drawer4"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".Profil"
@@ -9,16 +9,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <FrameLayout
+        android:id="@+id/FrameLayout4"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/l6_1"
+            android:id="@+id/l4Main"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/tx6MainNapis"
+                android:id="@+id/tx4MainNapis"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
@@ -34,7 +35,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
-                android:id="@+id/img6Menu"
+                android:id="@+id/img4Menu"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:padding="10dp"
@@ -43,7 +44,7 @@
                 app:srcCompat="@drawable/menu" />
 
             <ImageView
-                android:id="@+id/img6filter"
+                android:id="@+id/img4filter"
                 android:layout_width="45dp"
                 android:layout_height="50dp"
                 android:layout_marginTop="10dp"
@@ -54,33 +55,34 @@
 
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/fab6"
+                android:id="@+id/FAB4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="15dp"
                 android:clickable="true"
                 android:tint="#FF9800"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/ScrolView6"
-                app:layout_constraintTop_toBottomOf="@+id/img6filter"
+                app:layout_constraintEnd_toEndOf="@+id/ScrolView4"
+                app:layout_constraintTop_toBottomOf="@+id/img4filter"
                 app:srcCompat="@drawable/folating_button" />
 
             <ScrollView
-                android:id="@+id/ScrolView6"
+                android:id="@+id/ScrolView4"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="-1dp"
-                app:layout_constraintBottom_toTopOf="@+id/l6ButtomMenu"
+                app:layout_constraintBottom_toTopOf="@+id/l4ButtomMenu"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tx6MainNapis">
+                app:layout_constraintTop_toBottomOf="@+id/tx4MainNapis">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/l4Informacje"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
                     <View
-                        android:id="@+id/diver6Horizontal"
+                        android:id="@+id/diver4Horizontal"
                         android:layout_width="0dp"
                         android:layout_height="2dp"
                         android:layout_marginStart="30dp"
@@ -89,10 +91,10 @@
                         android:background="#FA0000"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/tx6Like" />
+                        app:layout_constraintTop_toBottomOf="@+id/tx4Like" />
 
                     <ImageView
-                        android:id="@+id/img6ZdjProf"
+                        android:id="@+id/img4ZdjProf"
                         android:layout_width="90dp"
                         android:layout_height="90dp"
                         android:layout_marginStart="35dp"
@@ -102,7 +104,7 @@
                         app:srcCompat="@drawable/boy" />
 
                     <TextView
-                        android:id="@+id/tx6Imie"
+                        android:id="@+id/tx4Imie"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="15dp"
@@ -110,12 +112,12 @@
                         android:textColor="#070707"
                         android:textSize="22sp"
                         android:textStyle="bold"
-                        app:layout_constraintStart_toEndOf="@+id/img6ZdjProf"
-                        app:layout_constraintTop_toTopOf="@+id/img6ZdjProf" />
+                        app:layout_constraintStart_toEndOf="@+id/img4ZdjProf"
+                        app:layout_constraintTop_toTopOf="@+id/img4ZdjProf" />
 
 
                     <RatingBar
-                        android:id="@+id/ratingBar6"
+                        android:id="@+id/ratingBar4"
                         style="@style/Widget.AppCompat.RatingBar.Indicator"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -124,68 +126,66 @@
                         android:indeterminate="false"
                         android:progressTint="#FF5722"
                         android:rating="4"
-                        app:layout_constraintStart_toEndOf="@+id/img6ZdjProf"
-                        app:layout_constraintTop_toBottomOf="@+id/tx6Imie" />
+                        app:layout_constraintStart_toEndOf="@+id/img4ZdjProf"
+                        app:layout_constraintTop_toBottomOf="@+id/tx4Imie" />
 
                     <TextView
-                        android:id="@+id/tx6Ukonczone1"
+                        android:id="@+id/tx4Ukonczone1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="40dp"
-                        android:text="6"
                         android:textColor="#070707"
                         android:textSize="24sp"
                         android:textStyle="bold"
-                        app:layout_constraintEnd_toStartOf="@+id/divider6vertical1"
+                        app:layout_constraintEnd_toStartOf="@+id/divider4vertical1"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/img6ZdjProf" />
+                        app:layout_constraintTop_toBottomOf="@+id/img4ZdjProf" />
 
                     <TextView
-                        android:id="@+id/tx6Ukonczone2"
+                        android:id="@+id/tx4Ukonczone2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
                         android:text="Ukończone"
                         android:textSize="18sp"
-                        app:layout_constraintEnd_toEndOf="@+id/tx6Ukonczone1"
-                        app:layout_constraintStart_toStartOf="@+id/tx6Ukonczone1"
-                        app:layout_constraintTop_toBottomOf="@+id/tx6Ukonczone1" />
+                        app:layout_constraintEnd_toEndOf="@+id/tx4Ukonczone1"
+                        app:layout_constraintStart_toStartOf="@+id/tx4Ukonczone1"
+                        app:layout_constraintTop_toBottomOf="@+id/tx4Ukonczone1" />
 
                     <TextView
-                        android:id="@+id/tx6Dni1"
+                        android:id="@+id/tx4Dni1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="21 dni"
                         android:textColor="#0B0B0B"
                         android:textSize="24sp"
                         android:textStyle="bold"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/divider6vertical1"
-                        app:layout_constraintTop_toTopOf="@+id/tx6Ukonczone1" />
+                        app:layout_constraintStart_toEndOf="@+id/divider4vertical1"
+                        app:layout_constraintTop_toTopOf="@+id/tx4Ukonczone1" />
 
                     <TextView
-                        android:id="@+id/tx6Dni2"
+                        android:id="@+id/tx4Dni2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
                         android:text="Z justJobs"
                         android:textSize="18sp"
-                        app:layout_constraintEnd_toEndOf="@+id/tx6Dni1"
-                        app:layout_constraintStart_toStartOf="@+id/tx6Dni1"
-                        app:layout_constraintTop_toBottomOf="@+id/tx6Dni1" />
+                        app:layout_constraintEnd_toEndOf="@+id/tx4Dni1"
+                        app:layout_constraintStart_toStartOf="@+id/tx4Dni1"
+                        app:layout_constraintTop_toBottomOf="@+id/tx4Dni1" />
 
                     <View
-                        android:id="@+id/divider6vertical1"
+                        android:id="@+id/divider4vertical1"
                         android:layout_width="2dp"
                         android:layout_height="0dp"
                         android:background="#FA0000"
-                        app:layout_constraintBottom_toBottomOf="@+id/tx6Dni2"
+                        app:layout_constraintBottom_toBottomOf="@+id/tx4Dni2"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="@+id/tx6Dni1" />
+                        app:layout_constraintTop_toTopOf="@+id/tx4Dni1" />
 
                     <View
-                        android:id="@+id/divider6Horizontal1"
+                        android:id="@+id/divider4Horizontal1"
                         android:layout_width="0dp"
                         android:layout_height="2dp"
                         android:layout_marginStart="30dp"
@@ -194,56 +194,54 @@
                         android:background="#FA0000"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/divider6vertical1" />
+                        app:layout_constraintTop_toBottomOf="@+id/divider4vertical1" />
 
                     <ImageView
-                        android:id="@+id/img6Like"
+                        android:id="@+id/img4Like"
                         android:layout_width="45dp"
                         android:layout_height="45dp"
                         android:layout_marginEnd="10dp"
-                        app:layout_constraintBottom_toBottomOf="@+id/tx6Like"
-                        app:layout_constraintEnd_toStartOf="@+id/tx6Like"
-                        app:layout_constraintTop_toTopOf="@+id/tx6Like"
+                        app:layout_constraintBottom_toBottomOf="@+id/tx4Like"
+                        app:layout_constraintEnd_toStartOf="@+id/tx4Like"
+                        app:layout_constraintTop_toTopOf="@+id/tx4Like"
                         app:srcCompat="@drawable/like" />
 
                     <ImageView
-                        android:id="@+id/img6DisLike"
+                        android:id="@+id/img4DisLike"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
                         android:layout_marginStart="15dp"
-                        app:layout_constraintBottom_toBottomOf="@+id/tx6Like"
-                        app:layout_constraintStart_toEndOf="@+id/divider6vertical1"
-                        app:layout_constraintTop_toTopOf="@+id/tx6Like"
+                        app:layout_constraintBottom_toBottomOf="@+id/tx4Like"
+                        app:layout_constraintStart_toEndOf="@+id/divider4vertical1"
+                        app:layout_constraintTop_toTopOf="@+id/tx4Like"
                         app:srcCompat="@drawable/dislike" />
 
                     <TextView
-                        android:id="@+id/tx6Like"
+                        android:id="@+id/tx4Like"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="25dp"
                         android:layout_marginEnd="15dp"
-                        android:text="19"
                         android:textColor="#0C0C0C"
                         android:textSize="30sp"
                         android:textStyle="bold"
-                        app:layout_constraintEnd_toStartOf="@+id/divider6vertical1"
-                        app:layout_constraintTop_toBottomOf="@+id/divider6Horizontal1" />
+                        app:layout_constraintEnd_toStartOf="@+id/divider4vertical1"
+                        app:layout_constraintTop_toBottomOf="@+id/divider4Horizontal1" />
 
                     <TextView
-                        android:id="@+id/tx6DisLike"
+                        android:id="@+id/tx4DisLike"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
-                        android:text="2"
                         android:textColor="#000000"
                         android:textSize="30sp"
                         android:textStyle="bold"
-                        app:layout_constraintBottom_toBottomOf="@+id/tx6Like"
-                        app:layout_constraintStart_toEndOf="@+id/img6DisLike"
-                        app:layout_constraintTop_toTopOf="@+id/tx6Like" />
+                        app:layout_constraintBottom_toBottomOf="@+id/tx4Like"
+                        app:layout_constraintStart_toEndOf="@+id/img4DisLike"
+                        app:layout_constraintTop_toTopOf="@+id/tx4Like" />
 
                     <View
-                        android:id="@+id/diver6Horizontal2"
+                        android:id="@+id/diver4Horizontal2"
                         android:layout_width="0dp"
                         android:layout_height="2dp"
                         android:layout_marginStart="30dp"
@@ -252,10 +250,10 @@
                         android:background="#FA0000"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/tx6Like" />
+                        app:layout_constraintTop_toBottomOf="@+id/tx4Like" />
 
                     <TextView
-                        android:id="@+id/tx6Opis1"
+                        android:id="@+id/tx4Opis1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="40dp"
@@ -265,10 +263,10 @@
                         android:textSize="24sp"
                         android:textStyle="bold"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/img6Like" />
+                        app:layout_constraintTop_toBottomOf="@+id/img4Like" />
 
                     <TextView
-                        android:id="@+id/tx6Opis2"
+                        android:id="@+id/tx4Opis2"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="40dp"
@@ -277,10 +275,10 @@
                         android:textSize="18sp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/tx6Opis1" />
+                        app:layout_constraintTop_toBottomOf="@+id/tx4Opis1" />
 
                     <View
-                        android:id="@+id/diver6Horizontal3"
+                        android:id="@+id/diver4Horizontal3"
                         android:layout_width="0dp"
                         android:layout_height="2dp"
                         android:layout_marginStart="30dp"
@@ -289,10 +287,10 @@
                         android:background="#FA0202"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/tx6Opis2" />
+                        app:layout_constraintTop_toBottomOf="@+id/tx4Opis2" />
 
                     <TextView
-                        android:id="@+id/tx6Kontakt"
+                        android:id="@+id/tx4Kontakt"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="40dp"
@@ -302,70 +300,67 @@
                         android:textSize="24sp"
                         android:textStyle="bold"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/diver6Horizontal3" />
+                        app:layout_constraintTop_toBottomOf="@+id/diver4Horizontal3" />
 
                     <ImageView
-                        android:id="@+id/img6Email"
+                        android:id="@+id/img4Email"
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         android:layout_marginStart="40dp"
                         android:layout_marginTop="15dp"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/tx6Kontakt"
+                        app:layout_constraintTop_toBottomOf="@id/tx4Kontakt"
                         app:srcCompat="@drawable/poprawione" />
 
                     <ImageView
-                        android:id="@+id/img6Tel"
+                        android:id="@+id/img4Tel"
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         android:layout_marginStart="40dp"
                         android:layout_marginTop="15dp"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/img6Email"
+                        app:layout_constraintTop_toBottomOf="@id/img4Email"
                         app:srcCompat="@drawable/poprawione" />
 
                     <ImageView
-                        android:id="@+id/img6UserChat"
+                        android:id="@+id/img4UserChat"
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         android:layout_marginStart="40dp"
                         android:layout_marginTop="15dp"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/img6Tel"
+                        app:layout_constraintTop_toBottomOf="@id/img4Tel"
                         app:srcCompat="@drawable/poprawione" />
 
                     <TextView
-                        android:id="@+id/tx6UserChat"
+                        android:id="@+id/tx4UserChat"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="20dp"
                         android:layout_marginBottom="5dp"
-                        android:text="Napisz na JustJobs"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/img6UserChat"
-                        app:layout_constraintTop_toTopOf="@+id/img6UserChat" />
+                        app:layout_constraintStart_toEndOf="@+id/img4UserChat"
+                        app:layout_constraintTop_toTopOf="@+id/img4UserChat" />
 
                     <TextView
-                        android:id="@+id/tx6Tel"
+                        android:id="@+id/tx4Tel"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="20dp"
                         android:layout_marginBottom="5dp"
-                        android:text="606309379"
-                        app:layout_constraintBottom_toBottomOf="@+id/img6Tel"
-                        app:layout_constraintStart_toEndOf="@+id/img6Tel"
-                        app:layout_constraintTop_toTopOf="@+id/img6Tel" />
+                        app:layout_constraintBottom_toBottomOf="@+id/img4Tel"
+                        app:layout_constraintStart_toEndOf="@+id/img4Tel"
+                        app:layout_constraintTop_toTopOf="@+id/img4Tel" />
 
                     <TextView
-                        android:id="@+id/tx6Email"
+                        android:id="@+id/tx4Email"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="20dp"
                         android:layout_marginBottom="5dp"
-                        android:text="krykubi@wp.pl"
-                        app:layout_constraintBottom_toBottomOf="@+id/img6Email"
-                        app:layout_constraintStart_toEndOf="@+id/img6Email"
-                        app:layout_constraintTop_toTopOf="@+id/img6Email" />
+                        app:layout_constraintBottom_toBottomOf="@+id/img4Email"
+                        app:layout_constraintStart_toEndOf="@+id/img4Email"
+                        app:layout_constraintTop_toTopOf="@+id/img4Email" />
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -374,7 +369,7 @@
             </ScrollView>
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/l6ButtomMenu"
+                android:id="@+id/l4ButtomMenu"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:background="#BFFFFDFD"
@@ -384,7 +379,7 @@
                 app:layout_constraintStart_toStartOf="parent">
 
                 <ImageView
-                    android:id="@+id/img6Chat"
+                    android:id="@+id/img4Chat"
                     android:layout_width="70dp"
                     android:layout_height="55dp"
                     android:layout_marginBottom="5dp"
@@ -393,12 +388,12 @@
                     android:paddingTop="5dp"
                     android:paddingRight="5dp"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/img6Mapa"
+                    app:layout_constraintEnd_toStartOf="@+id/img4Mapa"
                     app:layout_constraintStart_toStartOf="parent"
                     app:srcCompat="@drawable/poprawione" />
 
                 <ImageView
-                    android:id="@+id/img6Mapa"
+                    android:id="@+id/img4Mapa"
                     android:layout_width="70dp"
                     android:layout_height="55dp"
                     android:layout_marginBottom="5dp"
@@ -406,7 +401,7 @@
                     android:paddingRight="5dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/img6Profil"
-                    app:layout_constraintStart_toEndOf="@+id/img6Chat"
+                    app:layout_constraintStart_toEndOf="@+id/img4Chat"
                     app:srcCompat="@drawable/map" />
 
                 <ImageView
@@ -418,7 +413,7 @@
                     android:paddingRight="5dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/img6Mapa"
+                    app:layout_constraintStart_toEndOf="@+id/img4Mapa"
                     app:srcCompat="@drawable/boy" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -430,7 +425,7 @@
     </FrameLayout>
 
     <com.google.android.material.navigation.NavigationView
-        android:id="@+id/menu6"
+        android:id="@+id/menu4"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
