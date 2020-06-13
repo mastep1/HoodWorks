@@ -17,7 +17,7 @@ class InfoWindowAdapter(private val mContext: Context) :
         var clicked = 0
         var i = 0
         while(i < dane.zadania.size){
-            if(marker.snippet.toInt() == dane.zadania[i].img){
+            if(marker.snippet.toInt() == dane.zadania[i].img.toInt()){
                 clicked = i
                 break
             }else{

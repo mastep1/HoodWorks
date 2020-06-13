@@ -158,8 +158,16 @@ class Home : AppCompatActivity(), OnMapReadyCallback, NavigationView.OnNavigatio
 
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 for (i in dataSnapshot.children) {
-                    val element = i.getValue(ZadanieModel::class.java)
-                    dane.zadania.add(element!!)
+                    when(i.key){
+                        "opis" -> user.opis = i.value.toString()
+                        "dislike" -> user.dislike = i.value.toString().toInt()
+                        "like" -> user.like = i.value.toString().toInt()
+                        "dni" -> user.dni = i.value.toString().toInt()
+                        "ukonczono" -> user.ukonczone = i.value.toString().toInt()
+                        "rating" -> user.rating = i.value.toString().toDouble()
+                    }
+                    //var element : ZadanieModel = i.getValue() as ZadanieModel
+                    //dane.zadania.add(element!!)
                     znaczniki(googleMap)
                 }
             }

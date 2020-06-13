@@ -96,7 +96,7 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="Time"
-        android:inputType="time"
+        android:inputType="text"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Etx5Title" />
 </androidx.constraintlayout.widget.ConstraintLayout>

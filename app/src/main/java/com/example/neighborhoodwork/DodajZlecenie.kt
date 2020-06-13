@@ -32,14 +32,14 @@ class DodajZlecenie : AppCompatActivity() {
 
         WpierdolDoBazy.setOnClickListener {
             val opis = Etx5Opis.text.toString()
-            val img = Etx5Img.text.toString().toInt()
-            val length = Etx5Length.text.toString().toInt()
-            val wynagrodzenie = Etx5Wynagrodzenie.text.toString().toInt()
+            val img = Etx5Img.text.toString()
+            val length = Etx5Length.text.toString()
+            val wynagrodzenie = Etx5Wynagrodzenie.text.toString()
             val x = Etx5X.text.toString()
             val y = Etx5Y.text.toString()
             val title = Etx5Title.text.toString()
-            val time = Etx5Time.drawingTime
-            val fireBaseInput = ZadanieModel( x , y, opis,  wynagrodzenie, img, length, time, title, "${losujID(currentUser,time)}")
+            val time = Etx5Time.drawingTime.toString()
+            val fireBaseInput = ZadanieModel( x , y, opis,  wynagrodzenie, img, length, time, title, "${losujID(currentUser, {time.toLong()})}")
             myRef.child("${Date().time}").setValue(fireBaseInput)
             val Mapa = Intent(applicationContext, Home::class.java)
             startActivity(Mapa)
@@ -47,7 +47,7 @@ class DodajZlecenie : AppCompatActivity() {
         }
     }
 
-    private fun losujID(currentUser: FirebaseUser?, time : Long) : String{
+    private fun losujID(currentUser: FirebaseUser?, time: () -> Long) : String{
         var id = "${currentUser?.providerId}$time"
         return id
     }
