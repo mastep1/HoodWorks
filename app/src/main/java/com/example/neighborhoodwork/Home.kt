@@ -23,6 +23,7 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_home.*
 import java.util.*
+import kotlin.collections.ArrayList
 
 
 class Home : AppCompatActivity(), OnMapReadyCallback, NavigationView.OnNavigationItemSelectedListener {
@@ -157,19 +158,13 @@ class Home : AppCompatActivity(), OnMapReadyCallback, NavigationView.OnNavigatio
             }
 
             override fun onDataChange(dataSnapshot: DataSnapshot) {
+
                 for (i in dataSnapshot.children) {
-                    when(i.key){
-                        "opis" -> user.opis = i.value.toString()
-                        "dislike" -> user.dislike = i.value.toString().toInt()
-                        "like" -> user.like = i.value.toString().toInt()
-                        "dni" -> user.dni = i.value.toString().toInt()
-                        "ukonczono" -> user.ukonczone = i.value.toString().toInt()
-                        "rating" -> user.rating = i.value.toString().toDouble()
-                    }
-                    //var element : ZadanieModel = i.getValue() as ZadanieModel
-                    //dane.zadania.add(element!!)
-                    znaczniki(googleMap)
+
+                    val element = i.getValue(ZadanieModel::class.java)
+                    dane.zadania.add(element!!)
                 }
+                znaczniki(googleMap)
             }
         })
 
@@ -184,7 +179,7 @@ class Home : AppCompatActivity(), OnMapReadyCallback, NavigationView.OnNavigatio
             googleMap.addMarker(
                 MarkerOptions().position(wspolrzedne)
                     .icon(BitmapDescriptorFactory.fromResource(R.drawable.marker))
-                    .snippet("${dane.zadania[i].img}")
+                    .snippet("${dane.zadania[i].ID}")
             )
             if(i == dane.zadania.size - 1){
                 googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(wspolrzedne, 16f))
@@ -205,8 +200,12 @@ class Home : AppCompatActivity(), OnMapReadyCallback, NavigationView.OnNavigatio
         }
 
         googleMap.setOnInfoWindowClickListener(OnInfoWindowClickListener { arg0 ->
-            var tt = arg0.snippet
-            Toast.makeText(applicationContext, tt, Toast.LENGTH_SHORT).show()
+            arg0.hideInfoWindow()
+            val frag = supportFragmentManager
+            val infoWindow = F_MapWindow()
+
+            frag.beginTransaction().add(R.id.l2InfoFrag, infoWindow).commit()
+
         })
 
 

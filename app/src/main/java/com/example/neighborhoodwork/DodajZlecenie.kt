@@ -39,7 +39,8 @@ class DodajZlecenie : AppCompatActivity() {
             val y = Etx5Y.text.toString()
             val title = Etx5Title.text.toString()
             val time = Etx5Time.drawingTime.toString()
-            val fireBaseInput = ZadanieModel( x , y, opis,  wynagrodzenie, img, length, time, title, "${losujID(currentUser, {time.toLong()})}")
+            val fireBaseInput = ZadanieModel( x = x , y = y, opis = opis,  wynagrodzenie = wynagrodzenie, img = img,
+                length = length, time = time, title = title, ID =  time)
             myRef.child("${Date().time}").setValue(fireBaseInput)
             val Mapa = Intent(applicationContext, Home::class.java)
             startActivity(Mapa)
@@ -47,8 +48,5 @@ class DodajZlecenie : AppCompatActivity() {
         }
     }
 
-    private fun losujID(currentUser: FirebaseUser?, time: () -> Long) : String{
-        var id = "${currentUser?.providerId}$time"
-        return id
-    }
+
 }

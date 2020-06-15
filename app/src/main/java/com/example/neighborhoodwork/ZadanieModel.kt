@@ -1,7 +1,10 @@
 package com.example.neighborhoodwor
 
+import com.google.firebase.database.IgnoreExtraProperties
 import java.sql.Time
 
+
+@IgnoreExtraProperties
 data  class ZadanieModel (
     var x : String = "",
     var y : String = "",
