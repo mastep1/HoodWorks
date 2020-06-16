@@ -21,6 +21,20 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/FAB2MyLocation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#FFFFFF"
+                android:clickable="true"
+                android:tint="#2196F3"
+                app:backgroundTint="#FFFFFF"
+                app:fabSize="normal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@android:drawable/ic_menu_mylocation" />
+
             <TextView
                 android:id="@+id/tx2MainNapis"
                 android:layout_width="wrap_content"
@@ -66,6 +80,20 @@
                 app:layout_constraintTop_toBottomOf="@+id/img2Menu">
 
 
+                <Button
+                    android:id="@+id/BT6Exit"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginEnd="3dp"
+                    android:backgroundTint="#FB0202"
+                    android:text="X"
+                    android:textAlignment="center"
+                    android:textColor="#FBFBFB"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="@+id/l2InfoFrag"
+                    app:layout_constraintTop_toTopOf="@+id/l2InfoFrag" />
+
                 <fragment
                     android:id="@+id/mapView2"
                     android:name="com.google.android.gms.maps.SupportMapFragment"
@@ -80,7 +108,7 @@
                     android:id="@+id/l2InfoFrag"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="30dp"
+                    android:layout_marginBottom="10dp"
                     android:orientation="vertical"
                     app:layout_constraintBottom_toTopOf="@+id/l2DownMenu"
                     app:layout_constraintEnd_toEndOf="parent"

@@ -7,12 +7,26 @@
     android:layout_height="wrap_content"
     android:background="#E6FFFFFF">
 
+    <Button
+        android:id="@+id/BT6Chat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#03A9F4"
+        android:text="@string/tx4Chat"
+        android:textColor="#F8F8F7"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/BT6Commit"
+        app:layout_constraintEnd_toStartOf="@+id/BT6Commit"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/BT6Commit" />
+
     <ImageView
         android:id="@+id/img6Profil"
-        android:layout_width="105dp"
-        android:layout_height="105dp"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="25dp"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="5dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/boy" />
@@ -22,16 +36,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
-        android:text="Krystian Kubica"
+        android:layout_marginTop="5dp"
         android:textColor="#000000"
-        android:textSize="24sp"
+        android:textSize="22sp"
         app:layout_constraintStart_toEndOf="@+id/img6Profil"
         app:layout_constraintTop_toTopOf="@+id/img6Profil" />
 
     <RatingBar
         android:id="@+id/ratingBar6"
         style="@style/Widget.AppCompat.RatingBar.Indicator"
+        android:progressTint="#FF5722"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
@@ -40,15 +54,15 @@
         app:layout_constraintTop_toBottomOf="@+id/tx6Imie" />
 
     <TextView
-        android:id="@+id/tx6CzasTrawania"
+        android:id="@+id/tx6Length"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="35dp"
-        android:layout_marginEnd="40dp"
+        android:layout_marginEnd="190dp"
         android:text="Czas trwania"
         android:textColor="#000000"
-        android:textSize="22sp"
-        app:layout_constraintEnd_toStartOf="@+id/tx6Lokalizacja"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/img6Profil" />
 
@@ -57,52 +71,177 @@
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginTop="5dp"
-        app:layout_constraintStart_toStartOf="@+id/tx6CzasTrawania"
-        app:layout_constraintTop_toBottomOf="@+id/tx6CzasTrawania"
+        app:layout_constraintEnd_toStartOf="@+id/tx6LengthV"
+        app:layout_constraintStart_toStartOf="@+id/tx6Length"
+        app:layout_constraintTop_toBottomOf="@+id/tx6Length"
         app:srcCompat="@drawable/boy" />
 
     <TextView
-        android:id="@+id/tx6Length"
+        android:id="@+id/tx6LengthV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
-        android:text="20 min"
         android:textColor="#FF9800"
         android:textSize="28sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/tx6Length"
         app:layout_constraintStart_toEndOf="@+id/img6Length"
-        app:layout_constraintTop_toBottomOf="@+id/tx6CzasTrawania" />
-
-    <TextView
-        android:id="@+id/tx6Lokalizacja"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="35dp"
-        android:text="Lokalizacja"
-        android:textColor="#040404"
-        android:textSize="22sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/tx6CzasTrawania"
-        app:layout_constraintTop_toBottomOf="@+id/img6Profil" />
+        app:layout_constraintTop_toBottomOf="@+id/tx6Length" />
 
     <ImageView
         android:id="@+id/img6Lokalizacja"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:layout_marginTop="25dp"
-        app:layout_constraintEnd_toStartOf="@+id/tx6Lokalizacja"
-        app:layout_constraintTop_toBottomOf="@+id/img6Profil"
+        android:layout_marginBottom="5dp"
+        app:layout_constraintBottom_toTopOf="@+id/tx6Adres"
+        app:layout_constraintEnd_toEndOf="@+id/tx6Adres"
+        app:layout_constraintStart_toStartOf="@+id/tx6Adres"
         app:srcCompat="@drawable/map" />
 
     <TextView
-        android:id="@+id/tx6Adres"
+        android:id="@+id/tx6AdresV"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:text="żbiskowska 44 Piastów"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="10dp"
+        android:text="ul. żbikowska 44 Piastów"
+        android:textAlignment="center"
         android:textColor="#4CAF50"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tx6LengthV"
+        app:layout_constraintTop_toTopOf="@+id/tx6LengthV" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="Wynagrodzenie"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/tx6Length"
+        app:layout_constraintStart_toStartOf="@+id/tx6Length"
+        app:layout_constraintTop_toBottomOf="@+id/tx6AdresV" />
+
+    <ImageView
+        android:id="@+id/img4Wynagordzenie"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="5dp"
+        app:layout_constraintEnd_toStartOf="@+id/tx6WynagrodzenieV"
+        app:layout_constraintStart_toStartOf="@+id/textView4"
+        app:layout_constraintTop_toBottomOf="@+id/textView4"
+        app:srcCompat="@drawable/boy" />
+
+    <TextView
+        android:id="@+id/tx6WynagrodzenieV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:textColor="#F44336"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/textView4"
+        app:layout_constraintStart_toEndOf="@+id/img4Wynagordzenie"
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
+    <TextView
+        android:id="@+id/tx6Start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Rozpoczęcie"
+        android:textColor="#020202"
         android:textSize="22sp"
-        app:layout_constraintEnd_toEndOf="@+id/tx6Lokalizacja"
-        app:layout_constraintStart_toStartOf="@+id/img6Lokalizacja"
-        app:layout_constraintTop_toBottomOf="@+id/tx6Lokalizacja" />
+        app:layout_constraintEnd_toEndOf="@+id/tx6AdresV"
+        app:layout_constraintStart_toStartOf="@+id/tx6AdresV"
+        app:layout_constraintTop_toTopOf="@+id/textView4" />
+
+    <ImageView
+        android:id="@+id/img6Start"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="5dp"
+        app:layout_constraintEnd_toStartOf="@+id/tx6StartV"
+        app:layout_constraintStart_toStartOf="@+id/tx6Start"
+        app:layout_constraintTop_toBottomOf="@+id/tx6Start"
+        app:srcCompat="@drawable/boy" />
+
+    <TextView
+        android:id="@+id/tx6StartV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:textColor="#03A9F4"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/tx6Start"
+        app:layout_constraintStart_toEndOf="@+id/img6Start"
+        app:layout_constraintTop_toBottomOf="@+id/tx6Start" />
+
+    <TextView
+        android:id="@+id/tx6Opis"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Opis Zlecenia"
+        android:textColor="#090909"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/img4Wynagordzenie" />
+
+    <TextView
+        android:id="@+id/tx6OpisV"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tx6Opis" />
+
+    <TextView
+        android:id="@+id/tx6Adres"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:text="Lokalizacja"
+        android:textColor="#040404"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/tx6AdresV"
+        app:layout_constraintEnd_toEndOf="@+id/tx6AdresV"
+        app:layout_constraintStart_toStartOf="@+id/tx6AdresV" />
+
+    <Button
+        android:id="@+id/BT6Commit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:backgroundTint="#FF5722"
+        android:foregroundTint="#FFFFFF"
+        android:padding="10dp"
+        android:text="Wykonaj"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tx6OpisV" />
+
+    <Button
+        android:id="@+id/BT6Negocjuj"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#4CAF50"
+        android:text="Negocjuj"
+        android:textColor="#FDFBFB"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/BT6Commit"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/BT6Commit"
+        app:layout_constraintTop_toTopOf="@+id/BT6Commit" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

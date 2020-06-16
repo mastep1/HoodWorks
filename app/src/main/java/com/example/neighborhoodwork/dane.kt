@@ -1,9 +1,12 @@
 package com.example.neighborhoodwork
 
 import com.example.neighborhoodwor.ZadanieModel
+import com.google.android.gms.maps.model.LatLng
 
 object dane {
     var zadania = arrayListOf<ZadanieModel>()
+    var clicked : Int = 0
+    lateinit var lokalizacjaAktualna : LatLng
 }
 
 object user {

@@ -21,6 +21,7 @@ class InfoWindowAdapter(private val mContext: Context) :
         while(i < dane.zadania.size){
             if(marker.snippet.toInt() == dane.zadania[i].ID.toInt()){
                 clicked = i
+                dane.clicked = i
                 break
             }else{
                 i++

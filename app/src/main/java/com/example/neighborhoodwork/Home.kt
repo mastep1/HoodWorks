@@ -1,13 +1,21 @@
 package com.example.neighborhoodwork
 
+import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.location.Geocoder
+import android.location.Location
+import android.location.LocationListener
+import android.location.LocationManager
 import android.os.Bundle
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
 import androidx.core.view.GravityCompat
 import com.example.neighborhoodwor.ZadanieModel
 import com.firebase.ui.auth.AuthUI
+import com.google.android.gms.location.*
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.GoogleMap.OnInfoWindowClickListener
@@ -23,19 +31,21 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_home.*
 import java.util.*
-import kotlin.collections.ArrayList
 
 
 class Home : AppCompatActivity(), OnMapReadyCallback, NavigationView.OnNavigationItemSelectedListener {
 
     lateinit var providers: List<AuthUI.IdpConfig>
-    val MY_REQUEST_CODE: Int = 2807
+    lateinit var lm : LocationManager
+    lateinit var location : Location
     private lateinit var auth: FirebaseAuth
-
+    var frag = supportFragmentManager
+    var infoWindow = F_MapWindow()
     lateinit var myRef: DatabaseReference
-
+    lateinit var fusedLocationClient : FusedLocationProviderClient
     lateinit var userData: DatabaseReference
-
+    lateinit var locationRequest: LocationRequest
+    lateinit var locationCallback: LocationCallback
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -53,6 +63,9 @@ class Home : AppCompatActivity(), OnMapReadyCallback, NavigationView.OnNavigatio
 
         val currentUser = auth.currentUser
 
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
+        getLocationUpdates()
+
         val map = supportFragmentManager.findFragmentById(R.id.mapView2) as SupportMapFragment
         map.getMapAsync(this)
 
@@ -60,7 +73,40 @@ class Home : AppCompatActivity(), OnMapReadyCallback, NavigationView.OnNavigatio
 
 
 
+
         dateUser(currentUser)
+        /*if(ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
+            ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.ACCESS_COARSE_LOCATION, android.Manifest.permission.ACCESS_FINE_LOCATION),111)
+            }
+
+                lm = getSystemService(Context.LOCATION_SERVICE) as LocationManager
+                location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER)
+
+
+                var ll = object:LocationListener{
+                    override fun onLocationChanged(location: Location?) {
+                        reverseLocation(location)
+                    }
+
+                    override fun onStatusChanged(provider: String?, status: Int, extras: Bundle?) {
+                    }
+
+                    override fun onProviderEnabled(provider: String?) {
+                    }
+
+                    override fun onProviderDisabled(provider: String?) {
+                    }
+
+                }
+
+                lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 10.0f, ll)
+
+         */
+
+
+
+
 
         img2Menu.setOnClickListener {
             if(drawler2.isDrawerOpen(GravityCompat.START)){
@@ -85,8 +131,70 @@ class Home : AppCompatActivity(), OnMapReadyCallback, NavigationView.OnNavigatio
             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
         }
 
+        BT6Exit.setOnClickListener {
+            bigInfoWindow(false)
+        }
+
+    }
+
+    private fun getLocationUpdates()
+    {
+
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
+        locationRequest = LocationRequest()
+        locationRequest.interval = 5000
+        locationRequest.fastestInterval = 5000
+        locationRequest.smallestDisplacement = 10f // 170 m = 0.1 mile
+        locationRequest.priority = LocationRequest.PRIORITY_HIGH_ACCURACY //set according to your app function
+        locationCallback = object : LocationCallback() {
+            override fun onLocationResult(locationResult: LocationResult?) {
+                locationResult ?: return
+
+                if (locationResult.locations.isNotEmpty()) {
+
+                    val location = locationResult.lastLocation
+                    aktualizujLokalizacje(location)
+
+                    // use your location object
+                    // get latitude , longitude and other info from this
+                }
 
 
+            }
+        }
+    }
+
+    //start location updates
+    private fun startLocationUpdates() {
+        fusedLocationClient.requestLocationUpdates(
+            locationRequest,
+            locationCallback,
+            null /* Looper */
+        )
+    }
+
+    // stop location updates
+    private fun stopLocationUpdates() {
+        fusedLocationClient.removeLocationUpdates(locationCallback)
+    }
+
+    // stop receiving location update when activity not visible/foreground
+    override fun onPause() {
+        super.onPause()
+        stopLocationUpdates()
+    }
+
+    // start receiving location update when activity  visible/foreground
+    override fun onResume() {
+        super.onResume()
+        startLocationUpdates()
+    }
+
+    private fun aktualizujLokalizacje(lok: Location?) {
+        var x = lok?.latitude
+        var y = lok?.accuracy
+        val miejsceNaMapie = LatLng(x!!, y!!.toDouble())
+        dane.lokalizacjaAktualna = miejsceNaMapie
     }
 
     fun dateUser(currentUser: FirebaseUser?){
@@ -181,11 +289,9 @@ class Home : AppCompatActivity(), OnMapReadyCallback, NavigationView.OnNavigatio
                     .icon(BitmapDescriptorFactory.fromResource(R.drawable.marker))
                     .snippet("${dane.zadania[i].ID}")
             )
-            if(i == dane.zadania.size - 1){
-                googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(wspolrzedne, 16f))
-            }
             i++
         }
+       dodajLok(googleMap)
 
 
         googleMap.setOnMarkerClickListener { marker ->
@@ -200,17 +306,34 @@ class Home : AppCompatActivity(), OnMapReadyCallback, NavigationView.OnNavigatio
         }
 
         googleMap.setOnInfoWindowClickListener(OnInfoWindowClickListener { arg0 ->
-            arg0.hideInfoWindow()
-            val frag = supportFragmentManager
-            val infoWindow = F_MapWindow()
 
-            frag.beginTransaction().add(R.id.l2InfoFrag, infoWindow).commit()
+            arg0.hideInfoWindow()
+
+            bigInfoWindow(true)
+
+            tx2MainNapis.setOnClickListener {
+                bigInfoWindow(false)
+            }
 
         })
 
 
+
     }
 
+    fun bigInfoWindow(tryb : Boolean){
+        if(tryb==true){
+            FAB2MyLocation.hide()
+            frag.beginTransaction().add(R.id.l2InfoFrag, infoWindow).commit()
+        }else{
+            FAB2MyLocation.show()
+            frag.beginTransaction().remove(infoWindow).commit()
+        }
+    }
+
+    fun dodajLok(googleMap: GoogleMap){
+        googleMap.addMarker(MarkerOptions().position(dane.lokalizacjaAktualna).icon(BitmapDescriptorFactory.fromResource(R.drawable.beer)))
+    }
 
     override fun onNavigationItemSelected(p0: MenuItem): Boolean {
         when (p0.itemId) {
@@ -245,6 +368,10 @@ class Home : AppCompatActivity(), OnMapReadyCallback, NavigationView.OnNavigatio
         drawler2.closeDrawer(GravityCompat.START)
         return true
     }
+
+
+
+
 
 }
 
