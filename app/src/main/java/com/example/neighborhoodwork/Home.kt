@@ -1,13 +1,14 @@
 package com.example.neighborhoodwork
 
+import android.Manifest
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.location.Geocoder
 import android.location.Location
-import android.location.LocationListener
 import android.location.LocationManager
+import android.os.Build
 import android.os.Bundle
+import android.os.Looper
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -23,6 +24,7 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
@@ -36,16 +38,20 @@ import java.util.*
 class Home : AppCompatActivity(), OnMapReadyCallback, NavigationView.OnNavigationItemSelectedListener {
 
     lateinit var providers: List<AuthUI.IdpConfig>
-    lateinit var lm : LocationManager
-    lateinit var location : Location
     private lateinit var auth: FirebaseAuth
     var frag = supportFragmentManager
     var infoWindow = F_MapWindow()
     lateinit var myRef: DatabaseReference
-    lateinit var fusedLocationClient : FusedLocationProviderClient
     lateinit var userData: DatabaseReference
-    lateinit var locationRequest: LocationRequest
-    lateinit var locationCallback: LocationCallback
+    private var mFusedLocationProviderClient: FusedLocationProviderClient? = null
+    private val INTERVAL: Long = 2000
+    private val FASTEST_INTERVAL: Long = 1000
+    internal lateinit var mLocationRequest: LocationRequest
+    private val REQUEST_PERMISSION_LOCATION = 10
+    lateinit var googleMapForLocation : GoogleMap
+    lateinit var locationMarker : Marker
+    var dodanoLokalizacje : Boolean = false
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -63,50 +69,30 @@ class Home : AppCompatActivity(), OnMapReadyCallback, NavigationView.OnNavigatio
 
         val currentUser = auth.currentUser
 
-        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
-        getLocationUpdates()
+        mLocationRequest = LocationRequest()
+        val locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
+        if (!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+            buildAlertMessageNoGps()
+        }
+
 
         val map = supportFragmentManager.findFragmentById(R.id.mapView2) as SupportMapFragment
         map.getMapAsync(this)
 
 
-
-
-
-
         dateUser(currentUser)
-        /*if(ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
-            ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.ACCESS_COARSE_LOCATION, android.Manifest.permission.ACCESS_FINE_LOCATION),111)
+
+        setOnClickListner()
+
+    }
+
+    fun setOnClickListner(){
+
+        FAB2MyLocation.setOnClickListener {
+            if (checkPermissionForLocation(this)) {
+                startLocationUpdates()
             }
-
-                lm = getSystemService(Context.LOCATION_SERVICE) as LocationManager
-                location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER)
-
-
-                var ll = object:LocationListener{
-                    override fun onLocationChanged(location: Location?) {
-                        reverseLocation(location)
-                    }
-
-                    override fun onStatusChanged(provider: String?, status: Int, extras: Bundle?) {
-                    }
-
-                    override fun onProviderEnabled(provider: String?) {
-                    }
-
-                    override fun onProviderDisabled(provider: String?) {
-                    }
-
-                }
-
-                lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 10.0f, ll)
-
-         */
-
-
-
-
+        }
 
         img2Menu.setOnClickListener {
             if(drawler2.isDrawerOpen(GravityCompat.START)){
@@ -134,67 +120,101 @@ class Home : AppCompatActivity(), OnMapReadyCallback, NavigationView.OnNavigatio
         BT6Exit.setOnClickListener {
             bigInfoWindow(false)
         }
-
     }
 
-    private fun getLocationUpdates()
-    {
+    fun checkPermissionForLocation(context: Context): Boolean {
 
-        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
-        locationRequest = LocationRequest()
-        locationRequest.interval = 5000
-        locationRequest.fastestInterval = 5000
-        locationRequest.smallestDisplacement = 10f // 170 m = 0.1 mile
-        locationRequest.priority = LocationRequest.PRIORITY_HIGH_ACCURACY //set according to your app function
-        locationCallback = object : LocationCallback() {
-            override fun onLocationResult(locationResult: LocationResult?) {
-                locationResult ?: return
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
 
-                if (locationResult.locations.isNotEmpty()) {
+            if (context.checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+                true
+            } else {
+                ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),
+                    REQUEST_PERMISSION_LOCATION)
+                false
+            }
+        } else {
+            true
+        }
+    }
 
-                    val location = locationResult.lastLocation
-                    aktualizujLokalizacje(location)
-
-                    // use your location object
-                    // get latitude , longitude and other info from this
-                }
-
-
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        tx2MainNapis.text = "Doszło"
+        if (requestCode == REQUEST_PERMISSION_LOCATION) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                Toast.makeText(this,"Permission granted",Toast.LENGTH_SHORT).show()
+                startLocationUpdates()
             }
         }
     }
 
-    //start location updates
-    private fun startLocationUpdates() {
-        fusedLocationClient.requestLocationUpdates(
-            locationRequest,
-            locationCallback,
-            null /* Looper */
-        )
+    private fun buildAlertMessageNoGps() {
+/*
+        val builder = AlertDialog.Builder(this)
+        builder.setMessage("Your GPS seems to be disabled, do you want to enable it?")
+            .setCancelable(false)
+            .setPositiveButton("Yes") { dialog, id ->
+                startActivityForResult(
+                    Intent(BassBoost.Settings.ACTION_LOCATION_SOURCE_SETTINGS) , 11
+                )
+            }
+            .setNegativeButton("No") { dialog, id ->
+                dialog.cancel()
+                finish()
+            }
+        val alert: AlertDialog  = builder.create()
+        alert.show()
+
+ */
+
+
     }
 
-    // stop location updates
-    private fun stopLocationUpdates() {
-        fusedLocationClient.removeLocationUpdates(locationCallback)
+    private val mLocationCallback = object : LocationCallback() {
+        override fun onLocationResult(locationResult: LocationResult) {
+            // do work here
+            locationResult.lastLocation
+            onLocationChanged(locationResult.lastLocation)
+        }
     }
 
-    // stop receiving location update when activity not visible/foreground
-    override fun onPause() {
-        super.onPause()
-        stopLocationUpdates()
+    fun onLocationChanged(location: Location) {
+
+        if (location != null) {
+            var lokalizacjaDoZapisania = LatLng( location.latitude, location.longitude)
+            dane.lokalizacjaAktualna = lokalizacjaDoZapisania
+            dodajLok(googleMapForLocation)
+        }
+
     }
 
-    // start receiving location update when activity  visible/foreground
-    override fun onResume() {
-        super.onResume()
-        startLocationUpdates()
+    protected fun startLocationUpdates() {
+
+        mLocationRequest = LocationRequest()
+        mLocationRequest!!.priority = LocationRequest.PRIORITY_HIGH_ACCURACY
+        mLocationRequest!!.setInterval(INTERVAL)
+        mLocationRequest!!.setFastestInterval(FASTEST_INTERVAL)
+
+        val builder = LocationSettingsRequest.Builder()
+        builder.addLocationRequest(mLocationRequest!!)
+        val locationSettingsRequest = builder.build()
+
+        val settingsClient = LocationServices.getSettingsClient(this)
+        settingsClient.checkLocationSettings(locationSettingsRequest)
+
+        mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
+
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
+            ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+
+            return
+        }
+        mFusedLocationProviderClient!!.requestLocationUpdates(mLocationRequest, mLocationCallback,
+            Looper.myLooper())
     }
 
-    private fun aktualizujLokalizacje(lok: Location?) {
-        var x = lok?.latitude
-        var y = lok?.accuracy
-        val miejsceNaMapie = LatLng(x!!, y!!.toDouble())
-        dane.lokalizacjaAktualna = miejsceNaMapie
+    private fun stoplocationUpdates() {
+        mFusedLocationProviderClient!!.removeLocationUpdates(mLocationCallback)
     }
 
     fun dateUser(currentUser: FirebaseUser?){
@@ -255,6 +275,11 @@ class Home : AppCompatActivity(), OnMapReadyCallback, NavigationView.OnNavigatio
 
     override fun onMapReady(googleMap: GoogleMap) {
 
+        googleMapForLocation = googleMap
+        if (checkPermissionForLocation(this)) {
+            startLocationUpdates()
+        }
+
         googleMap.setInfoWindowAdapter(InfoWindowAdapter(this))
 
         val fireBase = FirebaseDatabase.getInstance()
@@ -276,8 +301,8 @@ class Home : AppCompatActivity(), OnMapReadyCallback, NavigationView.OnNavigatio
             }
         })
 
-
     }
+
 
     fun znaczniki(googleMap: GoogleMap) {
         var i = 0
@@ -291,7 +316,6 @@ class Home : AppCompatActivity(), OnMapReadyCallback, NavigationView.OnNavigatio
             )
             i++
         }
-       dodajLok(googleMap)
 
 
         googleMap.setOnMarkerClickListener { marker ->
@@ -332,7 +356,17 @@ class Home : AppCompatActivity(), OnMapReadyCallback, NavigationView.OnNavigatio
     }
 
     fun dodajLok(googleMap: GoogleMap){
-        googleMap.addMarker(MarkerOptions().position(dane.lokalizacjaAktualna).icon(BitmapDescriptorFactory.fromResource(R.drawable.beer)))
+        stoplocationUpdates()
+
+        if(dodanoLokalizacje)
+        { locationMarker.remove()}
+
+
+        locationMarker = googleMap.addMarker(MarkerOptions().position(dane.lokalizacjaAktualna).icon(BitmapDescriptorFactory.fromResource(R.drawable.marker)))
+        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(dane.lokalizacjaAktualna, 16f))
+
+        dodanoLokalizacje = true
+
     }
 
     override fun onNavigationItemSelected(p0: MenuItem): Boolean {
@@ -368,10 +402,6 @@ class Home : AppCompatActivity(), OnMapReadyCallback, NavigationView.OnNavigatio
         drawler2.closeDrawer(GravityCompat.START)
         return true
     }
-
-
-
-
 
 }
 

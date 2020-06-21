@@ -6,7 +6,7 @@ import com.google.android.gms.maps.model.LatLng
 object dane {
     var zadania = arrayListOf<ZadanieModel>()
     var clicked : Int = 0
-    lateinit var lokalizacjaAktualna : LatLng
+    var lokalizacjaAktualna = LatLng(51.0, 21.0)
 }
 
 object user {
