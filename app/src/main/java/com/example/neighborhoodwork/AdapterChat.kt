@@ -7,28 +7,36 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.row_chat.view.*
-import kotlin.collections.ArrayList
 
-class AdapterChat : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return ViewHolder(
-            LayoutInflater.from(parent.context).inflate(R.layout.row_chat, parent, false)
-        )
+
+class AdapterChat(var clickListner: OnSelectConConversation) : RecyclerView.Adapter<ViewHolder>() {
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        return ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.row_chat, parent, false))
     }
 
     override fun getItemCount(): Int {
-        return 2
+        return dane.Contasts.size
     }
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        holder.initialize(clickListner, position)
+    }
+
+}
+
+class ViewHolder constructor(itemView: View) : RecyclerView.ViewHolder(itemView) {
+
+    fun initialize(action : OnSelectConConversation, position: Int){
+        itemView.setOnClickListener {
+            action.onItemClick(itemView.tx9Imie.text.toString())
+        }
+        itemView.tx9Imie.text = dane.Contasts[position]
     }
 
 
-    class ViewHolder
-    constructor(
-        itemView: View
-    ) : RecyclerView.ViewHolder(itemView) {
+}
 
-
-    }
+interface OnSelectConConversation{
+    fun onItemClick(selectUser: String)
 }

@@ -22,7 +22,7 @@
         app:layout_constraintTop_toTopOf="@+id/BT6Commit" />
 
     <ImageView
-        android:id="@+id/img6Profil"
+        android:id="@+id/img9Profil"
         android:layout_width="90dp"
         android:layout_height="90dp"
         android:layout_marginStart="10dp"
@@ -39,8 +39,8 @@
         android:layout_marginTop="5dp"
         android:textColor="#000000"
         android:textSize="22sp"
-        app:layout_constraintStart_toEndOf="@+id/img6Profil"
-        app:layout_constraintTop_toTopOf="@+id/img6Profil" />
+        app:layout_constraintStart_toEndOf="@+id/img9Profil"
+        app:layout_constraintTop_toTopOf="@+id/img9Profil" />
 
     <RatingBar
         android:id="@+id/ratingBar6"
@@ -50,7 +50,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginTop="5dp"
-        app:layout_constraintStart_toEndOf="@+id/img6Profil"
+        app:layout_constraintStart_toEndOf="@+id/img9Profil"
         app:layout_constraintTop_toBottomOf="@+id/tx6Imie" />
 
     <TextView
@@ -64,7 +64,7 @@
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/img6Profil" />
+        app:layout_constraintTop_toBottomOf="@+id/img9Profil" />
 
     <ImageView
         android:id="@+id/img6Length"
@@ -104,10 +104,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
         android:layout_marginEnd="10dp"
-        android:text="ul. żbikowska 44 Piastów"
         android:textAlignment="center"
         android:textColor="#4CAF50"
-        android:textSize="20sp"
+        android:textSize="14sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/tx6LengthV"

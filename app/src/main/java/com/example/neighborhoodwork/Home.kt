@@ -6,11 +6,14 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Location
 import android.location.LocationManager
+import android.media.audiofx.BassBoost
 import android.os.Build
 import android.os.Bundle
 import android.os.Looper
+import android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS
 import android.view.MenuItem
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.view.GravityCompat
@@ -40,7 +43,7 @@ class Home : AppCompatActivity(), OnMapReadyCallback, NavigationView.OnNavigatio
     lateinit var providers: List<AuthUI.IdpConfig>
     private lateinit var auth: FirebaseAuth
     var frag = supportFragmentManager
-    var infoWindow = F_MapWindow()
+    var infoWindow = F_MapWindow(this)
     lateinit var myRef: DatabaseReference
     lateinit var userData: DatabaseReference
     private var mFusedLocationProviderClient: FusedLocationProviderClient? = null
@@ -51,6 +54,9 @@ class Home : AppCompatActivity(), OnMapReadyCallback, NavigationView.OnNavigatio
     lateinit var googleMapForLocation : GoogleMap
     lateinit var locationMarker : Marker
     var dodanoLokalizacje : Boolean = false
+    //lateinit var loadContacts : SQL_BASE_CONTACTS
+
+    lateinit var zadClass : SQL_CONTACTS
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -68,6 +74,10 @@ class Home : AppCompatActivity(), OnMapReadyCallback, NavigationView.OnNavigatio
         )
 
         val currentUser = auth.currentUser
+        
+        if (currentUser != null) {
+            dane.currentUser = currentUser
+        }
 
         mLocationRequest = LocationRequest()
         val locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
@@ -149,14 +159,14 @@ class Home : AppCompatActivity(), OnMapReadyCallback, NavigationView.OnNavigatio
     }
 
     private fun buildAlertMessageNoGps() {
-/*
+
         val builder = AlertDialog.Builder(this)
         builder.setMessage("Your GPS seems to be disabled, do you want to enable it?")
             .setCancelable(false)
             .setPositiveButton("Yes") { dialog, id ->
-                startActivityForResult(
-                    Intent(BassBoost.Settings.ACTION_LOCATION_SOURCE_SETTINGS) , 11
-                )
+               // startActivityForResult(
+                    //Intent(BassBoost.Settings.ACTION_LOCATION_SOURCE_SETTINGS) , 11
+                //)
             }
             .setNegativeButton("No") { dialog, id ->
                 dialog.cancel()
@@ -165,7 +175,7 @@ class Home : AppCompatActivity(), OnMapReadyCallback, NavigationView.OnNavigatio
         val alert: AlertDialog  = builder.create()
         alert.show()
 
- */
+
 
 
     }
@@ -218,10 +228,11 @@ class Home : AppCompatActivity(), OnMapReadyCallback, NavigationView.OnNavigatio
     }
 
     fun dateUser(currentUser: FirebaseUser?){
+
         if (currentUser != null) {
             val fireuserBase = FirebaseDatabase.getInstance()
 
-            userData = fireuserBase.getReference("Users").child(currentUser.displayName.toString())
+            userData = fireuserBase.getReference("Users").child(currentUser.displayName.toString()).child("Data")
 
             userData.addValueEventListener(object : ValueEventListener {
 
@@ -236,7 +247,7 @@ class Home : AppCompatActivity(), OnMapReadyCallback, NavigationView.OnNavigatio
                             "dislike" -> user.dislike = i.value.toString().toInt()
                             "like" -> user.like = i.value.toString().toInt()
                             "dni" -> user.dni = i.value.toString().toInt()
-                            "ukonczono" -> user.ukonczone = i.value.toString().toInt()
+                            "ukonczone" -> user.ukonczone = i.value.toString().toInt()
                             "rating" -> user.rating = i.value.toString().toDouble()
                         }
                     }
@@ -259,14 +270,17 @@ class Home : AppCompatActivity(), OnMapReadyCallback, NavigationView.OnNavigatio
             {
                 user.tel = currentUser.phoneNumber.toString()
             }
-            if(currentUser.phoneNumber != null)
-            {
-                user.tel = currentUser.phoneNumber.toString()
-            }
-
 
 
         }
+
+        zadClass = SQL_CONTACTS(this)
+        dane.Contasts.clear()
+        zadClass.readAllUsers()
+
+
+
+
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -302,7 +316,6 @@ class Home : AppCompatActivity(), OnMapReadyCallback, NavigationView.OnNavigatio
         })
 
     }
-
 
     fun znaczniki(googleMap: GoogleMap) {
         var i = 0
@@ -363,6 +376,7 @@ class Home : AppCompatActivity(), OnMapReadyCallback, NavigationView.OnNavigatio
 
 
         locationMarker = googleMap.addMarker(MarkerOptions().position(dane.lokalizacjaAktualna).icon(BitmapDescriptorFactory.fromResource(R.drawable.marker)))
+        locationMarker.snippet = "737F"
         googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(dane.lokalizacjaAktualna, 16f))
 
         dodanoLokalizacje = true

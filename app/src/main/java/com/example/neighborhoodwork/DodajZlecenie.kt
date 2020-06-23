@@ -41,8 +41,15 @@ class DodajZlecenie : AppCompatActivity() {
             val title = Etx5Title.text.toString()
             val time = Etx5Time.text.toString()
             val fireBaseInput = ZadanieModel( x = x , y = y, opis = opis,  wynagrodzenie = wynagrodzenie, img = img,
-                length = length, time = time, title = title, ID =  timestamp.toString())
+                length = length, time = time, title = title, ID =  timestamp.toString(), pracodawca = currentUser.toString())
             myRef.child("${Date().time}").setValue(fireBaseInput)
+            val Mapa = Intent(applicationContext, Home::class.java)
+            startActivity(Mapa)
+            finish()
+        }
+
+        BT5Common.setOnClickListener {
+            myRef.child("${Date().time}").setValue(ZadanieModel(pracodawca = currentUser!!.displayName.toString()))
             val Mapa = Intent(applicationContext, Home::class.java)
             startActivity(Mapa)
             finish()

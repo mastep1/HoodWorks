@@ -5,7 +5,7 @@
     android:id="@+id/l8Main"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:background="#CCFFFFFF">
+    android:background="#E6FFFFFF">
 
     <ImageView
         android:id="@+id/img8Info"
@@ -93,34 +93,35 @@
         android:id="@+id/tx8Lokalizacja"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
+        android:layout_marginStart="10dp"
         android:text="Lokalizacja"
         android:textColor="#4CAF50"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/D8_1"
-        app:layout_constraintStart_toStartOf="@+id/D8_1"
+        app:layout_constraintBottom_toBottomOf="@+id/img8Lokalizacja"
+        app:layout_constraintStart_toEndOf="@+id/img8Lokalizacja"
         app:layout_constraintTop_toBottomOf="@+id/D8_1" />
 
     <TextView
         android:id="@+id/tx8Adres"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:text="ul. Żbikowska 44"
+        android:layout_marginStart="35dp"
+        android:layout_marginEnd="35dp"
         android:textColor="#000000"
         android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="@+id/tx8Lokalizacja"
-        app:layout_constraintStart_toStartOf="@+id/tx8Lokalizacja"
-        app:layout_constraintTop_toBottomOf="@+id/tx8Lokalizacja" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/img8Lokalizacja" />
 
     <ImageView
         android:id="@+id/img8Lokalizacja"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="5dp"
         android:layout_marginEnd="10dp"
-        app:layout_constraintEnd_toStartOf="@+id/tx8Adres"
-        app:layout_constraintTop_toTopOf="@+id/tx8Lokalizacja"
+        app:layout_constraintEnd_toStartOf="@+id/D8_1"
+        app:layout_constraintTop_toBottomOf="@+id/D8_1"
         app:srcCompat="@drawable/map" />
 
     <Button

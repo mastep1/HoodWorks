@@ -2,20 +2,21 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/CARD6"
-    app:cardCornerRadius="0dp"
-    app:cardElevation="10dp"
+    android:id="@+id/CARD9"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:clickable="false"
+    app:cardCornerRadius="0dp"
+    app:cardElevation="10dp"
     tools:context=".Chat">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/lMain6"
+        android:id="@+id/lMain9"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <ImageView
-            android:id="@+id/img6Profil"
+            android:id="@+id/img9Profil"
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:layout_marginStart="20dp"
@@ -27,27 +28,27 @@
             app:srcCompat="@drawable/boy" />
 
         <TextView
-            android:id="@+id/tx6Czas"
+            android:id="@+id/tx9Czas"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="15dp"
             android:text="2 dni temu"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/tx6ImieINazwisko" />
+            app:layout_constraintTop_toTopOf="@+id/tx9Imie" />
 
         <TextView
-            android:id="@+id/tx6Wiadomosc"
+            android:id="@+id/tx9Wiadomosc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginBottom="10dp"
             android:text="Mordo, co z projektem?"
             android:textSize="15sp"
-            app:layout_constraintBottom_toBottomOf="@+id/img6Profil"
-            app:layout_constraintStart_toEndOf="@+id/img6Profil" />
+            app:layout_constraintBottom_toBottomOf="@+id/img9Profil"
+            app:layout_constraintStart_toEndOf="@+id/img9Profil" />
 
         <TextView
-            android:id="@+id/tx6ImieINazwisko"
+            android:id="@+id/tx9Imie"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
@@ -55,7 +56,7 @@
             android:text="Jakub Gołos"
             android:textColor="#090909"
             android:textSize="20sp"
-            app:layout_constraintStart_toEndOf="@+id/img6Profil"
+            app:layout_constraintStart_toEndOf="@+id/img9Profil"
             app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
