@@ -1,4 +1,4 @@
-package com.example.neighborhoodwork
+package com.example.neighborhoodwork.Activities
 
 import android.content.Context
 import android.content.Intent
@@ -7,6 +7,10 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
+import com.example.neighborhoodwork.*
+import com.example.neighborhoodwork.Fragments.Verification
+import com.example.neighborhoodwork.support.fireBaseConnection
+import com.example.neighborhoodwork.support.user
 
 import kotlinx.android.synthetic.main.edit_profil.*
 
@@ -43,7 +47,7 @@ public class EditProfil : AppCompatActivity() {
 
         Etx7Imie.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(p0: Editable?) {
-                if(Etx7Imie.text.toString()!=user.imie){
+                if(Etx7Imie.text.toString()!= user.imie){
                     tx7ZmianyImie.visibility = View.VISIBLE
                 }else{
                     tx7ZmianyImie.visibility = View.INVISIBLE
@@ -60,7 +64,7 @@ public class EditProfil : AppCompatActivity() {
 
         Etx7Email.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(p0: Editable?) {
-                if(Etx7Email.text.toString()!=user.email){
+                if(Etx7Email.text.toString()!= user.email){
                     tx7ZmianyEmail.visibility = View.VISIBLE
                 }else{
                     tx7ZmianyEmail.visibility = View.INVISIBLE
@@ -77,7 +81,7 @@ public class EditProfil : AppCompatActivity() {
 
         Etx7Tel.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(p0: Editable?) {
-                if(Etx7Tel.text.toString()!=user.tel){
+                if(Etx7Tel.text.toString()!= user.tel){
                     tx7ZmianyTel.visibility = View.VISIBLE
                 }else{
                     tx7ZmianyTel.visibility = View.INVISIBLE
@@ -94,7 +98,7 @@ public class EditProfil : AppCompatActivity() {
 
         Etx7Opis.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(p0: Editable?) {
-                if(Etx7Opis.text.toString()!=user.opis){
+                if(Etx7Opis.text.toString()!= user.opis){
                     tx7ZmianyOpis.visibility = View.VISIBLE
                 }else{
                     tx7ZmianyOpis.visibility = View.INVISIBLE
@@ -130,7 +134,10 @@ public class EditProfil : AppCompatActivity() {
         if(Etx7Email.text.toString() != user.email){
 
             val fm = supportFragmentManager
-            val F_Map = Verification("kk", applicationContext)
+            val F_Map = Verification(
+                "kk",
+                applicationContext
+            )
             fm.beginTransaction().add(R.id.l7Main, F_Map).commit()
 
         }

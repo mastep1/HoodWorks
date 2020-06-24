@@ -1,4 +1,4 @@
-package com.example.neighborhoodwork
+package com.example.neighborhoodwork.Adapters
 
 
 
@@ -6,13 +6,23 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.neighborhoodwork.R
+import com.example.neighborhoodwork.support.dane
 import kotlinx.android.synthetic.main.row_chat.view.*
 
 
 class AdapterChat(var clickListner: OnSelectConConversation) : RecyclerView.Adapter<ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.row_chat, parent, false))
+        return ViewHolder(
+            LayoutInflater.from(
+                parent.context
+            ).inflate(
+                R.layout.row_chat,
+                parent,
+                false
+            )
+        )
     }
 
     override fun getItemCount(): Int {

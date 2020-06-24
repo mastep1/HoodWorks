@@ -1,10 +1,11 @@
-package com.example.neighborhoodwork
+package com.example.neighborhoodwork.Activities
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import kotlinx.android.synthetic.main.activity_samouczek.*
-import android.view.View
+import com.example.neighborhoodwork.R
+import com.example.neighborhoodwork.Models.UserModel
 import com.firebase.ui.auth.AuthUI
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
@@ -40,13 +41,15 @@ class Samouczek : AppCompatActivity() {
                 val fireuserBase = FirebaseDatabase.getInstance()
                 userRef = fireuserBase.getReference("Users")
 
-                val doWczytania = UserModel( 0.0 , 0, 0, 0,0,
-                    " ${editText3.text}" )
+                val doWczytania = UserModel(
+                    0.0, 0, 0, 0, 0,
+                    " ${editText3.text}"
+                )
 
                 if(obecny!=null){
                     var id = obecny.displayName.toString()
                    baton1.text = id
-                    userRef.child(id).setValue(doWczytania)
+                    userRef.child(id).child("Data").setValue(doWczytania)
                 }
 
 

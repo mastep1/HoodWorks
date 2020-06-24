@@ -1,4 +1,4 @@
-package com.example.neighborhoodwork
+package com.example.neighborhoodwork.Activities
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -6,6 +6,8 @@ import android.os.Bundle
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.core.view.GravityCompat
+import com.example.neighborhoodwork.R
+import com.example.neighborhoodwork.support.user
 import com.firebase.ui.auth.AuthUI
 import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.profil.*
@@ -26,7 +28,7 @@ class Profil : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListe
         tx4Opis2.text = user.opis
 
 
-        if(user.email=="")
+        if(user.email =="")
         {
             tx4Email.text = "Nie podano"
         };else{
@@ -34,7 +36,7 @@ class Profil : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListe
         }
 
 
-        if(user.tel=="")
+        if(user.tel =="")
         {
             tx4Tel.text = "Nie podano"
         };else{
@@ -59,14 +61,20 @@ class Profil : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListe
         img4Mapa.setOnClickListener {
             val map = Intent(applicationContext,  Home::class.java)
             startActivity(map)
-            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
+            overridePendingTransition(
+                R.anim.slide_in_left,
+                R.anim.slide_out_right
+            )
         }
 
 
         img4Chat.setOnClickListener {
-            val chat = Intent(applicationContext,  Chat::class.java)
+            val chat = Intent(applicationContext,  ChatMenager::class.java)
             startActivity(chat)
-            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
+            overridePendingTransition(
+                R.anim.slide_in_left,
+                R.anim.slide_out_right
+            )
         }
 
         FAB4.setOnClickListener {
@@ -82,12 +90,18 @@ class Profil : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListe
             R.id.Menu_Mapa -> {
                 val home = Intent(applicationContext, Home::class.java)
                 startActivity(home)
-                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
+                overridePendingTransition(
+                    R.anim.slide_in_left,
+                    R.anim.slide_out_right
+                )
             }
             R.id.Menu_Chat -> {
-                val chat = Intent(applicationContext, Chat::class.java)
+                val chat = Intent(applicationContext, ChatMenager::class.java)
                 startActivity(chat)
-                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
+                overridePendingTransition(
+                    R.anim.slide_in_left,
+                    R.anim.slide_out_right
+                )
             }
             R.id.Menu_Profil -> {
                 val profil = Intent(applicationContext, Profil::class.java)

@@ -1,9 +1,10 @@
-package com.example.neighborhoodwork
+package com.example.neighborhoodwork.Activities
 
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.neighborhoodwor.ZadanieModel
+import com.example.neighborhoodwork.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
@@ -41,7 +42,7 @@ class DodajZlecenie : AppCompatActivity() {
             val title = Etx5Title.text.toString()
             val time = Etx5Time.text.toString()
             val fireBaseInput = ZadanieModel( x = x , y = y, opis = opis,  wynagrodzenie = wynagrodzenie, img = img,
-                length = length, time = time, title = title, ID =  timestamp.toString(), pracodawca = currentUser.toString())
+                length = length, time = time, title = title, ID =  timestamp.toString(), pracodawca = currentUser!!.displayName.toString())
             myRef.child("${Date().time}").setValue(fireBaseInput)
             val Mapa = Intent(applicationContext, Home::class.java)
             startActivity(Mapa)

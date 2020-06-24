@@ -1,4 +1,4 @@
-package com.example.neighborhoodwork
+package com.example.neighborhoodwork.Models
 
 data class UserModel (
     var rating : Double = 0.0,

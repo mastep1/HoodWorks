@@ -2,7 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.neighborhoodwork">
 
-
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
@@ -15,19 +14,20 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".EditProfil"></activity>
-        <activity android:name=".Samouczek" />
-        <activity android:name=".Profil" />
-        <activity android:name=".DodajZlecenie" />
-        <activity android:name=".Chat" />
+        <activity android:name=".Activities.ChatView"></activity>
+        <activity android:name=".Activities.EditProfil" />
+        <activity android:name=".Activities.Samouczek" />
+        <activity android:name=".Activities.Profil" />
+        <activity android:name=".Activities.DodajZlecenie" />
+        <activity android:name=".Activities.ChatMenager" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
-        <activity android:name=".Home" />
-        <activity android:name=".Loguj" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".Activities.Home" />
+        <activity android:name=".Activities.Loguj" />
+        <activity android:name=".Activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

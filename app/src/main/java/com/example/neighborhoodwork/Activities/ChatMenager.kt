@@ -1,4 +1,4 @@
-package com.example.neighborhoodwork
+package com.example.neighborhoodwork.Activities
 
 import android.content.Intent
 import android.os.Bundle
@@ -7,13 +7,19 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.neighborhoodwork.Adapters.AdapterChat
+import com.example.neighborhoodwork.Adapters.OnSelectConConversation
+import com.example.neighborhoodwork.R
+import com.example.neighborhoodwork.support.SQL_CONTACTS
+import com.example.neighborhoodwork.support.TopSpacingItemDecoration
+import com.example.neighborhoodwork.support.dane
 import com.firebase.ui.auth.AuthUI
 import com.google.android.material.navigation.NavigationView
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_chat.*
 
-class Chat : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, OnSelectConConversation {
+class ChatMenager : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener,
+    OnSelectConConversation {
 
 
     lateinit var SQL_CONTACTS_DB : SQL_CONTACTS
@@ -25,6 +31,7 @@ class Chat : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListene
         setContentView(R.layout.activity_chat)
 
         addContactIfShould()
+
 
         setOnClickListnerAndRecyclerApply()
 
@@ -41,23 +48,9 @@ class Chat : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListene
         val fireuserBase = FirebaseDatabase.getInstance()    /// Połączenie z bazą
 
         userConversationCurrent = fireuserBase.getReference("Users").child(dane.currentUser.displayName.toString())
-            .child("Data").child("Conversation")
+            .child("Data").child("")
 
-        userConversationCurrent.addValueEventListener(object : ValueEventListener {
 
-            override fun onCancelled(p0: DatabaseError) {
-            }
-
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
-                for (i in dataSnapshot.children) {
-                    var exist = checkDoExistConversation(i.key.toString())
-                    if(!exist){
-                        addConversation(i.key.toString())
-                    }
-                    tx3MainNapis.text = "$exist"
-                }
-            }
-        })
 
 
     }
@@ -77,16 +70,18 @@ class Chat : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListene
 
     private fun addContactIfShould(){
 
-        if(dane.newContact!=""){
+        if(dane.newContact !=""){
 
             var add = checkDoExistConversation(dane.newContact)
 
             if(add == false){
-                addConversation(dane.newContact)
+                
+                    val fireuserBase = FirebaseDatabase.getInstance()           /// Utworzenie konwersacji (W FireBase) Dla drugiego użytkownika
+                    userConversationOther = fireuserBase.getReference("Users").child(dane.newContact).child("Conversation").child(dane.currentUser!!.displayName.toString())
+                    /// Utworzenie konwersacji (W FireBase) Dla drugiego użytkownika
+                    userConversationOther.setValue("TAKIETAKIETAKIETAKIETAKIE")         // Utworzenie konwersacji (W FireBase) Dla drugiego użytkownika
 
-                val fireuserBase = FirebaseDatabase.getInstance()           /// Utworzenie konwersacji (W FireBase) Dla drugiego użytkownika
-                userConversationOther = fireuserBase.getReference("Users").child(dane.newContact).child("Data").child("Conversation").child(dane.currentUser!!.displayName.toString())  /// Utworzenie konwersacji (W FireBase) Dla drugiego użytkownika
-                userConversationOther.setValue("TAKIETAKIETAKIETAKIETAKIE")         // Utworzenie konwersacji (W FireBase) Dla drugiego użytkownika
+                addConversation(dane.newContact)
             }
 
         }
@@ -99,12 +94,12 @@ class Chat : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListene
         SQL_CONTACTS_DB.insertUser("${newConversation}")        /// SQL
 
 
-
-        dane.newContact = ""                            /// wyczyszczenie zmiennej
+        dane.newContact = ""             /// wyczyszczenie zmiennej
     }
 
     override fun onItemClick(selectUser: String) {
-        Toast.makeText(this, selectUser, Toast.LENGTH_SHORT).show()
+        var chatView = Intent(this, ChatView::class.java)
+        startActivity(chatView)
     }
 
     override fun onNavigationItemSelected(p0: MenuItem): Boolean {
@@ -112,28 +107,34 @@ class Chat : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListene
             R.id.Menu_Mapa -> {
                 val home = Intent(applicationContext, Home::class.java)
                 startActivity(home)
-                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+                overridePendingTransition(
+                    R.anim.slide_in_right,
+                    R.anim.slide_out_left
+                )
             }
             R.id.Menu_Chat -> {
-                val chat = Intent(applicationContext, Chat::class.java)
+                val chat = Intent(applicationContext, ChatMenager::class.java)
                 startActivity(chat)
             }
             R.id.Menu_Profil -> {
                 val profil = Intent(applicationContext, Profil::class.java)
                 startActivity(profil)
-                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+                overridePendingTransition(
+                    R.anim.slide_in_right,
+                    R.anim.slide_out_left
+                )
             }
             R.id.Menu_Dodaj_Zlecenie -> {
                 val dodaj = Intent(applicationContext, DodajZlecenie::class.java)
                 startActivity(dodaj)
             }
             R.id.Menu_Wyloguj -> {
-                AuthUI.getInstance().signOut(this@Chat).addOnCompleteListener {
+                AuthUI.getInstance().signOut(this@ChatMenager).addOnCompleteListener {
                     val main = Intent(applicationContext, MainActivity::class.java)
                     startActivity(main)
                     finish()
                 }.addOnFailureListener { e ->
-                    Toast.makeText(this@Chat, "Wylogowano", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@ChatMenager, "Wylogowano", Toast.LENGTH_SHORT).show()
                 }
                 finish()
             }
@@ -156,19 +157,30 @@ class Chat : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListene
         img3Mapa.setOnClickListener {
             val mapa = Intent(applicationContext, Home::class.java)
             startActivity(mapa)
-            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+            overridePendingTransition(
+                R.anim.slide_in_right,
+                R.anim.slide_out_left
+            )
         }
 
         img3Profil.setOnClickListener {
             val profil = Intent(applicationContext, Profil::class.java)
             startActivity(profil)
-            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+            overridePendingTransition(
+                R.anim.slide_in_right,
+                R.anim.slide_out_left
+            )
         }
 
         rc3.apply {
-            layoutManager = LinearLayoutManager(this@Chat)
-            addItemDecoration(TopSpacingItemDecoration(30))
-            adapter = AdapterChat(this@Chat)
+            layoutManager = LinearLayoutManager(this@ChatMenager)
+            addItemDecoration(
+                TopSpacingItemDecoration(
+                    30
+                )
+            )
+            adapter =
+                AdapterChat(this@ChatMenager)
 
 
         }

@@ -1,4 +1,4 @@
-package com.example.neighborhoodwork
+package com.example.neighborhoodwork.Fragments
 
 import android.content.Context
 import android.content.Intent
@@ -9,8 +9,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.neighborhoodwor.ZadanieModel
-import com.google.firebase.auth.FirebaseAuth
+import com.example.neighborhoodwork.Activities.ChatMenager
+import com.example.neighborhoodwork.R
+import com.example.neighborhoodwork.support.dane
+import com.example.neighborhoodwork.support.user
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -19,24 +21,28 @@ import kotlinx.android.synthetic.main.info_window_big.*
 import java.util.*
 
 
-class F_MapWindow(context : Context) : Fragment() {
+class BigInfoWindow(contextBuffor : Context) : Fragment() {
+
+    var xxxxxxx = contextBuffor
+
     override fun onCreateView( inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.info_window_big, container, false )
+
     }
 
     override fun onStart() {
         super.onStart()
 
-        setAll()
+        setAll(xxxxxxx)
 
 
     }
 
-    fun setAll(){
+    fun setAll(contextBuffor : Context){
 
         BT6Chat.setOnClickListener {
             dane.newContact = "${dane.zadania[dane.clicked].pracodawca}"
-            val chat = Intent(context, Chat::class.java)
+            val chat = Intent(context, ChatMenager::class.java)
             startActivity(chat)
         }
 
@@ -53,22 +59,25 @@ class F_MapWindow(context : Context) : Fragment() {
         val address = addresses[0].getAddressLine(0)
         tx6AdresV.text = address
 
-        ratingBar6.rating = user.rating.toFloat()
 
 
-        val fireBase = FirebaseDatabase.getInstance()
-        var myRef = fireBase.getReference("Users").child("${dane.zadania[dane.clicked].pracodawca}").child("Data").child("rating")
+    val fireBase = FirebaseDatabase.getInstance()
+    var myRef = fireBase.getReference("Users").child("${dane.zadania[dane.clicked].pracodawca}").child("Data").child("rating")
 
-        myRef.addValueEventListener(object : ValueEventListener {
+    myRef.addValueEventListener(object : ValueEventListener {
 
-            override fun onCancelled(p0: DatabaseError) {
-            }
+        override fun onCancelled(p0: DatabaseError) {
+        }
 
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
+        override fun onDataChange(dataSnapshot: DataSnapshot) {
 
-                val element = dataSnapshot.getValue()
-                    ratingBar6.rating = element.toString().toFloat()
-            }
-        })
+              val element = dataSnapshot.getValue()
+              ratingBar6.rating = element.toString().toFloat()
+         }
+})
+
+                        
     }
+
+
 }

@@ -1,4 +1,4 @@
-package com.example.neighborhoodwork
+package com.example.neighborhoodwork.Activities
 
 import android.Manifest
 import android.content.Context
@@ -6,11 +6,9 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Location
 import android.location.LocationManager
-import android.media.audiofx.BassBoost
 import android.os.Build
 import android.os.Bundle
 import android.os.Looper
-import android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
@@ -18,6 +16,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.view.GravityCompat
 import com.example.neighborhoodwor.ZadanieModel
+import com.example.neighborhoodwork.Fragments.BigInfoWindow
+import com.example.neighborhoodwork.Adapters.InfoWindowAdapter
+import com.example.neighborhoodwork.R
+import com.example.neighborhoodwork.support.SQL_CONTACTS
+import com.example.neighborhoodwork.support.dane
+import com.example.neighborhoodwork.support.user
 import com.firebase.ui.auth.AuthUI
 import com.google.android.gms.location.*
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -43,7 +47,7 @@ class Home : AppCompatActivity(), OnMapReadyCallback, NavigationView.OnNavigatio
     lateinit var providers: List<AuthUI.IdpConfig>
     private lateinit var auth: FirebaseAuth
     var frag = supportFragmentManager
-    var infoWindow = F_MapWindow(this)
+    var infoWindow = BigInfoWindow(this)
     lateinit var myRef: DatabaseReference
     lateinit var userData: DatabaseReference
     private var mFusedLocationProviderClient: FusedLocationProviderClient? = null
@@ -116,15 +120,21 @@ class Home : AppCompatActivity(), OnMapReadyCallback, NavigationView.OnNavigatio
         menu2.setNavigationItemSelectedListener(this)
 
         img2Chat.setOnClickListener {
-            val chat = Intent(applicationContext, Chat::class.java)
+            val chat = Intent(applicationContext, ChatMenager::class.java)
             startActivity(chat)
-            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
+            overridePendingTransition(
+                R.anim.slide_in_left,
+                R.anim.slide_out_right
+            )
         }
 
         img2Profil.setOnClickListener {
             val profil = Intent(applicationContext, Profil::class.java)
             startActivity(profil)
-            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+            overridePendingTransition(
+                R.anim.slide_in_right,
+                R.anim.slide_out_left
+            )
         }
 
         BT6Exit.setOnClickListener {
@@ -149,7 +159,6 @@ class Home : AppCompatActivity(), OnMapReadyCallback, NavigationView.OnNavigatio
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
-        tx2MainNapis.text = "Doszło"
         if (requestCode == REQUEST_PERMISSION_LOCATION) {
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 Toast.makeText(this,"Permission granted",Toast.LENGTH_SHORT).show()
@@ -294,7 +303,11 @@ class Home : AppCompatActivity(), OnMapReadyCallback, NavigationView.OnNavigatio
             startLocationUpdates()
         }
 
-        googleMap.setInfoWindowAdapter(InfoWindowAdapter(this))
+        googleMap.setInfoWindowAdapter(
+            InfoWindowAdapter(
+                this
+            )
+        )
 
         val fireBase = FirebaseDatabase.getInstance()
         myRef = fireBase.getReference("Zadania")
@@ -375,7 +388,9 @@ class Home : AppCompatActivity(), OnMapReadyCallback, NavigationView.OnNavigatio
         { locationMarker.remove()}
 
 
-        locationMarker = googleMap.addMarker(MarkerOptions().position(dane.lokalizacjaAktualna).icon(BitmapDescriptorFactory.fromResource(R.drawable.marker)))
+        locationMarker = googleMap.addMarker(MarkerOptions().position(dane.lokalizacjaAktualna).icon(BitmapDescriptorFactory.fromResource(
+            R.drawable.marker
+        )))
         locationMarker.snippet = "737F"
         googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(dane.lokalizacjaAktualna, 16f))
 
@@ -390,14 +405,20 @@ class Home : AppCompatActivity(), OnMapReadyCallback, NavigationView.OnNavigatio
                 startActivity(home)
             }
             R.id.Menu_Chat -> {
-                val chat = Intent(applicationContext, Chat::class.java)
+                val chat = Intent(applicationContext, ChatMenager::class.java)
                 startActivity(chat)
-                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
+                overridePendingTransition(
+                    R.anim.slide_in_left,
+                    R.anim.slide_out_right
+                )
             }
             R.id.Menu_Profil -> {
                 val profil = Intent(applicationContext, Profil::class.java)
                 startActivity(profil)
-                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+                overridePendingTransition(
+                    R.anim.slide_in_right,
+                    R.anim.slide_out_left
+                )
             }
             R.id.Menu_Dodaj_Zlecenie -> {
                 val dodaj = Intent(applicationContext, DodajZlecenie::class.java)

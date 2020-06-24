@@ -1,10 +1,12 @@
-package com.example.neighborhoodwork
+package com.example.neighborhoodwork.Adapters
 
 import android.content.Context
 import android.location.Address
 import android.location.Geocoder
 import android.view.LayoutInflater
 import android.view.View
+import com.example.neighborhoodwork.R
+import com.example.neighborhoodwork.support.dane
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.Marker
 import kotlinx.android.synthetic.main.info_window.view.*
@@ -23,7 +25,7 @@ class InfoWindowAdapter(private val mContext: Context) :
         var i = 0
 
             while(i < dane.zadania.size){
-                if(marker.snippet.toInt() == dane.zadania[i].ID.toInt()){
+                if(marker.snippet.toLong() == dane.zadania[i].ID.toLong()){
                     clicked = i
                     dane.clicked = i
                     break

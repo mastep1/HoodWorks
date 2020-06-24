@@ -1,11 +1,9 @@
-package com.example.neighborhoodwork
+package com.example.neighborhoodwork.Activities
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
+import com.example.neighborhoodwork.R
 import kotlinx.android.synthetic.main.activity_loguj.*
 
 class Loguj : AppCompatActivity() {

@@ -1,4 +1,4 @@
-package com.example.neighborhoodwork
+package com.example.neighborhoodwork.Fragments
 
 import android.content.Context
 import android.os.Bundle
@@ -6,7 +6,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import kotlinx.android.synthetic.main.edit_profil.*
+import com.example.neighborhoodwork.R
+import com.example.neighborhoodwork.support.fireBaseConnection
 import kotlinx.android.synthetic.main.verification.*
 
 
@@ -30,7 +31,8 @@ var newEmail2  = newEmail
     override fun onStart() {
         super.onStart()
         BT10Potwierdz.setOnClickListener {
-            context?.let { it1 -> fireBaseConnection().ustawEmail("$newEmail2", it1) }
+            context?.let { it1 -> fireBaseConnection()
+                .ustawEmail("$newEmail2", it1) }
         }
     }
 

@@ -8,7 +8,7 @@
     android:clickable="false"
     app:cardCornerRadius="0dp"
     app:cardElevation="10dp"
-    tools:context=".Chat">
+    tools:context=".Activities.ChatMenager">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/lMain9"

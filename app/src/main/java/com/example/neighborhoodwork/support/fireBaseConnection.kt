@@ -1,9 +1,7 @@
-package com.example.neighborhoodwork
+package com.example.neighborhoodwork.support
 
 import android.content.Context
-import android.content.Intent
-import android.util.Log
-import androidx.core.content.ContextCompat.startActivity
+import com.example.neighborhoodwork.Activities.EditProfil
 import com.google.firebase.auth.EmailAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
@@ -63,7 +61,7 @@ import com.google.firebase.database.FirebaseDatabase
         user.opis = opis
 
         var id = uzytkownik!!.displayName.toString()
-        link.child(id).child("opis").setValue("$opis")
+        link.child(id).child("Data").child("opis").setValue("$opis")
     }
 }
 

@@ -1,4 +1,4 @@
-package com.example.neighborhoodwork
+package com.example.neighborhoodwork.support
 
 import android.content.ContentValues
 import android.content.Context
@@ -7,11 +7,12 @@ import android.database.sqlite.SQLiteConstraintException
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteException
 import android.database.sqlite.SQLiteOpenHelper
-import android.widget.TextView
-import android.widget.Toast
 
 
-class SQL_CONTACTS(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
+class SQL_CONTACTS(context: Context) : SQLiteOpenHelper(context,
+    DATABASE_NAME, null,
+    DATABASE_VERSION
+) {
 
     override fun onCreate(db: SQLiteDatabase) {
         db.execSQL(SQL_CREATE_ENTRIES)
@@ -55,7 +56,7 @@ class SQL_CONTACTS(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, 
         try {
             cursor = db.rawQuery("select * from " + SQL_BD_CONTACT.Contacts.TABLE_NAME, null)
         } catch (e: SQLiteException) {
-            db.execSQL(SQL_CONTACTS.SQL_CREATE_ENTRIES)
+            db.execSQL(SQL_CREATE_ENTRIES)
         }
 
         var contactRow : String
@@ -72,7 +73,7 @@ class SQL_CONTACTS(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, 
     }
 
     companion object {
-        val DATABASE_VERSION = 33
+        val DATABASE_VERSION = 40
         val DATABASE_NAME = "Contacts.db"
 
         private val SQL_CREATE_ENTRIES = "CREATE TABLE " + SQL_BD_CONTACT.Contacts.TABLE_NAME + " (" +
