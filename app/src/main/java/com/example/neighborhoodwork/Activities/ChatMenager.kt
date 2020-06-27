@@ -7,7 +7,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.neighborhoodwork.Adapters.AdapterChat
+import com.example.neighborhoodwork.Adapters.ChatMenagerAdapter
 import com.example.neighborhoodwork.Adapters.OnSelectConConversation
 import com.example.neighborhoodwork.R
 import com.example.neighborhoodwork.support.SQL_CONTACTS
@@ -18,8 +18,7 @@ import com.google.android.material.navigation.NavigationView
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_chat.*
 
-class ChatMenager : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener,
-    OnSelectConConversation {
+class ChatMenager : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, OnSelectConConversation {
 
 
     lateinit var SQL_CONTACTS_DB : SQL_CONTACTS
@@ -37,7 +36,7 @@ class ChatMenager : AppCompatActivity(), NavigationView.OnNavigationItemSelected
 
         menu3.setNavigationItemSelectedListener(this)
 
-        checkReciveMessage()
+        //checkReciveMessage()
 
 
 
@@ -97,7 +96,8 @@ class ChatMenager : AppCompatActivity(), NavigationView.OnNavigationItemSelected
         dane.newContact = ""             /// wyczyszczenie zmiennej
     }
 
-    override fun onItemClick(selectUser: String) {
+    override fun onItemClick(selectUser: String, position : Int) {
+        dane.openConversation = position
         var chatView = Intent(this, ChatView::class.java)
         startActivity(chatView)
     }
@@ -179,8 +179,7 @@ class ChatMenager : AppCompatActivity(), NavigationView.OnNavigationItemSelected
                     30
                 )
             )
-            adapter =
-                AdapterChat(this@ChatMenager)
+            adapter = ChatMenagerAdapter(this@ChatMenager)
 
 
         }

@@ -11,7 +11,7 @@ import com.example.neighborhoodwork.support.dane
 import kotlinx.android.synthetic.main.row_chat.view.*
 
 
-class AdapterChat(var clickListner: OnSelectConConversation) : RecyclerView.Adapter<ViewHolder>() {
+class ChatMenagerAdapter(var clickListner: OnSelectConConversation) : RecyclerView.Adapter<ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
@@ -39,7 +39,7 @@ class ViewHolder constructor(itemView: View) : RecyclerView.ViewHolder(itemView)
 
     fun initialize(action : OnSelectConConversation, position: Int){
         itemView.setOnClickListener {
-            action.onItemClick(itemView.tx9Imie.text.toString())
+            action.onItemClick(itemView.tx9Imie.text.toString(), position)
         }
         itemView.tx9Imie.text = dane.Contasts[position]
     }
@@ -48,5 +48,5 @@ class ViewHolder constructor(itemView: View) : RecyclerView.ViewHolder(itemView)
 }
 
 interface OnSelectConConversation{
-    fun onItemClick(selectUser: String)
+    fun onItemClick(selectUser: String, position: Int)
 }

@@ -9,6 +9,7 @@ import com.google.firebase.database.FirebaseDatabase
 
 
  public class fireBaseConnection () {
+
     var bazaUzytkownik = FirebaseAuth.getInstance()
     var uzytkownik = bazaUzytkownik.currentUser
 

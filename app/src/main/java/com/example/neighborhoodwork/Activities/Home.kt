@@ -19,6 +19,7 @@ import com.example.neighborhoodwor.ZadanieModel
 import com.example.neighborhoodwork.Fragments.BigInfoWindow
 import com.example.neighborhoodwork.Adapters.InfoWindowAdapter
 import com.example.neighborhoodwork.R
+import com.example.neighborhoodwork.support.SQL_BASE_MESSAGE
 import com.example.neighborhoodwork.support.SQL_CONTACTS
 import com.example.neighborhoodwork.support.dane
 import com.example.neighborhoodwork.support.user
@@ -58,10 +59,9 @@ class Home : AppCompatActivity(), OnMapReadyCallback, NavigationView.OnNavigatio
     lateinit var googleMapForLocation : GoogleMap
     lateinit var locationMarker : Marker
     var dodanoLokalizacje : Boolean = false
-    //lateinit var loadContacts : SQL_BASE_CONTACTS
 
-    lateinit var zadClass : SQL_CONTACTS
-
+    lateinit var contactsBase : SQL_CONTACTS
+    lateinit var messageBase : SQL_BASE_MESSAGE
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -283,9 +283,13 @@ class Home : AppCompatActivity(), OnMapReadyCallback, NavigationView.OnNavigatio
 
         }
 
-        zadClass = SQL_CONTACTS(this)
+        contactsBase = SQL_CONTACTS(this)
         dane.Contasts.clear()
-        zadClass.readAllUsers()
+        contactsBase.readAllUsers()
+
+        messageBase = SQL_BASE_MESSAGE(this)
+        dane.messages.clear()
+        messageBase.readAllMessages(this)
 
 
 
