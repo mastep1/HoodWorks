@@ -1,5 +1,6 @@
 package com.example.neighborhoodwork.Activities
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
@@ -7,23 +8,28 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.neighborhoodwor.ZadanieModel
 import com.example.neighborhoodwork.Adapters.ChatMenagerAdapter
+import com.example.neighborhoodwork.Adapters.ChatViewAdapter
 import com.example.neighborhoodwork.Adapters.OnSelectConConversation
+import com.example.neighborhoodwork.Models.MessageModel
 import com.example.neighborhoodwork.R
 import com.example.neighborhoodwork.support.SQL_CONTACTS
 import com.example.neighborhoodwork.support.TopSpacingItemDecoration
+import com.example.neighborhoodwork.support.adddMessage
 import com.example.neighborhoodwork.support.dane
 import com.firebase.ui.auth.AuthUI
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_chat.*
+import kotlinx.android.synthetic.main.chat_view.*
 
 class ChatMenager : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, OnSelectConConversation {
 
 
     lateinit var SQL_CONTACTS_DB : SQL_CONTACTS
     lateinit var userConversationOther: DatabaseReference
-    lateinit var userConversationCurrent: DatabaseReference
+    lateinit var newMessaesPath: DatabaseReference
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,18 +42,44 @@ class ChatMenager : AppCompatActivity(), NavigationView.OnNavigationItemSelected
 
         menu3.setNavigationItemSelectedListener(this)
 
-        //checkReciveMessage()
-
+        checkReciveMessage(this)
 
 
     }
 
-    private fun checkReciveMessage(){
+    private fun checkReciveMessage(conext : Context){
 
         val fireuserBase = FirebaseDatabase.getInstance()    /// Połączenie z bazą
 
-        userConversationCurrent = fireuserBase.getReference("Users").child(dane.currentUser.displayName.toString())
-            .child("Data").child("")
+        newMessaesPath = fireuserBase.getReference("Users").child(dane.currentUser.displayName.toString())
+            .child("Conversation")
+
+
+        newMessaesPath.addValueEventListener( object : ValueEventListener {
+
+                override fun onCancelled(p0: DatabaseError) {
+                }
+
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
+
+                    for (i in dataSnapshot.children) {
+
+                        val element = i.getValue(MessageModel::class.java)
+                        adddMessage(applicationContext,element!!.message, element.time, false)
+                        var toRemove = fireuserBase.getReference("Users").child(dane.currentUser.displayName.toString()).child("Conversation").child("${i.key}")
+                        toRemove.removeValue()
+
+                        if(!checkDoExistConversation(element.user)){
+                               addConversation(element.user)
+                                rc3.adapter = ChatMenagerAdapter(this@ChatMenager)
+                        }
+
+
+                    }
+                }
+            })
+
+
 
 
 
@@ -75,10 +107,10 @@ class ChatMenager : AppCompatActivity(), NavigationView.OnNavigationItemSelected
 
             if(add == false){
                 
-                    val fireuserBase = FirebaseDatabase.getInstance()           /// Utworzenie konwersacji (W FireBase) Dla drugiego użytkownika
-                    userConversationOther = fireuserBase.getReference("Users").child(dane.newContact).child("Conversation").child(dane.currentUser!!.displayName.toString())
-                    /// Utworzenie konwersacji (W FireBase) Dla drugiego użytkownika
-                    userConversationOther.setValue("TAKIETAKIETAKIETAKIETAKIE")         // Utworzenie konwersacji (W FireBase) Dla drugiego użytkownika
+                   // val fireuserBase = FirebaseDatabase.getInstance()           /// Utworzenie konwersacji (W FireBase) Dla drugiego użytkownika
+                   // userConversationOther = fireuserBase.getReference("Users")
+                   //     .child(dane.newContact).child("Conversation").child(dane.currentUser!!.displayName.toString()) /// Utworzenie konwersacji (W FireBase) Dla drugiego użytkownika
+                  //  userConversationOther.setValue("TAKIETAKIETAKIETAKIETAKIE")         // Utworzenie konwersacji (W FireBase) Dla drugiego użytkownika
 
                 addConversation(dane.newContact)
             }

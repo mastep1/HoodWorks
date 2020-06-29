@@ -1,5 +1,6 @@
 package com.example.neighborhoodwork.Activities
 
+import android.content.Context
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -17,7 +18,6 @@ import java.util.*
 class ChatView : AppCompatActivity(), OnSelectConConversationV {
 
     private lateinit var auth: FirebaseAuth
-    lateinit var SQL_MESSAGE : SQL_BASE_MESSAGE
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,9 +45,9 @@ class ChatView : AppCompatActivity(), OnSelectConConversationV {
                 val date = Date(timestamp) // tworzy obiekt daty na podstawie timestamp
 
 
-
-
                 var message = Etx12Message.text.toString()
+
+                adddMessage(this, message, date.time.toString(), true)
 
                 var bazaDane = FirebaseDatabase.getInstance()
                 var link =
@@ -63,11 +63,9 @@ class ChatView : AppCompatActivity(), OnSelectConConversationV {
                 var messageToPush = MessageModel(message, false, "${date.time}", name)
                 link.setValue(messageToPush)
 
-                SQL_MESSAGE = SQL_BASE_MESSAGE(this)            //// SQL
-                SQL_MESSAGE.insert(MessageModel(message, true,"${date.time}", dane.Contasts[dane.openConversation]))             /// SQL
                 Etx12Message.setText("")
 
-                dane.messages.add(MessageModel(message, true,"${date.time}", dane.Contasts[dane.openConversation]))
+
 
                 rc12ChatView.adapter = ChatViewAdapter(this@ChatView)
 
@@ -87,3 +85,5 @@ class ChatView : AppCompatActivity(), OnSelectConConversationV {
     }
 
 }
+
+
