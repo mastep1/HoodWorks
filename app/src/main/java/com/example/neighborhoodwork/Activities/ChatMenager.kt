@@ -14,17 +14,14 @@ import com.example.neighborhoodwork.Adapters.ChatViewAdapter
 import com.example.neighborhoodwork.Adapters.OnSelectConConversation
 import com.example.neighborhoodwork.Models.MessageModel
 import com.example.neighborhoodwork.R
-import com.example.neighborhoodwork.support.SQL_CONTACTS
-import com.example.neighborhoodwork.support.TopSpacingItemDecoration
-import com.example.neighborhoodwork.support.adddMessage
-import com.example.neighborhoodwork.support.dane
+import com.example.neighborhoodwork.support.*
 import com.firebase.ui.auth.AuthUI
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_chat.*
 import kotlinx.android.synthetic.main.chat_view.*
 
-class ChatMenager : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, OnSelectConConversation {
+class ChatMenager : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, OnSelectConConversation{
 
 
     lateinit var SQL_CONTACTS_DB : SQL_CONTACTS
@@ -35,52 +32,15 @@ class ChatMenager : AppCompatActivity(), NavigationView.OnNavigationItemSelected
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chat)
 
+        dane.currentActivity = "ChatMenager"
+        dane.recycler = rc3
+
         addContactIfShould()
 
 
         setOnClickListnerAndRecyclerApply()
 
         menu3.setNavigationItemSelectedListener(this)
-
-        checkReciveMessage(this)
-
-
-    }
-
-    private fun checkReciveMessage(conext : Context){
-
-        val fireuserBase = FirebaseDatabase.getInstance()    /// Połączenie z bazą
-
-        newMessaesPath = fireuserBase.getReference("Users").child(dane.currentUser.displayName.toString())
-            .child("Conversation")
-
-
-        newMessaesPath.addValueEventListener( object : ValueEventListener {
-
-                override fun onCancelled(p0: DatabaseError) {
-                }
-
-                override fun onDataChange(dataSnapshot: DataSnapshot) {
-
-                    for (i in dataSnapshot.children) {
-
-                        val element = i.getValue(MessageModel::class.java)
-                        adddMessage(applicationContext,element!!.message, element.time, false)
-                        var toRemove = fireuserBase.getReference("Users").child(dane.currentUser.displayName.toString()).child("Conversation").child("${i.key}")
-                        toRemove.removeValue()
-
-                        if(!checkDoExistConversation(element.user)){
-                               addConversation(element.user)
-                                rc3.adapter = ChatMenagerAdapter(this@ChatMenager)
-                        }
-
-
-                    }
-                }
-            })
-
-
-
 
 
 
@@ -126,12 +86,6 @@ class ChatMenager : AppCompatActivity(), NavigationView.OnNavigationItemSelected
 
 
         dane.newContact = ""             /// wyczyszczenie zmiennej
-    }
-
-    override fun onItemClick(selectUser: String, position : Int) {
-        dane.openConversation = position
-        var chatView = Intent(this, ChatView::class.java)
-        startActivity(chatView)
     }
 
     override fun onNavigationItemSelected(p0: MenuItem): Boolean {
@@ -215,6 +169,12 @@ class ChatMenager : AppCompatActivity(), NavigationView.OnNavigationItemSelected
 
 
         }
+    }
+
+    override fun onItemClick(selectUser: String, position : Int) {
+        dane.openConversation = position
+        var chatView = Intent(this, ChatView::class.java)
+        startActivity(chatView)
     }
 
 }

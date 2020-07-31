@@ -20,7 +20,6 @@ class ChatViewAdapter(var clickListnerV: OnSelectConConversationV) : RecyclerVie
 {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolderV {
-        dane.indexMessage = 0
                     return ViewHolderV(LayoutInflater.from(parent.context).inflate(R.layout.row_chat_view_me, parent, false))
     }
 
@@ -28,16 +27,50 @@ class ChatViewAdapter(var clickListnerV: OnSelectConConversationV) : RecyclerVie
         when(holder) {
 
             is ViewHolderV -> {
-                holder.initialize(clickListnerV, position)
+                    holder.initialize2(clickListnerV, position)
+
             }
         }
     }
     override fun getItemCount(): Int {
-        return dane.messages.size
+        var howManyMessage =  sayHowMany(dane.Contasts[dane.openConversation])
+        return howManyMessage
+    }
+
+    private fun sayHowMany(openConversation : String): Int{
+        var i = 0
+        var toReturn = 0
+        while(i < dane.messages.size)
+        {
+            if(dane.messages[i].user==openConversation){
+                 toReturn++
+            }
+            i++
+        }
+        return toReturn
     }
 
     class ViewHolderV
     constructor(itemView: View): RecyclerView.ViewHolder(itemView){
+
+        fun initialize2(action : OnSelectConConversationV, position: Int){
+            var find = false
+             while(find==false){
+                 if(dane.messages[dane.avoid].user==dane.Contasts[dane.openConversation]){
+                     itemView.tx13Message.text = dane.messages[dane.avoid].message
+                      find = true
+                     if(dane.messages[dane.avoid].thisUser==false){
+                         itemView.l13Main.gravity = Gravity.END
+                     }
+                }
+                 dane.avoid ++
+
+             }
+
+        }
+
+
+
 
 
         @SuppressLint("ResourceAsColor")
@@ -45,19 +78,22 @@ class ChatViewAdapter(var clickListnerV: OnSelectConConversationV) : RecyclerVie
 
 
             var i = true;   while(i){
-                if(dane.Contasts[dane.openConversation]==dane.messages[dane.indexMessage].user){       /// SPRAWDZA CZY WIADOMOŚĆ NALEŻY DO TEJ KONWERSACJI
-                    itemView.tx13Message.text = "${dane.messages[position].message}"                   /// Jeśli należy ustawia widomość na odpowidnią treść
-                    if(dane.messages[dane.indexMessage].thisUser==true){                               /// Ustala do kogo należy wiadomość. (wiadomość wysłana / wiadomość przychodząca)
-                        itemView.tx13Message.setTextColor(R.color.fontColorMe)
-                    };else{
-                        itemView.l13Main.gravity = Gravity.END
-                        itemView.tx13Message.setTextColor(R.color.fontColorOther)
-                    }
-
+                if(dane.Contasts[dane.openConversation]==dane.messages[dane.avoid].user&&dane.avoid==6){       /// SPRAWDZA CZY WIADOMOŚĆ NALEŻY DO TEJ KONWERSACJI
+                    itemView.tx13Message.text = "${dane.messages[dane.avoid].message}"
                     i = false
-                }
-                dane.indexMessage ++
+                    /*                                                                                   /// Jeśli tak, ustawia widomość na odpowidnią treść
+                   if(dane.messages[dane.indexMessage].thisUser==true){                               /// Ustala do kogo należy wiadomość. (wiadomość wysłana / wiadomość przychodząca)
+                       itemView.tx13Message.setTextColor(R.color.fontColorMe)
+                       Toast.makeText(itemView.context, "Start", Toast.LENGTH_LONG).show()
+                   };else{
+                       itemView.setPadding(100, 0, 0 , 0)
 
+                       itemView.tx13Message.setTextColor(R.color.fontColorOther)
+                       Toast.makeText(itemView.context, "END", Toast.LENGTH_LONG).show()
+                   }
+                   */
+                }
+                dane.avoid ++
             }
 
             itemView.setOnClickListener {

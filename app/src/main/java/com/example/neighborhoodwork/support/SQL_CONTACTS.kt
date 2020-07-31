@@ -73,7 +73,7 @@ class SQL_CONTACTS(context: Context) : SQLiteOpenHelper(context,
     }
 
     companion object {
-        val DATABASE_VERSION = 205
+        val DATABASE_VERSION = 221
         val DATABASE_NAME = "Contacts.db"
 
         private val SQL_CREATE_ENTRIES = "CREATE TABLE " + SQL_BD_CONTACT.Contacts.TABLE_NAME + " (" +

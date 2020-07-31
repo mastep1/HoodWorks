@@ -23,8 +23,7 @@
             android:paddingTop="7dp"
             android:paddingEnd="20dp"
             android:paddingBottom="7dp"
-            android:text="Wiadomość"
-            android:textColor="#00FFFFFF"
+            android:textColor="#0C0C0C"
             android:textSize="18sp" />
     </androidx.cardview.widget.CardView>
 

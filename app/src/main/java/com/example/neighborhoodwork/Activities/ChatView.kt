@@ -19,23 +19,33 @@ class ChatView : AppCompatActivity(), OnSelectConConversationV {
 
     private lateinit var auth: FirebaseAuth
 
+    override fun onResume() {
+        super.onResume()
+        dane.avoid = 0
+
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.chat_view)
-        
-        
+
+        dane.currentActivity = "ChatView"
+        dane.recycler = rc12ChatView
+
         setHeaderLine()
 
-        rc12ChatView.apply {
-            layoutManager = LinearLayoutManager(this@ChatView)
-            addItemDecoration(TopSpacingItemDecoration(30))
-            adapter = ChatViewAdapter(this@ChatView)
-        }
+         rc12ChatView.apply {
+        layoutManager = LinearLayoutManager(this@ChatView)
+        addItemDecoration(TopSpacingItemDecoration(30))
+        adapter = ChatViewAdapter(this@ChatView)
+    }
 
-        send()
+    send()
+
     }
 
     fun send(){
+
 
         FAB12Send.setOnClickListener {
 
@@ -48,10 +58,8 @@ class ChatView : AppCompatActivity(), OnSelectConConversationV {
                 var message = Etx12Message.text.toString()
 
                 adddMessage(this, message, date.time.toString(), true)
-
                 var bazaDane = FirebaseDatabase.getInstance()
-                var link =
-                    bazaDane.getReference("Users").child("${dane.Contasts[dane.openConversation]}")
+                var link = bazaDane.getReference("Users").child("${dane.Contasts[dane.openConversation]}")
                         .child("Conversation").child("${date.time}")
 
 
@@ -60,24 +68,29 @@ class ChatView : AppCompatActivity(), OnSelectConConversationV {
                 val name = currentUser!!.displayName.toString()
 
 
-                var messageToPush = MessageModel(message, false, "${date.time}", name)
+                var messageToPush = MessageModel(message, false, "${date.time}", name, false )
                 link.setValue(messageToPush)
 
                 Etx12Message.setText("")
 
 
-
+                dane.avoid = 0
                 rc12ChatView.adapter = ChatViewAdapter(this@ChatView)
 
-                rc12ChatView.scrollToPosition(dane.messages.size-1)
-            }
+                //rc12ChatView.scrollToPosition(dane.messages.size-1)
+                  //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
+            }
         }
 
     }
 
     fun setHeaderLine(){
         tx12Imie.text = dane.Contasts[dane.openConversation]
+
+        BT12Back.setOnClickListener {
+            finish()
+        }
     }
 
     override fun onItemClickV(selectUser: String, position: Int) {

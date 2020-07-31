@@ -1,10 +1,13 @@
 package com.example.neighborhoodwork.Models
 
-data class UserModel (
-    var rating : Double = 0.0,
-    var ukonczone : Int = 0,
-    var dni : Int = 0,
-    var like : Int = 0,
+import android.net.Uri
+
+data class UserModel(
+    var rating: Double = 0.0,
+    var ukonczone: Int = 0,
+    var dni: Int = 0,
+    var like: Int = 0,
     var dislike: Int = 0,
-    var opis : String = ""
+    var opis: String = "",
+    var url : String = ""
 )

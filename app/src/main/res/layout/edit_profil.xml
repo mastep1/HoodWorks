@@ -14,7 +14,7 @@
         android:layout_marginStart="35dp"
         android:layout_marginTop="20dp"
         android:text="Imie i Nazwisko"
-        android:textAllCaps="true"
+        android:textAllCaps="false"
         android:textColor="#000000"
         android:textSize="22sp"
         android:textStyle="bold|italic"
@@ -28,7 +28,7 @@
         android:layout_marginStart="35dp"
         android:layout_marginTop="10dp"
         android:text="E-mail"
-        android:textAllCaps="true"
+        android:textAllCaps="false"
         android:textColor="#000000"
         android:textSize="22sp"
         android:textStyle="bold|italic"
@@ -86,7 +86,7 @@
         android:layout_marginStart="35dp"
         android:layout_marginTop="10dp"
         android:text="Numer telefonu"
-        android:textAllCaps="true"
+        android:textAllCaps="false"
         android:textColor="#000000"
         android:textSize="22sp"
         android:textStyle="bold|italic"
@@ -121,7 +121,7 @@
         android:layout_marginStart="35dp"
         android:layout_marginTop="10dp"
         android:text="Opis Twojego Profilu"
-        android:textAllCaps="true"
+        android:textAllCaps="false"
         android:textColor="#000000"
         android:textSize="22sp"
         android:textStyle="bold|italic"
@@ -194,7 +194,7 @@
         android:layout_width="0dp"
         android:layout_height="80dp"
         android:layout_marginStart="65dp"
-        android:layout_marginTop="45dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="65dp"
         android:backgroundTint="#03A9F4"
         android:text="Potwierdź"
@@ -203,16 +203,101 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Etx7Opis" />
+        app:layout_constraintTop_toBottomOf="@+id/Etx7RepeatPassword" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/FAB7Commit"
+        android:id="@+id/FAB7Save"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="15dp"
+        android:backgroundTint="#009EFF"
         android:clickable="true"
+        android:tint="#FCFEFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/folating_button" />
+        app:srcCompat="@drawable/save" />
+
+    <View
+        android:id="@+id/divider7_4"
+        android:layout_width="0dp"
+        android:layout_height="2dp"
+        android:layout_marginTop="10dp"
+        android:background="#FD0000"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Etx7Opis" />
+
+    <TextView
+        android:id="@+id/tx7Haslo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="35dp"
+        android:layout_marginTop="10dp"
+        android:text="Zmień hasło"
+        android:textAllCaps="false"
+        android:textColor="#000000"
+        android:textSize="22sp"
+        android:textStyle="bold|italic"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/divider7_4" />
+
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/SBT7Haslo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:autoText="false"
+        android:background="#FFFEFE"
+        android:text="off"
+        android:textColor="#00FFFFFF"
+        app:layout_constraintStart_toEndOf="@+id/tx7Haslo"
+        app:layout_constraintTop_toTopOf="@+id/tx7Haslo"
+        app:thumbTint="#6200EA"
+        app:trackTint="#009EFF" />
+
+    <TextView
+        android:id="@+id/tx7HasloZmiany"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:textColor="#FB0000"
+        android:textSize="17sp"
+        android:textStyle="bold"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="@+id/tx7Haslo"
+        app:layout_constraintTop_toBottomOf="@+id/tx7Haslo" />
+
+    <EditText
+        android:id="@+id/Etx7CurrentPasword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Obecne hasło"
+        android:inputType="textPassword"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="@+id/tx7Haslo"
+        app:layout_constraintTop_toBottomOf="@+id/tx7HasloZmiany" />
+
+    <EditText
+        android:id="@+id/Etx7NewPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Nowe hasło"
+        android:inputType="textPassword"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="@+id/Etx7CurrentPasword"
+        app:layout_constraintTop_toBottomOf="@+id/Etx7CurrentPasword" />
+
+    <EditText
+        android:id="@+id/Etx7RepeatPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Powtórz hasło"
+        android:inputType="textPassword"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="@+id/Etx7NewPassword"
+        app:layout_constraintTop_toBottomOf="@+id/Etx7NewPassword" />
 </androidx.constraintlayout.widget.ConstraintLayout>

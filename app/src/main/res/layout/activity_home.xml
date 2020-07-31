@@ -17,36 +17,17 @@
         android:layout_height="match_parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/l2Main"
+            android:id="@+id/l2Content"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/FAB2MyLocation"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:backgroundTint="#FFFFFF"
-                android:clickable="true"
-                android:tint="#2196F3"
-                app:backgroundTint="#FFFFFF"
-                app:fabSize="normal"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@android:drawable/ic_menu_mylocation" />
 
-            <TextView
-                android:id="@+id/tx2MainNapis"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:paddingTop="5dp"
-                android:paddingBottom="15dp"
-                android:text="@string/tx4Home"
-                android:textAlignment="center"
-                android:textColor="#050505"
-                android:textSize="30sp"
-                android:textStyle="bold"
+            <fragment
+                android:id="@+id/mapView2"
+                android:name="com.google.android.gms.maps.SupportMapFragment"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -55,6 +36,8 @@
                 android:id="@+id/img2Menu"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
                 android:padding="10dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -64,107 +47,114 @@
                 android:id="@+id/img2Filter"
                 android:layout_width="45dp"
                 android:layout_height="50dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/filter" />
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/l2Content"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/FAB2MyLocation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="3dp"
+                android:backgroundTint="#FFFFFF"
+                android:clickable="true"
+                android:tint="#2196F3"
+                app:backgroundTint="#FFFFFF"
+                app:fabSize="normal"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/img2Menu">
+                app:layout_constraintTop_toTopOf="@+id/mapView2"
+                app:srcCompat="@android:drawable/ic_menu_mylocation" />
 
+            <Button
+                android:id="@+id/BT6Exit"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginEnd="3dp"
+                android:backgroundTint="#FB0202"
+                android:text="X"
+                android:textAlignment="center"
+                android:textColor="#FBFBFB"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@+id/l2InfoFrag"
+                app:layout_constraintTop_toTopOf="@+id/l2InfoFrag" />
 
-                <Button
-                    android:id="@+id/BT6Exit"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_marginEnd="3dp"
-                    android:backgroundTint="#FB0202"
-                    android:text="X"
-                    android:textAlignment="center"
-                    android:textColor="#FBFBFB"
-                    android:textSize="24sp"
-                    android:textStyle="bold"
-                    app:layout_constraintEnd_toEndOf="@+id/l2InfoFrag"
-                    app:layout_constraintTop_toTopOf="@+id/l2InfoFrag" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/l2InfoFrag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toTopOf="@+id/l2DownMenu"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"></androidx.constraintlayout.widget.ConstraintLayout>
 
-                <fragment
-                    android:id="@+id/mapView2"
-                    android:name="com.google.android.gms.maps.SupportMapFragment"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/l2DownMenu"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="#BFFFFDFD"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
+
+                <ImageView
+                    android:id="@+id/img2Chat"
+                    android:layout_width="70dp"
+                    android:layout_height="55dp"
+                    android:layout_marginBottom="5dp"
+                    android:background="@android:color/transparent"
+                    android:paddingLeft="5dp"
+                    android:paddingTop="5dp"
+                    android:paddingRight="5dp"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/img2Mapa"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:srcCompat="@drawable/poprawione" />
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/l2InfoFrag"
+                <TextView
+                    android:id="@+id/tx2NewMessage"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
-                    android:orientation="vertical"
-                    app:layout_constraintBottom_toTopOf="@+id/l2DownMenu"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"></androidx.constraintlayout.widget.ConstraintLayout>
+                    android:layout_marginStart="60dp"
+                    android:layout_marginBottom="45dp"
+                    android:text="1"
+                    android:textColor="#FD0303"
+                    android:textSize="10sp"
+                    android:textStyle="bold"
+                    android:visibility="invisible"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/img2Chat" />
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/l2DownMenu"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:background="#BFFFFDFD"
-                    android:orientation="horizontal"
+                <ImageView
+                    android:id="@+id/img2Mapa"
+                    android:layout_width="80dp"
+                    android:layout_height="70dp"
+                    android:layout_marginBottom="10dp"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/img2Profil"
+                    app:layout_constraintStart_toEndOf="@+id/img2Chat"
+                    app:srcCompat="@drawable/map" />
+
+                <ImageView
+                    android:id="@+id/img2Profil"
+                    android:layout_width="70dp"
+                    android:layout_height="55dp"
+                    android:layout_marginBottom="5dp"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent">
+                    app:layout_constraintStart_toEndOf="@+id/img2Mapa"
+                    app:srcCompat="@drawable/boy" />
 
-                    <ImageView
-                        android:id="@+id/img2Chat"
-                        android:layout_width="70dp"
-                        android:layout_height="55dp"
-                        android:layout_marginBottom="5dp"
-                        android:background="@android:color/transparent"
-                        android:paddingLeft="5dp"
-                        android:paddingTop="5dp"
-                        android:paddingRight="5dp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@+id/img2Mapa"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:srcCompat="@drawable/poprawione" />
-
-                    <ImageView
-                        android:id="@+id/img2Mapa"
-                        android:layout_width="80dp"
-                        android:layout_height="70dp"
-                        android:layout_marginBottom="10dp"
-                        android:paddingLeft="5dp"
-                        android:paddingRight="5dp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@+id/img2Profil"
-                        app:layout_constraintStart_toEndOf="@+id/img2Chat"
-                        app:srcCompat="@drawable/map" />
-
-                    <ImageView
-                        android:id="@+id/img2Profil"
-                        android:layout_width="70dp"
-                        android:layout_height="55dp"
-                        android:layout_marginBottom="5dp"
-                        android:paddingLeft="5dp"
-                        android:paddingRight="5dp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/img2Mapa"
-                        app:srcCompat="@drawable/boy" />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
-
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 

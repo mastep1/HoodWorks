@@ -24,8 +24,8 @@ class MainActivity : AppCompatActivity() {
             startActivity(nowaAktywnosc3)
         }
 
-        l1Ikony.setOnClickListener {
-            var samo = Intent(applicationContext, Samouczek::class.java)
+        l1Ikony.setOnClickListener{
+            var samo = Intent(applicationContext, SamouczekAvater::class.java)
             startActivity(samo)
         }
     }

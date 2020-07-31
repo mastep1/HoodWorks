@@ -2,8 +2,8 @@
 <project version="4">
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/app/src/main/java/com/example/neighborhoodwork/Activities/ChatView.kt" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/app/src/main/java/com/example/neighborhoodwork/support/SQL_BASE_CONTACTS.kt" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/app/src/main/java/com/example/neighborhoodwork/support/SQL_BASE_MESSAGE.kt" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/example/neighborhoodwork/support/SQL_CONTACTS.kt" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/example/neighborhoodwork/support/SQL_MESSAGE.kt" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/com/example/neighborhoodwork/support/dane.kt" charset="UTF-8" />
     <file url="PROJECT" charset="UTF-8" />
   </component>

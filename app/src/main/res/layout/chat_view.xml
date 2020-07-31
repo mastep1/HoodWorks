@@ -8,34 +8,52 @@
     tools:context=".Activities.ChatView">
 
     <ImageButton
-        android:id="@+id/BT12Hands"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginEnd="10dp"
-        app:layout_constraintEnd_toStartOf="@+id/BT12Settings"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/dislike" />
-
-    <ImageButton
         android:id="@+id/BT12Back"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:backgroundTint="#FFFFFF"
+        app:layout_constraintBottom_toTopOf="@+id/Diver12"
+        app:layout_constraintEnd_toStartOf="@+id/CV12Avatar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/maxresdefault" />
+        app:srcCompat="@drawable/back_arrow" />
 
     <TextView
         android:id="@+id/tx12Imie"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginBottom="20dp"
         android:text="Jakub Gołos"
         android:textColor="#040404"
-        android:textSize="18sp"
-        app:layout_constraintStart_toEndOf="@+id/BT12Back"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/CV12Avatar"
+        app:layout_constraintStart_toEndOf="@+id/CV12Avatar"
+        app:layout_constraintTop_toTopOf="@+id/CV12Avatar" />
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/CV12Avatar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="10dp"
+        app:cardBackgroundColor="#FFFFFF"
+        app:cardCornerRadius="50dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <ImageView
+            android:id="@+id/img12Avatar"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/avatar"
+            app:srcCompat="@drawable/avatar" />
+
+
+    </androidx.cardview.widget.CardView>
 
     <TextView
         android:id="@+id/tx12Online"
@@ -48,24 +66,26 @@
 
     <ImageButton
         android:id="@+id/BT12Settings"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
-        android:layout_marginTop="5dp"
+        android:layout_width="35sp"
+        android:layout_height="35sp"
         android:layout_marginEnd="10dp"
+        android:backgroundTint="#FFFFFF"
+        android:tint="#000000"
+        app:layout_constraintBottom_toTopOf="@+id/Diver12"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/dislike" />
+        app:srcCompat="@drawable/settings" />
 
     <View
         android:id="@+id/Diver12"
         android:layout_width="0dp"
         android:layout_height="2dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="10dp"
         android:background="#FF0000"
         android:backgroundTint="#F80707"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/BT12Back" />
+        app:layout_constraintTop_toBottomOf="@+id/CV12Avatar" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rc12ChatView"
@@ -82,7 +102,7 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/TxInput12"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -90,23 +110,26 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/l12input"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1">
+            android:layout_gravity="center|center_horizontal|center_vertical">
 
             <EditText
                 android:id="@+id/Etx12Message"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
                 android:layout_marginStart="10dp"
+                android:layout_marginEnd="5dp"
                 android:layout_weight="1"
                 android:backgroundTint="#673AB7"
                 android:ems="10"
                 android:foregroundTint="#FF9800"
                 android:gravity="start|top"
-                android:hint="Aa..."
+                android:hint="Napisz wiadomość..."
                 android:inputType="textMultiLine"
                 app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/FAB12Send"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 

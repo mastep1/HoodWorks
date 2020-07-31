@@ -10,24 +10,20 @@ import android.os.Build
 import android.os.Bundle
 import android.os.Looper
 import android.view.MenuItem
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.view.GravityCompat
-import com.example.neighborhoodwor.ZadanieModel
 import com.example.neighborhoodwork.Fragments.BigInfoWindow
 import com.example.neighborhoodwork.Adapters.InfoWindowAdapter
 import com.example.neighborhoodwork.R
-import com.example.neighborhoodwork.support.SQL_BASE_MESSAGE
-import com.example.neighborhoodwork.support.SQL_CONTACTS
-import com.example.neighborhoodwork.support.dane
-import com.example.neighborhoodwork.support.user
+import com.example.neighborhoodwork.support.*
 import com.firebase.ui.auth.AuthUI
 import com.google.android.gms.location.*
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
-import com.google.android.gms.maps.GoogleMap.OnInfoWindowClickListener
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
@@ -49,8 +45,7 @@ class Home : AppCompatActivity(), OnMapReadyCallback, NavigationView.OnNavigatio
     private lateinit var auth: FirebaseAuth
     var frag = supportFragmentManager
     var infoWindow = BigInfoWindow(this)
-    lateinit var myRef: DatabaseReference
-    lateinit var userData: DatabaseReference
+
     private var mFusedLocationProviderClient: FusedLocationProviderClient? = null
     private val INTERVAL: Long = 2000
     private val FASTEST_INTERVAL: Long = 1000
@@ -60,8 +55,7 @@ class Home : AppCompatActivity(), OnMapReadyCallback, NavigationView.OnNavigatio
     lateinit var locationMarker : Marker
     var dodanoLokalizacje : Boolean = false
 
-    lateinit var contactsBase : SQL_CONTACTS
-    lateinit var messageBase : SQL_BASE_MESSAGE
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -69,36 +63,56 @@ class Home : AppCompatActivity(), OnMapReadyCallback, NavigationView.OnNavigatio
         setContentView(R.layout.activity_home)
 
 
-        auth = FirebaseAuth.getInstance()
-        providers = Arrays.asList<AuthUI.IdpConfig>(
-            AuthUI.IdpConfig.EmailBuilder().build(),
-            AuthUI.IdpConfig.FacebookBuilder().build(),
-            AuthUI.IdpConfig.GoogleBuilder().build(),
-            AuthUI.IdpConfig.PhoneBuilder().build()
-        )
 
-        val currentUser = auth.currentUser
-        
-        if (currentUser != null) {
-            dane.currentUser = currentUser
+
+        if(dane.HomeOnCreate==false){
+            auth = FirebaseAuth.getInstance()
+            providers = Arrays.asList<AuthUI.IdpConfig>(
+                AuthUI.IdpConfig.EmailBuilder().build(),
+                AuthUI.IdpConfig.FacebookBuilder().build(),
+                AuthUI.IdpConfig.GoogleBuilder().build(),
+                AuthUI.IdpConfig.PhoneBuilder().build()
+            )
+
+            val currentUser = auth.currentUser
+
+            if (currentUser != null) {
+                dane.currentUser = currentUser
+            }
+            dane.superImage = img2Mapa
+
+
+
         }
 
+
+        setOnClickListner()
+
+    }
+
+
+    override fun onResume() {
+        super.onResume()
+
+        setCurrentActivity(tx2NewMessage, "Home")
+
+        val map = supportFragmentManager.findFragmentById(R.id.mapView2) as SupportMapFragment
+        map.getMapAsync(this)
         mLocationRequest = LocationRequest()
         val locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
         if (!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
             buildAlertMessageNoGps()
         }
 
-
-        val map = supportFragmentManager.findFragmentById(R.id.mapView2) as SupportMapFragment
-        map.getMapAsync(this)
-
-
-        dateUser(currentUser)
-
-        setOnClickListner()
+        if(dane.newMessage!=0){
+            tx2NewMessage.text = dane.newMessage.toString()
+            tx2NewMessage.visibility = View.VISIBLE
+        }else{
+            tx2NewMessage.visibility = View.INVISIBLE
+        }
 
     }
+
 
     fun setOnClickListner(){
 
@@ -236,65 +250,6 @@ class Home : AppCompatActivity(), OnMapReadyCallback, NavigationView.OnNavigatio
         mFusedLocationProviderClient!!.removeLocationUpdates(mLocationCallback)
     }
 
-    fun dateUser(currentUser: FirebaseUser?){
-
-        if (currentUser != null) {
-            val fireuserBase = FirebaseDatabase.getInstance()
-
-            userData = fireuserBase.getReference("Users").child(currentUser.displayName.toString()).child("Data")
-
-            userData.addValueEventListener(object : ValueEventListener {
-
-                override fun onCancelled(p0: DatabaseError) {
-                }
-
-                override fun onDataChange(dataSnapshot: DataSnapshot) {
-                    for (i in dataSnapshot.children) {
-
-                        when(i.key){
-                            "opis" -> user.opis = i.value.toString()
-                            "dislike" -> user.dislike = i.value.toString().toInt()
-                            "like" -> user.like = i.value.toString().toInt()
-                            "dni" -> user.dni = i.value.toString().toInt()
-                            "ukonczone" -> user.ukonczone = i.value.toString().toInt()
-                            "rating" -> user.rating = i.value.toString().toDouble()
-                        }
-                    }
-                }
-            })
-
-            if(currentUser.displayName != null)
-            {
-                user.imie = currentUser.displayName.toString()
-            }
-            if(currentUser.email != null)
-            {
-                user.email = currentUser.email.toString()
-                if(!currentUser.isEmailVerified){
-                    Snackbar.make(l2Content, "Zweryfikuj swoje konto e-mail ${currentUser.email}", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show()
-                }
-            }
-            if(currentUser.phoneNumber != null)
-            {
-                user.tel = currentUser.phoneNumber.toString()
-            }
-
-
-        }
-
-        contactsBase = SQL_CONTACTS(this)
-        dane.Contasts.clear()
-        contactsBase.readAllUsers()
-
-        messageBase = SQL_BASE_MESSAGE(this)
-        dane.messages.clear()
-        messageBase.readAllMessages(this)
-
-
-
-
-    }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
@@ -302,7 +257,18 @@ class Home : AppCompatActivity(), OnMapReadyCallback, NavigationView.OnNavigatio
 
     override fun onMapReady(googleMap: GoogleMap) {
 
+        if(dane.HomeOnCreate==false){
+            dane.googleMap = googleMap
+            startService(Intent(this@Home, MyService::class.java))
+            dane.HomeOnCreate = true
+        }
+
+
+
+        znaczniki(googleMap)
+        
         googleMapForLocation = googleMap
+
         if (checkPermissionForLocation(this)) {
             startLocationUpdates()
         }
@@ -313,67 +279,21 @@ class Home : AppCompatActivity(), OnMapReadyCallback, NavigationView.OnNavigatio
             )
         )
 
-        val fireBase = FirebaseDatabase.getInstance()
-        myRef = fireBase.getReference("Zadania")
-
-        myRef.addValueEventListener(object : ValueEventListener {
-
-            override fun onCancelled(p0: DatabaseError) {
-            }
-
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
-
-                for (i in dataSnapshot.children) {
-
-                    val element = i.getValue(ZadanieModel::class.java)
-                    dane.zadania.add(element!!)
-                }
-                znaczniki(googleMap)
-            }
-        })
-
-    }
-
-    fun znaczniki(googleMap: GoogleMap) {
-        var i = 0
-        while (i < dane.zadania.size) {
-
-            val wspolrzedne = LatLng(dane.zadania[i].x.toDouble(), dane.zadania[i].y.toDouble())
-            googleMap.addMarker(
-                MarkerOptions().position(wspolrzedne)
-                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.marker))
-                    .snippet("${dane.zadania[i].ID}")
-            )
-            i++
-        }
-
-
-        googleMap.setOnMarkerClickListener { marker ->
-            if (marker.isInfoWindowShown) {
-                marker.hideInfoWindow()
-            } else {
-                marker.showInfoWindow()
-
-            }
-            true
-
-        }
-
-        googleMap.setOnInfoWindowClickListener(OnInfoWindowClickListener { arg0 ->
+        googleMap.setOnInfoWindowClickListener(GoogleMap.OnInfoWindowClickListener { arg0 ->
 
             arg0.hideInfoWindow()
 
             bigInfoWindow(true)
 
-            tx2MainNapis.setOnClickListener {
-                bigInfoWindow(false)
-            }
+            // tx2MainNapis.setOnClickListener {
+            //    bigInfoWindow(false)
+            // }
 
         })
 
-
-
     }
+
+
 
     fun bigInfoWindow(tryb : Boolean){
         if(tryb==true){

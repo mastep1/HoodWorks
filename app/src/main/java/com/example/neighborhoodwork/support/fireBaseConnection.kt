@@ -22,7 +22,6 @@ import com.google.firebase.database.FirebaseDatabase
 
         //user!!.reauthenticate(credential).addOnCompleteListener {
             user!!.updateEmail("$newemail")
-           EditProfil().zakoncz(context)
 
 
 

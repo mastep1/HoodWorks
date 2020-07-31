@@ -3,9 +3,12 @@ package com.example.neighborhoodwork.Activities
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.core.net.toUri
 import kotlinx.android.synthetic.main.activity_samouczek.*
 import com.example.neighborhoodwork.R
 import com.example.neighborhoodwork.Models.UserModel
+import com.example.neighborhoodwork.support.dane
+import com.example.neighborhoodwork.support.user
 import com.firebase.ui.auth.AuthUI
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
@@ -43,15 +46,14 @@ class Samouczek : AppCompatActivity() {
 
                 val doWczytania = UserModel(
                     0.0, 0, 0, 0, 0,
-                    " ${editText3.text}"
+                    " ${editText3.text}", user.avatarPhotoURL
                 )
 
                 if(obecny!=null){
                     var id = obecny.displayName.toString()
-                   baton1.text = id
+                   baton1.text = dane.UriBuffer.toString()
                     userRef.child(id).child("Data").setValue(doWczytania)
                 }
-
 
             }
 
@@ -73,3 +75,6 @@ class Samouczek : AppCompatActivity() {
         )
     }
 }
+
+
+
