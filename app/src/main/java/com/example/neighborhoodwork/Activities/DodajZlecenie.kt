@@ -1,61 +1,94 @@
 package com.example.neighborhoodwork.Activities
 
+
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.example.neighborhoodwor.ZadanieModel
+import androidx.core.app.ShareCompat
+import com.example.neighborhoodwork.Fragments.AddTaskMap
 import com.example.neighborhoodwork.R
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
-import kotlinx.android.synthetic.main.activity_dodaj_zlecenie.*
-import java.util.*
+import com.example.neighborhoodwork.support.dane
+import com.google.android.gms.common.GooglePlayServicesNotAvailableException
+import com.google.android.gms.common.GooglePlayServicesRepairableException
+import com.google.android.gms.common.api.PendingResult
+import com.google.android.gms.location.places.Place
+import com.google.android.gms.location.places.PlaceBuffer
+import com.google.android.gms.location.places.Places
+import com.google.android.gms.location.places.ui.PlacePicker
+import kotlinx.android.synthetic.main.dodaj_zlecenie.*
+
 
 class DodajZlecenie : AppCompatActivity() {
 
-    lateinit var myRef : DatabaseReference
-    lateinit var auth: FirebaseAuth
-
+    var fragOfTheMap = supportFragmentManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_dodaj_zlecenie)
+        setContentView(R.layout.dodaj_zlecenie)
 
-        val fireBase = FirebaseDatabase.getInstance()
-        myRef = fireBase.getReference("Zadania")
+        img18DotOne.setColorFilter(R.color.fuckingblack)
+        dane.addTask = 1
 
-        auth = FirebaseAuth.getInstance()
-        var currentUser = auth.currentUser
+        var addTaskMap = AddTaskMap()
+        fragOfTheMap.beginTransaction().add(R.id.l18ForFragment, addTaskMap).commit()
 
-
-        WpierdolDoBazy.setOnClickListener {
-
-            val timestamp = System.currentTimeMillis()
+        setBottomDot()
 
 
-            val opis = Etx5Opis.text.toString()
-            val img = Etx5Img.text.toString()
-            val length = Etx5Length.text.toString()
-            val wynagrodzenie = Etx5Wynagrodzenie.text.toString()
-            val x = Etx5X.text.toString()
-            val y = Etx5Y.text.toString()
-            val title = Etx5Title.text.toString()
-            val time = Etx5Time.text.toString()
-            val fireBaseInput = ZadanieModel( x = x , y = y, opis = opis,  wynagrodzenie = wynagrodzenie, img = img,
-                length = length, time = time, title = title, ID =  timestamp.toString(), pracodawca = currentUser!!.displayName.toString())
-            myRef.child("${Date().time}").setValue(fireBaseInput)
-            val Mapa = Intent(applicationContext, Home::class.java)
-            startActivity(Mapa)
-            finish()
-        }
 
-        BT5Common.setOnClickListener {
-            myRef.child("${Date().time}").setValue(ZadanieModel(pracodawca = currentUser!!.displayName.toString()))
-            val Mapa = Intent(applicationContext, Home::class.java)
-            startActivity(Mapa)
-            finish()
-        }
+
+
     }
 
 
+
+    fun setBottomDot(){
+
+        img18RightArrow.setOnClickListener {
+
+            when(dane.addTask){
+                1 ->  { img18DotOne.clearColorFilter()
+                    img18DotTwo.setColorFilter(R.color.fuckingblack)}
+
+                2 ->  { img18DotTwo.clearColorFilter()
+                    img18DotThree.setColorFilter(R.color.fuckingblack)}
+
+                3 ->  { img18DotThree.clearColorFilter()
+                    img18DotFour.setColorFilter(R.color.fuckingblack)}
+
+                4 ->  { img18DotFour.clearColorFilter()
+                    img18DotFive.setColorFilter(R.color.fuckingblack)}
+
+                5 -> {
+                    var intent = Intent(this, Home::class.java)
+                    startActivity(intent)
+                    finish()
+                }
+            }
+            dane.addTask ++
+        }
+
+        img18LeftArrow.setOnClickListener {
+
+            when(dane.addTask){
+
+                2 ->  { img18DotTwo.clearColorFilter()
+                    img18DotOne.setColorFilter(R.color.fuckingblack)}
+
+                3 ->  { img18DotThree.clearColorFilter()
+                    img18DotTwo.setColorFilter(R.color.fuckingblack)}
+
+                4 ->  { img18DotFour.clearColorFilter()
+                    img18DotThree.setColorFilter(R.color.fuckingblack)}
+
+                5 -> { img18DotFive.clearColorFilter()
+                    img18DotFour.setColorFilter(R.color.fuckingblack)}
+            }
+            dane.addTask = dane.addTask - 1
+        }
+    }
+
+    
 }
+
+

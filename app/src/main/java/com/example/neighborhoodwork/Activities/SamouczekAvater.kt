@@ -44,7 +44,6 @@ class SamouczekAvater : Activity() {
             bazaDanych = SQL_USER(this)            //// SQL
                                                             /// SQL
 
-                val user_id: String = 77.toString()
                 val image_path: StorageReference = storagePath
                 val uploadTask = image_path.putFile(imageUri!!)
                 uploadTask.continueWithTask { task ->

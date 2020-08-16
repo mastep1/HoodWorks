@@ -34,6 +34,7 @@ object dane {
     lateinit var googleMap : GoogleMap
     lateinit var UriBuffer : Uri
     lateinit var superImage : ImageView
+    var addTask = 1
     }
 
 

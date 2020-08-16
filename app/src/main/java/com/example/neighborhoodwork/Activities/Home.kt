@@ -12,14 +12,18 @@ import android.os.Looper
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
+import androidx.annotation.NonNull
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.view.GravityCompat
-import com.example.neighborhoodwork.Fragments.BigInfoWindow
 import com.example.neighborhoodwork.Adapters.InfoWindowAdapter
+import com.example.neighborhoodwork.Fragments.BigInfoWindow
 import com.example.neighborhoodwork.R
-import com.example.neighborhoodwork.support.*
+import com.example.neighborhoodwork.support.MyService
+import com.example.neighborhoodwork.support.dane
+import com.example.neighborhoodwork.support.setCurrentActivity
+import com.example.neighborhoodwork.support.znaczniki
 import com.firebase.ui.auth.AuthUI
 import com.google.android.gms.location.*
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -30,11 +34,10 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.android.gms.tasks.Task
 import com.google.android.material.navigation.NavigationView
-import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_home.*
 import java.util.*
 
@@ -54,6 +57,7 @@ class Home : AppCompatActivity(), OnMapReadyCallback, NavigationView.OnNavigatio
     lateinit var googleMapForLocation : GoogleMap
     lateinit var locationMarker : Marker
     var dodanoLokalizacje : Boolean = false
+    private val mLocationPermissionsGranted = false
 
 
 
@@ -360,7 +364,11 @@ class Home : AppCompatActivity(), OnMapReadyCallback, NavigationView.OnNavigatio
         }
         drawler2.closeDrawer(GravityCompat.START)
         return true
+        
+    
     }
+
+    
 
 }
 

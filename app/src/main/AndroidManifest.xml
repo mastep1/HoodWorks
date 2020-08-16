@@ -6,7 +6,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -15,12 +15,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".Activities.SamouczekAvater"></activity>
+        <activity android:name=".Activities.LoactionPicker"></activity>
+        <activity android:name=".Activities.DodajZlecenie" />
+        <activity android:name=".Activities.SamouczekAvater" />
         <activity android:name=".Activities.ChatView" />
         <activity android:name=".Activities.EditProfil" />
         <activity android:name=".Activities.Samouczek" />
         <activity android:name=".Activities.Profil" />
-        <activity android:name=".Activities.DodajZlecenie" />
+        <activity android:name=".Activities.DodajZlecenieR" />
         <activity android:name=".Activities.ChatMenager" />
 
         <meta-data

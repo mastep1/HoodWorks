@@ -5,4 +5,6 @@
     <color name="colorAccent">#03DAC5</color>
     <color name="fontColorMe">#5000FF</color>
     <color name="fontColorOther">#FC6C00</color>
+    <color name="fuckingblack">#000000</color>
+    <color name="fuckingGray">#7A5959</color>
 </resources>

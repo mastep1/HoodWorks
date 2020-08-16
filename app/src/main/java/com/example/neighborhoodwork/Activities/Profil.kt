@@ -1,25 +1,22 @@
 package com.example.neighborhoodwork.Activities
 
 import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.MenuItem
 import android.view.View
-import android.widget.TextView
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.core.view.GravityCompat
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
 import com.example.neighborhoodwork.R
-import com.example.neighborhoodwork.support.adddMessage
 import com.example.neighborhoodwork.support.dane
 import com.example.neighborhoodwork.support.setCurrentActivity
 import com.example.neighborhoodwork.support.user
 import com.firebase.ui.auth.AuthUI
 import com.google.android.material.navigation.NavigationView
-import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.profil.*
 
 
@@ -28,11 +25,12 @@ class Profil : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListe
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.profil)
+
         setOnClickListner()
 
     }
 
-    override fun onResume() {
+    override fun onResume(){
         super.onResume()
         setData()
         setCurrentActivity(tx4NewMessage, "Profil")
@@ -64,7 +62,7 @@ class Profil : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListe
                 )
             }
             R.id.Menu_Dodaj_Zlecenie -> {
-                val dodaj = Intent(applicationContext, DodajZlecenie::class.java)
+                val dodaj = Intent(applicationContext, DodajZlecenieR::class.java)
                 startActivity(dodaj)
             }
             R.id.Menu_Wyloguj -> {
@@ -88,13 +86,13 @@ class Profil : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListe
         circularProgressDrawable.centerRadius = 30f
         circularProgressDrawable.start()
         
+
+
+
         Glide.with(this)
-            .load("${user.avatarPhotoURL}")
-            .apply(
-                RequestOptions()
-                .placeholder(circularProgressDrawable)
-            )
+            .load("https://firebasestorage.googleapis.com/v0/b/hoodworks-6948c.appspot.com/o/Images%2F1596110855207?alt=media&token=234135ad-de87-44bc-9def-6da8bd65fa06")
             .into(img4ZdjProf)
+        
 
         tx4Imie.text = user.imie
         ratingBar4.rating = user.rating.toFloat()
@@ -160,6 +158,10 @@ class Profil : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListe
         }
 
     }
+}
+
+private fun ImageView.setImageDrawable(photoUrl: Uri) {
+
 }
 
 

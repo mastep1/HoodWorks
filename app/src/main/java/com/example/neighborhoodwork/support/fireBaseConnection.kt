@@ -22,10 +22,6 @@ import com.google.firebase.database.FirebaseDatabase
 
         //user!!.reauthenticate(credential).addOnCompleteListener {
             user!!.updateEmail("$newemail")
-
-
-
-
        // }
            /* .addOnCompleteListener(object : OnCompleteListener<Void?>() {
                 fun onComplete(task: Task<Void?>) {

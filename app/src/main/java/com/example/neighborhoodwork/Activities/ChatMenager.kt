@@ -1,6 +1,5 @@
 package com.example.neighborhoodwork.Activities
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
@@ -8,18 +7,14 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.neighborhoodwor.ZadanieModel
 import com.example.neighborhoodwork.Adapters.ChatMenagerAdapter
-import com.example.neighborhoodwork.Adapters.ChatViewAdapter
 import com.example.neighborhoodwork.Adapters.OnSelectConConversation
-import com.example.neighborhoodwork.Models.MessageModel
 import com.example.neighborhoodwork.R
 import com.example.neighborhoodwork.support.*
 import com.firebase.ui.auth.AuthUI
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_chat.*
-import kotlinx.android.synthetic.main.chat_view.*
 
 class ChatMenager : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, OnSelectConConversation{
 
@@ -111,7 +106,7 @@ class ChatMenager : AppCompatActivity(), NavigationView.OnNavigationItemSelected
                 )
             }
             R.id.Menu_Dodaj_Zlecenie -> {
-                val dodaj = Intent(applicationContext, DodajZlecenie::class.java)
+                val dodaj = Intent(applicationContext, DodajZlecenieR::class.java)
                 startActivity(dodaj)
             }
             R.id.Menu_Wyloguj -> {

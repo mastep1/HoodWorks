@@ -16,6 +16,7 @@ import com.example.neighborhoodwork.Adapters.OnSelectConConversationV
 import com.example.neighborhoodwork.Models.MessageModel
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.auth.ActionCodeSettings
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.*
 import com.google.firebase.storage.FirebaseStorage
@@ -95,6 +96,7 @@ class MyService : Service(), OnSelectConConversation, OnSelectConConversationV {
                 user.email = currentUser.email.toString()
                 if(!currentUser.isEmailVerified){
                     Toast.makeText(applicationContext, "Zweryfikuj swoje konto e-mail ${currentUser.email}", Toast.LENGTH_LONG).show()
+                    dane.currentUser.sendEmailVerification(ActionCodeSettings.zza())
                 }
             }
             if(currentUser.phoneNumber != null)
