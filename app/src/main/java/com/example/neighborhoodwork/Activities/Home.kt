@@ -91,7 +91,6 @@ class Home : AppCompatActivity(), OnMapReadyCallback, NavigationView.OnNavigatio
 
 
         setOnClickListner()
-
     }
 
 
@@ -207,52 +206,18 @@ class Home : AppCompatActivity(), OnMapReadyCallback, NavigationView.OnNavigatio
 
     }
 
-    private val mLocationCallback = object : LocationCallback() {
-        override fun onLocationResult(locationResult: LocationResult) {
-            // do work here
-            locationResult.lastLocation
-            onLocationChanged(locationResult.lastLocation)
-        }
-    }
-
-    fun onLocationChanged(location: Location) {
-
-        if (location != null) {
-            var lokalizacjaDoZapisania = LatLng( location.latitude, location.longitude)
-            dane.lokalizacjaAktualna = lokalizacjaDoZapisania
-            dodajLok(googleMapForLocation)
-        }
-
-    }
-
     protected fun startLocationUpdates() {
 
-        mLocationRequest = LocationRequest()
-        mLocationRequest!!.priority = LocationRequest.PRIORITY_HIGH_ACCURACY
-        mLocationRequest!!.setInterval(INTERVAL)
-        mLocationRequest!!.setFastestInterval(FASTEST_INTERVAL)
-
-        val builder = LocationSettingsRequest.Builder()
-        builder.addLocationRequest(mLocationRequest!!)
-        val locationSettingsRequest = builder.build()
-
-        val settingsClient = LocationServices.getSettingsClient(this)
-        settingsClient.checkLocationSettings(locationSettingsRequest)
-
-        mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
 
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
             ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
 
             return
+        }else{
+            autoLokalizacja(dane.googleMap)
         }
-        mFusedLocationProviderClient!!.requestLocationUpdates(mLocationRequest, mLocationCallback,
-            Looper.myLooper())
     }
 
-    private fun stoplocationUpdates() {
-        mFusedLocationProviderClient!!.removeLocationUpdates(mLocationCallback)
-    }
 
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -309,20 +274,19 @@ class Home : AppCompatActivity(), OnMapReadyCallback, NavigationView.OnNavigatio
         }
     }
 
-    fun dodajLok(googleMap: GoogleMap){
-        stoplocationUpdates()
+    fun autoLokalizacja(googleMap: GoogleMap){
 
-        if(dodanoLokalizacje)
-        { locationMarker.remove()}
+        googleMap!!.isMyLocationEnabled = true
+        googleMap!!.setOnMyLocationChangeListener { location ->
 
-
-        locationMarker = googleMap.addMarker(MarkerOptions().position(dane.lokalizacjaAktualna).icon(BitmapDescriptorFactory.fromResource(
-            R.drawable.marker
-        )))
-        locationMarker.snippet = "737F"
-        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(dane.lokalizacjaAktualna, 16f))
-
-        dodanoLokalizacje = true
+            val ltlng = LatLng(location.latitude, location.longitude)
+            val cameraUpdate = CameraUpdateFactory.newLatLngZoom(
+                ltlng, 15f
+            )
+            googleMap!!.animateCamera(cameraUpdate)
+            var lokalizacjaDoZapisania = LatLng( location.latitude, location.longitude)
+            dane.lokalizacjaAktualna = lokalizacjaDoZapisania
+        }
 
     }
 

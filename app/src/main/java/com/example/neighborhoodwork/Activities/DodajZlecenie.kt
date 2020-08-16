@@ -4,17 +4,9 @@ package com.example.neighborhoodwork.Activities
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ShareCompat
 import com.example.neighborhoodwork.Fragments.AddTaskMap
 import com.example.neighborhoodwork.R
 import com.example.neighborhoodwork.support.dane
-import com.google.android.gms.common.GooglePlayServicesNotAvailableException
-import com.google.android.gms.common.GooglePlayServicesRepairableException
-import com.google.android.gms.common.api.PendingResult
-import com.google.android.gms.location.places.Place
-import com.google.android.gms.location.places.PlaceBuffer
-import com.google.android.gms.location.places.Places
-import com.google.android.gms.location.places.ui.PlacePicker
 import kotlinx.android.synthetic.main.dodaj_zlecenie.*
 
 
@@ -29,7 +21,7 @@ class DodajZlecenie : AppCompatActivity() {
         img18DotOne.setColorFilter(R.color.fuckingblack)
         dane.addTask = 1
 
-        var addTaskMap = AddTaskMap()
+        var addTaskMap = AddTaskMap(this)
         fragOfTheMap.beginTransaction().add(R.id.l18ForFragment, addTaskMap).commit()
 
         setBottomDot()

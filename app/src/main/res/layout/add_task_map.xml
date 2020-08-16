@@ -35,7 +35,7 @@
         android:textColor="#000000"
         android:textSize="16sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/rL19"
+        app:layout_constraintBottom_toTopOf="@+id/img19Search"
         app:layout_constraintStart_toStartOf="@+id/img19Location" />
 
     <ImageView
@@ -120,15 +120,18 @@
         android:id="@+id/rL19"
         android:layout_width="0dp"
         android:layout_height="50dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginEnd="30dp"
         android:elevation="10dp"
-        app:layout_constraintBottom_toTopOf="@+id/tx19Home"
+        android:foregroundGravity="left"
+        android:gravity="left"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="@+id/img19Search"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/img19Location">
+        app:layout_constraintStart_toEndOf="@+id/img19Search"
+        app:layout_constraintTop_toTopOf="@+id/img19Search">
 
         <AutoCompleteTextView
-            android:id="@+id/tx19Seachr"
+            android:id="@+id/Etx19Search"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_centerVertical="true"
@@ -140,4 +143,15 @@
 
 
     </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/img19Search"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:clickable="true"
+        android:cropToPadding="false"
+        app:layout_constraintBottom_toTopOf="@+id/img19Home"
+        app:layout_constraintStart_toStartOf="@+id/img19Location"
+        app:srcCompat="@drawable/search" />
 </androidx.constraintlayout.widget.ConstraintLayout>
