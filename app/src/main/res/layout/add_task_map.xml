@@ -12,7 +12,7 @@
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginBottom="40dp"
+        android:layout_marginBottom="5dp"
         app:layout_constraintBottom_toTopOf="@+id/tx19Hello"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -31,6 +31,7 @@
         android:id="@+id/tx19WhereAddTask"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="2dp"
         android:text="Gdzie chcesz aby wykonano zadanie?"
         android:textColor="#000000"
         android:textSize="16sp"
@@ -108,13 +109,13 @@
         android:id="@+id/divider19Top"
         android:layout_width="0dp"
         android:layout_height="3dp"
-        android:layout_marginStart="140dp"
-        android:layout_marginEnd="140dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="5dp"
         android:background="#706F6F"
-        app:layout_constraintBottom_toTopOf="@+id/tx19Hello"
+        app:layout_constraintBottom_toTopOf="@+id/tx19Home"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mapView19" />
+        app:layout_constraintStart_toStartOf="@+id/img19Search"
+        app:layout_constraintTop_toBottomOf="@+id/rL19" />
 
     <RelativeLayout
         android:id="@+id/rL19"
@@ -148,7 +149,6 @@
         android:id="@+id/img19Search"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="5dp"
         android:clickable="true"
         android:cropToPadding="false"
         app:layout_constraintBottom_toTopOf="@+id/img19Home"

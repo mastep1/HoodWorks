@@ -93,7 +93,6 @@ class Home : AppCompatActivity(), OnMapReadyCallback, NavigationView.OnNavigatio
         setOnClickListner()
     }
 
-
     override fun onResume() {
         super.onResume()
 

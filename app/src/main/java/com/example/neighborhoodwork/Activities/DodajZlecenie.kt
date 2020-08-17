@@ -1,12 +1,24 @@
 package com.example.neighborhoodwork.Activities
 
 
+import android.R.attr.apiKey
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.neighborhoodwork.Fragments.AddTaskMap
 import com.example.neighborhoodwork.R
 import com.example.neighborhoodwork.support.dane
+import com.google.android.gms.common.api.ApiException
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.libraries.places.api.Places
+import com.google.android.libraries.places.api.model.AutocompleteSessionToken
+import com.google.android.libraries.places.api.model.RectangularBounds
+import com.google.android.libraries.places.api.model.TypeFilter
+import com.google.android.libraries.places.api.net.FindAutocompletePredictionsRequest
+import com.google.android.libraries.places.api.net.FindAutocompletePredictionsResponse
+import kotlinx.android.synthetic.main.add_task_map.*
 import kotlinx.android.synthetic.main.dodaj_zlecenie.*
 
 
@@ -25,9 +37,6 @@ class DodajZlecenie : AppCompatActivity() {
         fragOfTheMap.beginTransaction().add(R.id.l18ForFragment, addTaskMap).commit()
 
         setBottomDot()
-
-
-
 
 
     }
@@ -78,9 +87,14 @@ class DodajZlecenie : AppCompatActivity() {
             }
             dane.addTask = dane.addTask - 1
         }
+
+
+
+    
     }
 
     
 }
+
 
 
