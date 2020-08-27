@@ -15,8 +15,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".Activities.re"></activity>
-        <activity android:name=".Activities.DodajZlecenie"></activity>
+        <activity android:name=".Activities.ConfirmNewTask"></activity>
+        <activity android:name=".Activities.DodajZlecenie" />
         <activity android:name=".Activities.SamouczekAvater" />
         <activity android:name=".Activities.ChatView" />
         <activity android:name=".Activities.EditProfil" />
@@ -29,7 +29,7 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyAdvyos83thw11LPSWKl44nI8csYVCrt50" />
 
-        <activity android:name=".Activities.Home"></activity>
+        <activity android:name=".Activities.Home" />
         <activity android:name=".Activities.Loguj" />
         <activity android:name=".Activities.MainActivity">
             <intent-filter>

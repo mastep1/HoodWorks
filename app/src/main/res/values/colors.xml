@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#6200EE</color>
-    <color name="colorPrimaryDark">#3700B3</color>
-    <color name="colorAccent">#03DAC5</color>
+    <color name="colorPrimary">#6900FF</color>
+    <color name="colorPrimaryDark">#00DDFF</color>
+    <color name="colorAccent">#00FFE6</color>
     <color name="fontColorMe">#5000FF</color>
     <color name="fontColorOther">#FC6C00</color>
     <color name="fuckingblack">#000000</color>

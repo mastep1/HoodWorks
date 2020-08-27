@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/l21"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Fragments.AddTaskCategory">
+
+    <TextView
+        android:id="@+id/tx21SelectCategory"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="55dp"
+        android:layout_marginEnd="55dp"
+        android:drawableEnd="@drawable/arrow_bottom"
+        android:drawablePadding="7dp"
+        android:includeFontPadding="false"
+        android:minEms="9"
+        android:paddingStart="15dp"
+        android:paddingLeft="15dp"
+        android:paddingTop="3dp"
+        android:paddingEnd="10dp"
+        android:paddingBottom="3dp"
+        android:shadowColor="#FF6D00"
+        android:text="Wybierz Kategorię"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/img21Main" />
+
+    <LinearLayout
+        android:id="@+id/l21WalkWithDog"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:orientation="horizontal"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="@+id/tx21SelectCategory"
+        app:layout_constraintStart_toStartOf="@+id/tx21SelectCategory"
+        app:layout_constraintTop_toBottomOf="@+id/tx21SelectCategory">
+
+        <TextView
+            android:id="@+id/tx21WalkWithDog"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Spacer z psem"
+            android:textColor="#D9000000"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:visibility="visible" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/l21Cleaning"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:orientation="horizontal"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="@+id/tx21SelectCategory"
+        app:layout_constraintStart_toStartOf="@+id/tx21SelectCategory"
+        app:layout_constraintTop_toBottomOf="@+id/l21WalkWithDog">
+
+        <TextView
+            android:id="@+id/tx21Cleaning"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Pomoc przy sprzątaniu"
+            android:textColor="#D9000000"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:visibility="visible" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/l21Garden"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:orientation="horizontal"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="@+id/tx21SelectCategory"
+        app:layout_constraintStart_toStartOf="@+id/tx21SelectCategory"
+        app:layout_constraintTop_toBottomOf="@+id/l21Cleaning">
+
+        <TextView
+            android:id="@+id/tx21Garden"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Pomoc w ogrodzie"
+            android:textColor="#D9000000"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:visibility="visible" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/l21Shopping"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:orientation="horizontal"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="@+id/tx21SelectCategory"
+        app:layout_constraintStart_toStartOf="@+id/tx21SelectCategory"
+        app:layout_constraintTop_toBottomOf="@+id/l21Garden">
+
+        <TextView
+            android:id="@+id/tx21Shopping"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Zrobienie zakópów"
+            android:textColor="#D9000000"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:visibility="visible" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/l21PhysicalWorks"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:orientation="horizontal"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="@+id/tx21SelectCategory"
+        app:layout_constraintStart_toStartOf="@+id/tx21SelectCategory"
+        app:layout_constraintTop_toBottomOf="@+id/l21Shopping">
+
+        <TextView
+            android:id="@+id/tx21PhysicalWorks"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Prace fizyczne"
+            android:textColor="#D9000000"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:visibility="visible" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/l21Other"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:orientation="horizontal"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="@+id/tx21SelectCategory"
+        app:layout_constraintStart_toStartOf="@+id/tx21SelectCategory"
+        app:layout_constraintTop_toBottomOf="@+id/l21PhysicalWorks">
+
+        <TextView
+            android:id="@+id/tx21Other"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Inne"
+            android:textColor="#D9000000"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:visibility="visible" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/img21Main"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:src="@drawable/b"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

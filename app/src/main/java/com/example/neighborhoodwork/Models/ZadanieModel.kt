@@ -6,7 +6,7 @@ import java.sql.Time
 
 
 @IgnoreExtraProperties
-data  class ZadanieModel (
+data class ZadanieModel (
     var x : String = "52.184549",
     var y : String = "20.838927",
     var opis : String = "Pieś jest bardzo niebezpieczny. Poszukiwana bardzo kompetentna osoba." +

@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/l23"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center|center_horizontal|fill_horizontal"
+    android:foregroundGravity="center_vertical|center|center_horizontal"
+    android:textAlignment="gravity"
+    app:layout_anchorGravity="center|center_horizontal|center_vertical"
+    tools:context=".Fragments.AddTaskDescription">
+
+    <View
+        android:id="@+id/divider23_2"
+        android:layout_width="0dp"
+        android:layout_height="3dp"
+        android:layout_marginTop="10dp"
+        android:background="#FF6D00"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/img23PlusMonay" />
+
+    <ImageView
+        android:id="@+id/img23Main"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:src="@drawable/c"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/c" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/CV23Description"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        app:cardCornerRadius="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/img23Main">
+
+        <EditText
+            android:id="@+id/Etx23Description"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:ems="10"
+            android:hint="Tutaj napisz opis zlecenia"
+            android:inputType="textMultiLine"
+            android:maxLines="3"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp" />
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/tx23Tags"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:text="500 znaków pozostało"
+        app:layout_constraintStart_toStartOf="@+id/CV23Description"
+        app:layout_constraintTop_toBottomOf="@+id/CV23Description" />
+
+    <ImageView
+        android:id="@+id/img23PlusMonay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:padding="5dp"
+        android:src="@drawable/plus"
+        android:tint="#00C853"
+        app:layout_constraintEnd_toStartOf="@+id/Etx23Monay"
+        app:layout_constraintTop_toBottomOf="@+id/tx23SelectSalary" />
+
+    <ImageView
+        android:id="@+id/img23MinusMonay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:src="@drawable/minus"
+        android:tint="#FF0000"
+        app:layout_constraintStart_toEndOf="@+id/Etx23Monay"
+        app:layout_constraintTop_toTopOf="@+id/img23PlusMonay" />
+
+    <TextView
+        android:id="@+id/Etx23Monay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="4"
+        android:hint="20 zł"
+        android:inputType="number"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/img23PlusMonay"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/img23PlusMonay" />
+
+    <ImageView
+        android:id="@+id/img23PlusLength"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:padding="5dp"
+        android:src="@drawable/plus"
+        android:tint="#00C853"
+        app:layout_constraintEnd_toStartOf="@+id/Etx23Length"
+        app:layout_constraintTop_toBottomOf="@+id/tx23SetLength" />
+
+    <TextView
+        android:id="@+id/Etx23Length"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="4"
+        android:hint="20 min"
+        android:inputType="number"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/img23PlusLength"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/img23PlusLength" />
+
+    <ImageView
+        android:id="@+id/img23MinusLength"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:src="@drawable/minus"
+        android:tint="#FF0000"
+        app:layout_constraintStart_toEndOf="@+id/Etx23Length"
+        app:layout_constraintTop_toTopOf="@+id/img23PlusLength" />
+
+    <View
+        android:id="@+id/divider23_1"
+        android:layout_width="0dp"
+        android:layout_height="3dp"
+        android:layout_marginTop="10dp"
+        android:background="#FF6D00"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tx23Tags" />
+
+    <TextView
+        android:id="@+id/tx23SelectSalary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Wybierz wynagrodzenie"
+        android:textColor="#FFAB00"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/divider23_1" />
+
+    <TextView
+        android:id="@+id/tx23SetLength"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Określ czas potrzebny do wykonania zlecenia"
+        android:textAlignment="center"
+        android:textColor="#0091EA"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/divider23_2" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -4,6 +4,8 @@ import android.content.Context
 import android.location.Address
 import android.location.Geocoder
 import android.os.Bundle
+import android.os.Parcel
+import android.os.Parcelable
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.LayoutInflater
@@ -13,6 +15,7 @@ import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.neighborhoodwork.R
+import com.example.neighborhoodwork.support.dane
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -31,20 +34,15 @@ import java.io.IOException
 import java.util.*
 
 
-class AddTaskMap(context2 : Context) : Fragment(),
-    OnMapReadyCallback {
+class AddTaskMap(context2 : Context) : Fragment(), OnMapReadyCallback {
     private var mMap: GoogleMap? = null
     var context3 = context2
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
-
-
-
-
         val view: View = inflater.inflate(R.layout.add_task_map, container, false)
         
         val mapFragment = childFragmentManager.findFragmentById(R.id.mapView19) as SupportMapFragment?
@@ -56,8 +54,9 @@ class AddTaskMap(context2 : Context) : Fragment(),
     }
 
     private fun getAddress(latLng: LatLng): String {
-        val geocoder: Geocoder
-        val addresses: List<Address>
+
+        var geocoder: Geocoder
+        var addresses: List<Address>
         geocoder = Geocoder(context3, Locale.getDefault())
         return try {
             addresses = geocoder.getFromLocation(
@@ -82,19 +81,29 @@ class AddTaskMap(context2 : Context) : Fragment(),
         }
     }
 
-
-
     override fun onMapReady(googleMap: GoogleMap) {
+        var afterUpadate = false
         mMap = googleMap
         mMap!!.isMyLocationEnabled = true
         mMap!!.setOnMyLocationChangeListener { location ->
-            val ltlng =
-                LatLng(location.latitude, location.longitude)
-            val cameraUpdate = CameraUpdateFactory.newLatLngZoom(
-                ltlng, 15f
-            )
-            mMap!!.animateCamera(cameraUpdate)
+            val ltlng = LatLng(location.latitude, location.longitude)
+            if(afterUpadate == false){
+                val cameraUpdate = CameraUpdateFactory.newLatLngZoom(
+                    ltlng, 15f
+                )
+                mMap!!.animateCamera(cameraUpdate)
+                afterUpadate = true
+            }
             tx19LocationAdress.text = getAddress(ltlng)
+        }
+
+        if(dane.newTask.x != "taklubnie"){
+            var lateLatLng = LatLng(dane.newTask.x.toDouble(), dane.newTask.y.toDouble())
+            var markerOptionsLate = MarkerOptions()
+            markerOptionsLate.position(lateLatLng)
+            markerOptionsLate.title(getAddress(lateLatLng))
+            mMap!!.clear()
+            googleMap.addMarker(markerOptionsLate)
         }
 
         mMap!!.setOnMapClickListener { latLng ->
@@ -102,13 +111,13 @@ class AddTaskMap(context2 : Context) : Fragment(),
             markerOptions.position(latLng)
             markerOptions.title(getAddress(latLng))
             mMap!!.clear()
-            val location = CameraUpdateFactory.newLatLngZoom(
-                latLng, 15f
-            )
+            val location = CameraUpdateFactory.newLatLngZoom(latLng, 15f)
+
             mMap!!.animateCamera(location)
             mMap!!.addMarker(markerOptions)
             Etx19Search.setText(getAddress(latLng))
-
+            dane.newTask.x = "${latLng.latitude}"
+            dane.newTask.y = "${latLng.longitude}"
         }
         Etx19Search.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(p0: Editable?) {
@@ -124,6 +133,7 @@ class AddTaskMap(context2 : Context) : Fragment(),
     }
 
     fun returnIdeas(string : String){
+
         Places.initialize(context3, "AIzaSyAdvyos83thw11LPSWKl44nI8csYVCrt50")
         val placesClient = Places.createClient(context3)
 
@@ -150,8 +160,8 @@ class AddTaskMap(context2 : Context) : Fragment(),
             }
 
     }
+
     private fun setAdapter(string: String) {
-        Toast.makeText(context3, string, Toast.LENGTH_SHORT).show()
         if(string==null){
 
         }else{

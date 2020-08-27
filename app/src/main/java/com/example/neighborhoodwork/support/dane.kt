@@ -35,7 +35,19 @@ object dane {
     lateinit var UriBuffer : Uri
     lateinit var superImage : ImageView
     var addTask = 1
+    var newTask = ZadanieModel("taklubnie", "taklubnie", "","","taklubnie","","taklubnie", "taklubnie", "","")
+    var blockAddingUnit = false
     }
+
+object time{
+    var timeSet = false
+    var dateSet = false
+    var min = 0
+    var hour = 0
+    var dayMonthYear = 0.toLong()
+}
+
+
 
 
 object user {
