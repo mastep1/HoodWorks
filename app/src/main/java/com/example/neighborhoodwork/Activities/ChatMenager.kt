@@ -106,7 +106,7 @@ class ChatMenager : AppCompatActivity(), NavigationView.OnNavigationItemSelected
                 )
             }
             R.id.Menu_Dodaj_Zlecenie -> {
-                val dodaj = Intent(applicationContext, DodajZlecenieR::class.java)
+                val dodaj = Intent(applicationContext, DodajZlecenie::class.java)
                 startActivity(dodaj)
             }
             R.id.Menu_Wyloguj -> {

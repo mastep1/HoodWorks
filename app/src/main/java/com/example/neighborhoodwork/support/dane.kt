@@ -7,6 +7,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.neighborhoodwor.ZadanieModel
 import com.example.neighborhoodwork.Models.MessageModel
+import com.example.neighborhoodwork.Models.UserHome
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.LatLng
 import com.google.firebase.auth.FirebaseUser
@@ -36,7 +37,7 @@ object dane {
     lateinit var superImage : ImageView
     var addTask = 1
     var newTask = ZadanieModel("taklubnie", "taklubnie", "","","taklubnie","","taklubnie", "taklubnie", "","")
-    var blockAddingUnit = false
+    var arrayForAdapter = arrayListOf<String>()
     }
 
 object time{
@@ -61,6 +62,7 @@ object user {
     var dislike : Int = 0
     var opis = "otoopis"
     var avatarPhotoURL = "URL"
+    var home = UserHome(LatLng(0.0,0.0), "", 0)
 }
 
 object SQL_BD_CONTACT{

@@ -20,10 +20,7 @@ import androidx.core.view.GravityCompat
 import com.example.neighborhoodwork.Adapters.InfoWindowAdapter
 import com.example.neighborhoodwork.Fragments.BigInfoWindow
 import com.example.neighborhoodwork.R
-import com.example.neighborhoodwork.support.MyService
-import com.example.neighborhoodwork.support.dane
-import com.example.neighborhoodwork.support.setCurrentActivity
-import com.example.neighborhoodwork.support.znaczniki
+import com.example.neighborhoodwork.support.*
 import com.firebase.ui.auth.AuthUI
 import com.google.android.gms.location.*
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -258,6 +255,10 @@ class Home : AppCompatActivity(), OnMapReadyCallback, NavigationView.OnNavigatio
             // }
 
         })
+         img2Filter.setOnClickListener {
+             Toast.makeText(applicationContext, "${user.home}", Toast.LENGTH_LONG).show()
+         }
+
 
     }
 

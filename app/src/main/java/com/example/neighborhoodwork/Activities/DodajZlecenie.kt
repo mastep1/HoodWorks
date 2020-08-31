@@ -20,12 +20,14 @@ class DodajZlecenie : AppCompatActivity() {
     var fragOfTheCategory = supportFragmentManager
     var fragOfTheTime = supportFragmentManager
     var fragOfTheDesciption = supportFragmentManager
+    var fragOfTheMoney = supportFragmentManager
 
     var addTaskMap = AddTaskMap(this)
     var addTaskTitle = AddTaskTitle(this)
     var addTaskCategory = AddTaskCategory()
     var addTaskTime = AddTaskTime()
     var addTaskDescrption = AddTaskDescription()
+    var addTaskMoney = AddTaskMoney()
 
     public override fun onCreate(savedInstanceState: Bundle?){
         super.onCreate(savedInstanceState)
@@ -73,10 +75,17 @@ class DodajZlecenie : AppCompatActivity() {
                 }
 
                 5 -> {
+                    dane.newTask.opis = Etx23Description.text.toString()
+                    img18DotFour.clearColorFilter()
+                    img18DotFive.setColorFilter(R.color.fuckingblack)
+                    fragOfTheDesciption.beginTransaction().remove(addTaskDescrption).commit()
+                    fragOfTheMoney.beginTransaction().add(R.id.l18ForFragment, addTaskMoney).commit()
+                }
+
+                6 ->{
                     val timestamp = System.currentTimeMillis()
                     dane.newTask.ID = "${dane.currentUser.providerId}$timestamp"
                     dane.newTask.pracodawca = dane.currentUser.displayName.toString()
-                    dane.newTask.opis = Etx23Description.text.toString()
                     var intent = Intent(this, ConfirmNewTask::class.java)
                     startActivity(intent)
                     finish()
@@ -87,29 +96,44 @@ class DodajZlecenie : AppCompatActivity() {
 
         img18LeftArrow.setOnClickListener {
 
-            when(dane.addTask){
+            when(dane.addTask) {
 
-                2 ->  { img18DotTwo.clearColorFilter()
+                2 -> {
+                    img18DotTwo.clearColorFilter()
                     img18DotOne.setColorFilter(R.color.fuckingblack)
                     fragOfTheMap.beginTransaction().add(R.id.l18ForFragment, addTaskMap).commit()
-                    fragOfTheTitle.beginTransaction().remove(addTaskTitle).commit()}
+                    fragOfTheTitle.beginTransaction().remove(addTaskTitle).commit()
+                }
 
-                3 ->  { img18DotThree.clearColorFilter()
+                3 -> {
+                    img18DotThree.clearColorFilter()
                     img18DotTwo.setColorFilter(R.color.fuckingblack)
-                    fragOfTheTitle.beginTransaction().add(R.id.l18ForFragment, addTaskTitle).commit()
-                    fragOfTheCategory.beginTransaction().remove(addTaskCategory).commit()}
+                    fragOfTheTitle.beginTransaction().add(R.id.l18ForFragment, addTaskTitle)
+                        .commit()
+                    fragOfTheCategory.beginTransaction().remove(addTaskCategory).commit()
+                }
 
-                4 ->  { img18DotFour.clearColorFilter()
+                4 -> {
+                    img18DotFour.clearColorFilter()
                     img18DotThree.setColorFilter(R.color.fuckingblack)
-                    fragOfTheCategory.beginTransaction().add(R.id.l18ForFragment, addTaskCategory).commit()
+                    fragOfTheCategory.beginTransaction().add(R.id.l18ForFragment, addTaskCategory)
+                        .commit()
                     fragOfTheTime.beginTransaction().remove(addTaskTime).commit()
                 }
 
-                5 -> { img18DotFive.clearColorFilter()
+                5 -> {
+                    img18DotFive.clearColorFilter()
                     img18DotFour.setColorFilter(R.color.fuckingblack)
                     fragOfTheDesciption.beginTransaction().remove(addTaskDescrption).commit()
-                    fragOfTheCategory.beginTransaction().add(R.id.l18ForFragment, addTaskTime).commit()}
-                 }
+                    fragOfTheCategory.beginTransaction().add(R.id.l18ForFragment, addTaskTime)
+                        .commit()
+                }
+
+                6 -> {
+                    fragOfTheMoney.beginTransaction().remove(addTaskMoney).commit()
+                    fragOfTheDesciption.beginTransaction().add(R.id.l18ForFragment, addTaskDescrption).commit()
+                }
+            }
             dane.addTask = dane.addTask - 1
         }
 

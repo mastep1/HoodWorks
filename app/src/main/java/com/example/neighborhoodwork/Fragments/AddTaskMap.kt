@@ -4,8 +4,6 @@ import android.content.Context
 import android.location.Address
 import android.location.Geocoder
 import android.os.Bundle
-import android.os.Parcel
-import android.os.Parcelable
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.LayoutInflater
@@ -16,6 +14,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.neighborhoodwork.R
 import com.example.neighborhoodwork.support.dane
+import com.example.neighborhoodwork.support.user
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -53,7 +52,19 @@ class AddTaskMap(context2 : Context) : Fragment(), OnMapReadyCallback {
         return view
     }
 
-    private fun getAddress(latLng: LatLng): String {
+
+    override fun onResume() {
+        super.onResume()
+
+        if(user.home.type == 0){
+            tx19HomeAdress.text = "Nie podano adresu"
+        };else{
+            tx19HomeAdress.text = user.home.address
+        }
+
+    }
+
+    fun getAddress(latLng: LatLng): String {
 
         var geocoder: Geocoder
         var addresses: List<Address>
@@ -72,13 +83,36 @@ class AddTaskMap(context2 : Context) : Fragment(), OnMapReadyCallback {
             val country = addresses[0].countryName
 
 
-            var toReturn = address.removeSuffix(", Polska")
+            var toReturn = address.removeSuffix(", $postalCode, Polska")
+
 
             return  toReturn
         } catch (e: IOException) {
             e.printStackTrace()
             "No Address Found"
         }
+    }
+
+    fun getLatLngFromAddress(context: Context, strAddress: String): LatLng? {
+
+        val coder = Geocoder(context)
+        val address: List<Address>
+        var p1: LatLng? = null
+
+       try {
+            address = coder.getFromLocationName(strAddress, 1)
+            if (address == null) {
+                return null
+            }
+           if(address.isNotEmpty()){
+               val location = address[0]
+               p1 = LatLng(location.latitude, location.longitude)
+           }
+
+
+        }  catch (ex: IOException) {
+        }
+        return p1
     }
 
     override fun onMapReady(googleMap: GoogleMap) {
@@ -98,27 +132,31 @@ class AddTaskMap(context2 : Context) : Fragment(), OnMapReadyCallback {
         }
 
         if(dane.newTask.x != "taklubnie"){
+            afterUpadate = true
             var lateLatLng = LatLng(dane.newTask.x.toDouble(), dane.newTask.y.toDouble())
             var markerOptionsLate = MarkerOptions()
             markerOptionsLate.position(lateLatLng)
             markerOptionsLate.title(getAddress(lateLatLng))
+
             mMap!!.clear()
             googleMap.addMarker(markerOptionsLate)
+            
+            val cameraUpdate = CameraUpdateFactory.newLatLngZoom(lateLatLng, 15f)
+            mMap!!.animateCamera(cameraUpdate)
         }
 
         mMap!!.setOnMapClickListener { latLng ->
-            val markerOptions = MarkerOptions()
-            markerOptions.position(latLng)
-            markerOptions.title(getAddress(latLng))
-            mMap!!.clear()
-            val location = CameraUpdateFactory.newLatLngZoom(latLng, 15f)
+            addNewPlace(latLng, mMap!!, true)
 
-            mMap!!.animateCamera(location)
-            mMap!!.addMarker(markerOptions)
-            Etx19Search.setText(getAddress(latLng))
-            dane.newTask.x = "${latLng.latitude}"
-            dane.newTask.y = "${latLng.longitude}"
         }
+
+        Etx19Search.setOnItemClickListener { parent, view, position, id ->
+
+            var laglng = getLatLngFromAddress(context3, dane.arrayForAdapter[position])
+            addNewPlace(laglng!!, googleMap, false)
+    }
+        
+        
         Etx19Search.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(p0: Editable?) {
                 returnIdeas(p0.toString())
@@ -130,6 +168,59 @@ class AddTaskMap(context2 : Context) : Fragment(), OnMapReadyCallback {
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
             }
         })
+
+        BT19Search.setOnClickListener {
+            if(Etx19Search.text.toString() != ""){
+                var addressSearch = getLatLngFromAddress(context3, Etx19Search.text.toString())
+                if (addressSearch != null) {
+                    addNewPlace(addressSearch, googleMap, false)
+                } else {
+                    Toast.makeText(context3, "Nie znaleziono lokalizacji", Toast.LENGTH_LONG).show()
+                }
+            }
+        }
+
+        l19UserLocation.setOnClickListener {
+            var newPlaceLatLng = getLatLngFromAddress(context3, tx19LocationAdress.text.toString())
+
+            if (newPlaceLatLng != null) {
+                addNewPlace(newPlaceLatLng, googleMap, true)
+            }
+        }
+
+
+        l19Home.setOnClickListener {
+
+            if(user.home.type != 0){
+                var newPlaceLatLng = getLatLngFromAddress(context3, user.home.address)
+
+                if (newPlaceLatLng != null) {
+                    addNewPlace(newPlaceLatLng, googleMap, true)
+                }
+            }else{
+                Toast.makeText(context3, "Najpierw ustaw adres w edycji swojego profilu", Toast.LENGTH_LONG).show()
+            }
+
+        }
+    }
+
+    fun addNewPlace(latLng : LatLng, googleMapTask: GoogleMap, searchView : Boolean) {
+
+        val markerOptions = MarkerOptions()
+        markerOptions.position(latLng)
+        googleMapTask!!.clear()
+        val location = CameraUpdateFactory.newLatLngZoom(latLng, 15f)
+
+        if(searchView){
+            Etx19Search.setText(getAddress(latLng))
+        }
+
+
+
+        googleMapTask!!.animateCamera(location)
+        googleMapTask!!.addMarker(markerOptions)
+        dane.newTask.x = "${latLng.latitude}"
+        dane.newTask.y = "${latLng.longitude}"
     }
 
     fun returnIdeas(string : String){
@@ -148,25 +239,27 @@ class AddTaskMap(context2 : Context) : Fragment(), OnMapReadyCallback {
             .setQuery(query)
             .build()
 
-        placesClient.findAutocompletePredictions(request)
-            .addOnSuccessListener { response: FindAutocompletePredictionsResponse ->
+        placesClient.findAutocompletePredictions(request).addOnSuccessListener { response: FindAutocompletePredictionsResponse ->
+        dane.arrayForAdapter.clear()
                 for (prediction in response.autocompletePredictions) {
-                    setAdapter(prediction.getPrimaryText(null).toString())
+                  dane.arrayForAdapter.add(prediction.getPrimaryText(null).toString())
+
                 }
+            setAdapter(dane.arrayForAdapter)
             }.addOnFailureListener { exception: Exception? ->
+            var arrayForAdapterFailed = arrayListOf<String>()
                 if (exception is ApiException) {
-                    setAdapter("null")
+                    setAdapter(arrayForAdapterFailed)
                 }
             }
 
     }
 
-    private fun setAdapter(string: String) {
-        if(string==null){
+    private fun setAdapter(array: ArrayList<String>) {
+        if(array.size==0){
 
         }else{
-            var listOfAdresses = listOf<String>(string)
-            var adapter = ArrayAdapter(context3, R.layout.support_simple_spinner_dropdown_item ,listOfAdresses)
+            var adapter = ArrayAdapter(context3, R.layout.support_simple_spinner_dropdown_item, array)
             Etx19Search.setAdapter(adapter)
         }
 
@@ -174,11 +267,7 @@ class AddTaskMap(context2 : Context) : Fragment(), OnMapReadyCallback {
     }
 
 
-    
-    companion object {
-        private const val PLACE_PICKER_REQUEST = 999
-        private const val LOCATION_REQUEST_CODE = 23
-    }
+
 
 }
 

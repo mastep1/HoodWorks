@@ -62,7 +62,7 @@ class Profil : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListe
                 )
             }
             R.id.Menu_Dodaj_Zlecenie -> {
-                val dodaj = Intent(applicationContext, DodajZlecenieR::class.java)
+                val dodaj = Intent(applicationContext, DodajZlecenie::class.java)
                 startActivity(dodaj)
             }
             R.id.Menu_Wyloguj -> {
@@ -160,8 +160,6 @@ class Profil : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListe
     }
 }
 
-private fun ImageView.setImageDrawable(photoUrl: Uri) {
 
-}
 
 

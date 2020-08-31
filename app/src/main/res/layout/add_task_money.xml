@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/l24"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Fragments.AddTaskMoney">
+
+
+    <ImageView
+        android:id="@+id/img24Main"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/d"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tx24SelectSalary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="Ustaw Wynagrodzenie"
+        android:textColor="#FFAB00"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tx24SetLength"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/img24Main" />
+
+    <ImageView
+        android:id="@+id/img24PlusMonay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:src="@drawable/plus"
+        android:tint="#00C853"
+        app:layout_constraintEnd_toStartOf="@+id/Etx24Monay"
+        app:layout_constraintTop_toBottomOf="@+id/tx24SelectSalary" />
+
+    <ImageView
+        android:id="@+id/img24MinusMonay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:src="@drawable/minus"
+        android:tint="#FF0000"
+        app:layout_constraintStart_toEndOf="@+id/Etx24Monay"
+        app:layout_constraintTop_toTopOf="@+id/img24PlusMonay" />
+
+    <TextView
+        android:id="@+id/Etx24Monay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="4"
+        android:hint="20 zł"
+        android:inputType="number"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/img24PlusMonay"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/img24PlusMonay" />
+
+    <TextView
+        android:id="@+id/tx24SetLength"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="Określ czas potrzebny do wykonania zlecenia"
+        android:textAlignment="center"
+        android:textColor="#0091EA"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/img24PlusMonay" />
+
+    <ImageView
+        android:id="@+id/img24PlusLength"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:src="@drawable/plus"
+        android:tint="#00C853"
+        app:layout_constraintEnd_toStartOf="@+id/Etx24Length"
+        app:layout_constraintTop_toBottomOf="@+id/tx24SetLength" />
+
+    <ImageView
+        android:id="@+id/img24MinusLength"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:src="@drawable/minus"
+        android:tint="#FF0000"
+        app:layout_constraintStart_toEndOf="@+id/Etx24Length"
+        app:layout_constraintTop_toTopOf="@+id/img24PlusLength" />
+
+    <TextView
+        android:id="@+id/Etx24Length"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="4"
+        android:hint="20 min"
+        android:inputType="number"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/img24PlusLength"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/img24PlusLength" />
+
+    <View
+        android:id="@+id/divider24"
+        android:layout_width="0dp"
+        android:layout_height="3dp"
+        android:background="@color/fuckingblack"
+        app:layout_constraintBottom_toTopOf="@+id/tx24SetLength"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/img24PlusMonay" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

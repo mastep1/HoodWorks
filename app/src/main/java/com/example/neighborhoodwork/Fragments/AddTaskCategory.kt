@@ -29,9 +29,9 @@ class AddTaskCategory : Fragment() {
 
         if(dane.newTask.img!= "taklubnie"){
             when(dane.newTask.img){
-                1.toString() -> tx21SelectCategory.text = "Spacer z psem"
-                2.toString() -> tx21SelectCategory.text = "Pomoc przy sprzątaniu"
-                3.toString() -> tx21SelectCategory.text = "Pomoc w ogrodzie"
+                1.toString() -> tx21SelectCategory.text = "Zwierzęta"
+                2.toString() -> tx21SelectCategory.text = "Sprzątanie"
+                3.toString() -> tx21SelectCategory.text = "Ogród"
                 4.toString() -> tx21SelectCategory.text = "Zakupy"
                 5.toString() -> tx21SelectCategory.text = "Prace fizyczne"
                 6.toString() -> tx21SelectCategory.text = "Inne"
@@ -44,23 +44,23 @@ class AddTaskCategory : Fragment() {
                 l21Garden.visibility = View.VISIBLE
                 l21Shopping.visibility = View.VISIBLE
                 l21PhysicalWorks.visibility = View.VISIBLE
-                l21WalkWithDog.visibility = View.VISIBLE
+                l21Animal.visibility = View.VISIBLE
                 l21Other.visibility = View.VISIBLE
             }else{
                setGoneList()
             }
         }
 
-        l21WalkWithDog.setOnClickListener {
-            tx21SelectCategory.text = "Spacer z Psem"
+        l21Animal.setOnClickListener {
+            tx21SelectCategory.text = "Zwirzęta"
             setGoneList()
             dane.newTask.img = 1.toString()
         };l21Cleaning.setOnClickListener {
-            tx21SelectCategory.text = "Pomoc przy sprzątaniu"
+            tx21SelectCategory.text = "Sprzątanie"
             setGoneList()
             dane.newTask.img = 2.toString()
         }; l21Garden.setOnClickListener {
-            tx21SelectCategory.text = "Pomoc w ogrodzie"
+            tx21SelectCategory.text = "Ogród"
             setGoneList()
             dane.newTask.img = 3.toString()
         }; l21Shopping.setOnClickListener {
@@ -84,7 +84,7 @@ class AddTaskCategory : Fragment() {
         l21Garden.visibility = View.GONE
         l21Shopping.visibility = View.GONE
         l21PhysicalWorks.visibility = View.GONE
-        l21WalkWithDog.visibility = View.GONE
+        l21Animal.visibility = View.GONE
         l21Other.visibility = View.GONE
     }
 }

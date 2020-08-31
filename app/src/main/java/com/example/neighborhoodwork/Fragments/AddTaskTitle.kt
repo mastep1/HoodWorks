@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.text.set
 import androidx.core.widget.addTextChangedListener
 import com.example.neighborhoodwork.R
 import com.example.neighborhoodwork.support.dane
@@ -33,28 +34,19 @@ class AddTaskTitle(context : Context) : Fragment() {
 
         if(dane.newTask.title != "taklubnie"){
             Etx20Title.setText(dane.newTask.title)
-            howManyTags(40 - dane.newTask.title.length)
+            howManyTagsMore(40 - dane.newTask.title.length)
         }
 
 
         Etx20Title.addTextChangedListener{
             var howMany = 40 - it.toString().length
-            howManyTags(howMany)
+            howManyTagsMore(howMany)
         }
     }
 
-    @SuppressLint("ResourceAsColor")
-    private fun howManyTags(tags : Int){
 
-
-        if(tags < 0){
-            Etx20Title.text.delete(40, 41)
-            tx20HowManyTags.setTextColor(R.color.fuckingblack)
-            tx20HowManyTags.text = "0 znaków pozostało"
-        }else{
+    private fun howManyTagsMore(tags : Int){
             tx20HowManyTags.text = "${tags} znaków pozostało"
-            tx20HowManyTags.setTextColor(R.color.quantum_googred700)
-        }
     }
 
     override fun onStop() {

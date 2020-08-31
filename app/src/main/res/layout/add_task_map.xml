@@ -1,157 +1,183 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/l19"
+    android:id="@+id/CV19ForFrag"
+    layout_height="match"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    app:cardCornerRadius="30dp">
 
-    <fragment
-        android:id="@+id/mapView19"
-        android:name="com.google.android.gms.maps.SupportMapFragment"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="5dp"
-        app:layout_constraintBottom_toTopOf="@+id/tx19Hello"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/l19"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#CCCCCC">
 
-    <TextView
-        android:id="@+id/tx19Hello"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Miło Cię widzieć!"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/tx19WhereAddTask"
-        app:layout_constraintStart_toStartOf="@+id/img19Location" />
+        <fragment
+            android:id="@+id/mapView19"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginBottom="10dp"
+            app:layout_constraintBottom_toTopOf="@+id/tx19Hello"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/tx19WhereAddTask"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="2dp"
-        android:text="Gdzie chcesz aby wykonano zadanie?"
-        android:textColor="#000000"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/img19Search"
-        app:layout_constraintStart_toStartOf="@+id/img19Location" />
+        <TextView
+            android:id="@+id/tx19Hello"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Miło Cię widzieć!"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/tx19WhereAddTask"
+            app:layout_constraintStart_toStartOf="@+id/tx19WhereAddTask" />
 
-    <ImageView
-        android:id="@+id/img19Home"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:tint="#000000"
-        app:layout_constraintBottom_toBottomOf="@+id/tx19HomeAdress"
-        app:layout_constraintStart_toStartOf="@+id/img19Location"
-        app:layout_constraintTop_toTopOf="@+id/tx19Home"
-        app:layout_constraintVertical_bias="1.0"
-        app:srcCompat="@drawable/home" />
+        <TextView
+            android:id="@+id/tx19WhereAddTask"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:text="Gdzie chcesz aby wykonano zadanie?"
+            android:textColor="#000000"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/CV19"
+            app:layout_constraintStart_toStartOf="@+id/l19UserLocation" />
 
-    <TextView
-        android:id="@+id/tx19Home"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
-        android:layout_marginBottom="3dp"
-        android:text="Dom"
-        android:textColor="#070707"
-        android:textSize="17sp"
-        app:layout_constraintBottom_toTopOf="@+id/tx19HomeAdress"
-        app:layout_constraintStart_toEndOf="@+id/img19Home" />
+        <androidx.cardview.widget.CardView
+            android:id="@+id/CV19"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="30dp"
+            android:layout_marginBottom="10dp"
+            app:cardCornerRadius="20sp"
+            app:contentPadding="5dp"
+            app:layout_constraintBottom_toTopOf="@+id/l19Home"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/l19UserLocation">
 
-    <TextView
-        android:id="@+id/tx19HomeAdress"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
-        android:layout_marginBottom="5dp"
-        android:text="Żbikowska 44, Piastów"
-        app:layout_constraintBottom_toTopOf="@+id/tx19Location"
-        app:layout_constraintStart_toEndOf="@+id/img19Home" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal|left|center_vertical"
+                android:orientation="horizontal">
 
-    <ImageView
-        android:id="@+id/img19Location"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="25dp"
-        android:tint="#000000"
-        app:layout_constraintBottom_toBottomOf="@+id/tx19LocationAdress"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/tx19Location"
-        app:srcCompat="@drawable/location" />
+                <ImageButton
+                    android:id="@+id/BT19Search"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="#FFFFFF"
+                    android:padding="5dp"
+                    android:src="@drawable/search"
+                    android:tint="#000000"></ImageButton>
 
-    <TextView
-        android:id="@+id/tx19Location"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
-        android:layout_marginBottom="3dp"
-        android:text="Twoja lokalizcja"
-        android:textColor="#000000"
-        android:textSize="17sp"
-        app:layout_constraintBottom_toTopOf="@+id/tx19LocationAdress"
-        app:layout_constraintStart_toEndOf="@+id/img19Location" />
+                <AutoCompleteTextView
+                    android:id="@+id/Etx19Search"
+                    style="@style/Widget.AppCompat.AutoCompleteTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_centerVertical="true"
+                    android:background="@null"
+                    android:hint="Wpisz adres, miasto, ulice"
+                    android:imeOptions="actionSearch"
+                    android:textColor="#000"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
 
-    <TextView
-        android:id="@+id/tx19LocationAdress"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
-        android:layout_marginBottom="15dp"
-        android:text="Żbikowska 44, Piastów"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/img19Location" />
+        </androidx.cardview.widget.CardView>
 
-    <View
-        android:id="@+id/divider19Top"
-        android:layout_width="0dp"
-        android:layout_height="3dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginBottom="5dp"
-        android:background="#706F6F"
-        app:layout_constraintBottom_toTopOf="@+id/tx19Home"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/img19Search"
-        app:layout_constraintTop_toBottomOf="@+id/rL19" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/l19Home"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            app:layout_constraintBottom_toTopOf="@+id/l19UserLocation"
+            app:layout_constraintStart_toStartOf="@+id/l19UserLocation">
 
-    <RelativeLayout
-        android:id="@+id/rL19"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:layout_marginEnd="30dp"
-        android:elevation="10dp"
-        android:foregroundGravity="left"
-        android:gravity="left"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="@+id/img19Search"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/img19Search"
-        app:layout_constraintTop_toTopOf="@+id/img19Search">
+            <ImageView
+                android:id="@+id/img19Home"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:tint="#000000"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/home" />
 
-        <AutoCompleteTextView
-            android:id="@+id/Etx19Search"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_centerVertical="true"
-            android:background="@null"
-            android:hint="Wpisz adres, miasto, ulice"
-            android:imeOptions="actionSearch"
-            android:textColor="#000"
-            android:textSize="15sp" />
+            <TextView
+                android:id="@+id/tx19HomeAdress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="13sp"
+                app:layout_constraintStart_toEndOf="@+id/img19Home"
+                app:layout_constraintTop_toBottomOf="@+id/tx19Home" />
 
+            <TextView
+                android:id="@+id/tx19Home"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Dom"
+                android:textColor="#070707"
+                android:textSize="16sp"
+                app:layout_constraintStart_toEndOf="@+id/img19Home"
+                app:layout_constraintTop_toTopOf="@+id/img19Home" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </RelativeLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/l19UserLocation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="25dp"
+            android:layout_marginBottom="5dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
 
-    <ImageView
-        android:id="@+id/img19Search"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:clickable="true"
-        android:cropToPadding="false"
-        app:layout_constraintBottom_toTopOf="@+id/img19Home"
-        app:layout_constraintStart_toStartOf="@+id/img19Location"
-        app:srcCompat="@drawable/search" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <ImageView
+                android:id="@+id/img19Location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:tint="#000000"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/mylocation" />
+
+            <TextView
+                android:id="@+id/tx19Location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Twoja lokalizcja"
+                android:textColor="#000000"
+                android:textSize="15sp"
+                app:layout_constraintStart_toEndOf="@+id/img19Location"
+                app:layout_constraintTop_toTopOf="@+id/img19Location" />
+
+            <TextView
+                android:id="@+id/tx19LocationAdress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="@+id/img19Location"
+                app:layout_constraintStart_toEndOf="@+id/img19Location"
+                app:layout_constraintTop_toBottomOf="@+id/tx19Location" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <View
+            android:id="@+id/divider19Map"
+            android:layout_width="0dp"
+            android:layout_height="3dp"
+            android:background="#FFAB00"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/mapView19" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

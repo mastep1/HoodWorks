@@ -16,9 +16,12 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
          auth = FirebaseAuth.getInstance()
          val currentUser = auth.currentUser
+
          updateUI(currentUser)
+
         tx1ZalogujSie.setOnClickListener{
             var nowaAktywnosc3 = Intent(applicationContext, Loguj::class.java)
             startActivity(nowaAktywnosc3)

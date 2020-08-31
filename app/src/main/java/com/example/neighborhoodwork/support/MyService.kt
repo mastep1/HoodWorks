@@ -14,7 +14,9 @@ import com.example.neighborhoodwork.Adapters.ChatViewAdapter
 import com.example.neighborhoodwork.Adapters.OnSelectConConversation
 import com.example.neighborhoodwork.Adapters.OnSelectConConversationV
 import com.example.neighborhoodwork.Models.MessageModel
+import com.example.neighborhoodwork.Models.UserHome
 import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.model.LatLng
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.ActionCodeSettings
 import com.google.firebase.auth.FirebaseUser
@@ -82,6 +84,19 @@ class MyService : Service(), OnSelectConConversation, OnSelectConConversationV {
                             "dni" -> user.dni = i.value.toString().toInt()
                             "ukonczone" -> user.ukonczone = i.value.toString().toInt()
                             "rating" -> user.rating = i.value.toString().toDouble()
+                            "homeAddress" -> user.home.address = i.value.toString()
+                            "homeAddress" -> user.home.address = i.value.toString()
+                            "homeX" -> {
+                                val bufferSecoundParameter = user.home.latLng.longitude
+                                user.home.latLng = LatLng(i.value.toString().toDouble(), bufferSecoundParameter)
+                            }
+                            "homeY" -> {
+                                val bufferFirstParameter = user.home.latLng.latitude
+                                user.home.latLng = LatLng(bufferFirstParameter, i.value.toString().toDouble())
+                            }
+                            "homeType" -> {
+                                 user.home.type = i.value.toString().toInt()
+                            }
                         }
                     }
                 }

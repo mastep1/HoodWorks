@@ -4,12 +4,15 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.core.net.toUri
+import com.example.neighborhoodwork.Models.UserHome
 import kotlinx.android.synthetic.main.activity_samouczek.*
 import com.example.neighborhoodwork.R
 import com.example.neighborhoodwork.Models.UserModel
 import com.example.neighborhoodwork.support.dane
 import com.example.neighborhoodwork.support.user
 import com.firebase.ui.auth.AuthUI
+import com.firebase.ui.auth.data.model.User
+import com.google.android.gms.maps.model.LatLng
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
@@ -43,14 +46,15 @@ class Samouczek : AppCompatActivity() {
                 val obecny = auth.currentUser
                 val fireuserBase = FirebaseDatabase.getInstance()
                 userRef = fireuserBase.getReference("Users")
+                var home = UserHome(LatLng(0.0, 0.0), "takJakNie", 0)
 
                 val doWczytania = UserModel(
                     0.0, 0, 0, 0, 0,
-                    " ${editText3.text}", user.avatarPhotoURL
+                    " ${editText3.text}", user.avatarPhotoURL, "", "0", "0", "0"
                 )
 
                 if(obecny!=null){
-                    var id = obecny.displayName.toString()
+                    val id = obecny.displayName.toString()
                    baton1.text = dane.UriBuffer.toString()
                     userRef.child(id).child("Data").setValue(doWczytania)
                 }
