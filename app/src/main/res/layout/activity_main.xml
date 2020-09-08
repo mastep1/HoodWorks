@@ -7,15 +7,27 @@
     android:layout_height="match_parent"
     tools:context=".Activities.MainActivity">
 
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="399dp"
+        android:layout_height="467dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.265"
+        app:srcCompat="@drawable/witamy" />
+
     <TextView
         android:id="@+id/tx1Dolacz"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="267dp"
+        android:layout_marginTop="252dp"
         android:text="@string/tx1Dolacz"
         android:textColor="#000000"
         android:textSize="65sp"
         android:textStyle="bold"
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -24,6 +36,7 @@
         android:id="@+id/l1Ikony"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tx1Dolacz">
@@ -36,6 +49,7 @@
             android:text="@string/tx1Utworz"
             android:textColor="#090909"
             android:textSize="20sp"
+            android:visibility="invisible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -47,6 +61,7 @@
             android:layout_marginStart="25dp"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="10dp"
+            android:visibility="invisible"
             app:layout_constraintEnd_toStartOf="@+id/img1FB"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tx1Utworz"
@@ -57,8 +72,9 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="10dp"
+            android:visibility="invisible"
             app:layout_constraintEnd_toStartOf="@+id/img1Google"
             app:layout_constraintStart_toEndOf="@+id/img1Email"
             app:layout_constraintTop_toBottomOf="@+id/tx1Utworz"
@@ -69,8 +85,9 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="10dp"
+            android:visibility="invisible"
             app:layout_constraintEnd_toStartOf="@+id/img1Phone"
             app:layout_constraintStart_toEndOf="@+id/img1FB"
             app:layout_constraintTop_toBottomOf="@+id/tx1Utworz"
@@ -84,6 +101,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginEnd="25dp"
             android:tint="#C50909"
+            android:visibility="invisible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/img1Google"
             app:layout_constraintTop_toBottomOf="@+id/tx1Utworz"
@@ -98,9 +116,28 @@
         android:text="@string/tx1ZalogujSie"
         android:textColor="#0C0C0C"
         android:textSize="20sp"
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/l1Ikony" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="329dp"
+        android:layout_height="70dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/nowynapokladzie"
+        tools:layout_editor_absoluteY="564dp" />
+
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="329"
+        android:layout_height="70"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/zalogujsieteraz"
+        tools:layout_editor_absoluteY="634dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

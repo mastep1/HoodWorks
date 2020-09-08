@@ -26,7 +26,10 @@ class MainActivity : AppCompatActivity() {
             var nowaAktywnosc3 = Intent(applicationContext, Loguj::class.java)
             startActivity(nowaAktywnosc3)
         }
-
+img1tlo.setOnClickListener {
+    var klikniecie3 = Intent(applicationContext, Home::class.java)
+    startActivity(klikniecie3)
+}
         l1Ikony.setOnClickListener{
             var samo = Intent(applicationContext, SamouczekAvater::class.java)
             startActivity(samo)
