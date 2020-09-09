@@ -28,7 +28,7 @@
     <ImageView
         android:id="@+id/imageView8"
         android:layout_width="329dp"
-        android:layout_height="70"
+        android:layout_height="70dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/zalogujprzyuzyciuggl"
