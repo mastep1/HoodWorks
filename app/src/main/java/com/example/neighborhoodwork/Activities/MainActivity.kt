@@ -22,15 +22,13 @@ class MainActivity : AppCompatActivity() {
 
          updateUI(currentUser)
 
-        tx1ZalogujSie.setOnClickListener{
+        imageView3.setOnClickListener{
             var nowaAktywnosc3 = Intent(applicationContext, Loguj::class.java)
             startActivity(nowaAktywnosc3)
         }
-img1tlo.setOnClickListener {
-    var klikniecie3 = Intent(applicationContext, Home::class.java)
-    startActivity(klikniecie3)
-}
-        l1Ikony.setOnClickListener{
+
+
+        imageView5.setOnClickListener{
             var samo = Intent(applicationContext, SamouczekAvater::class.java)
             startActivity(samo)
         }

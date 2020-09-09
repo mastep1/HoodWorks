@@ -7,7 +7,7 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/textView6"
         android:layout_width="43dp"
         android:layout_height="21dp"
         android:text="Więcej"
@@ -17,25 +17,25 @@
         tools:layout_editor_absoluteY="628dp" />
 
     <ImageView
-        android:id="@+id/imageView6"
+        android:id="@+id/imageView12"
         android:layout_width="329dp"
         android:layout_height="70dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/zalogujsiepoprzezemail"
-        tools:layout_editor_absoluteY="469dp" />
+        app:srcCompat="@drawable/zarejestrujprzyuzyciu"
+        tools:layout_editor_absoluteY="542dp" />
 
     <ImageView
-        android:id="@+id/imageView8"
+        android:id="@+id/imageView11"
         android:layout_width="329dp"
-        android:layout_height="70"
+        android:layout_height="70dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/zalogujprzyuzyciuggl"
-        tools:layout_editor_absoluteY="532dp" />
+        app:srcCompat="@drawable/zarejestrujsiepoprzezemail"
+        tools:layout_editor_absoluteY="484dp" />
 
     <ImageView
-        android:id="@+id/imageView7"
+        android:id="@+id/imageView10"
         android:layout_width="25dp"
         android:layout_height="15dp"
         app:srcCompat="@drawable/ic_icon_ionic_ios_arrow_round_back"
@@ -43,13 +43,12 @@
         tools:layout_editor_absoluteY="16dp" />
 
     <ImageView
-        android:id="@+id/imageView4"
-        android:layout_width="302dp"
-        android:layout_height="266dp"
+        android:id="@+id/imageView9"
+        android:layout_width="296dp"
+        android:layout_height="285dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/zalogujdalej"
-        tools:layout_editor_absoluteY="123dp" />
-
+        app:srcCompat="@drawable/rysuneknowynapokladzie"
+        tools:layout_editor_absoluteY="130dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
