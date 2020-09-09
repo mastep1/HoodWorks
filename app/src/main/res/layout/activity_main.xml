@@ -5,6 +5,7 @@
     android:id="@+id/l1Main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#ffffff"
     tools:context=".Activities.MainActivity">
 
     <ImageView
@@ -122,22 +123,46 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/l1Ikony" />
 
-    <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="329dp"
-        android:layout_height="70dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/nowynapokladzie"
-        tools:layout_editor_absoluteY="564dp" />
+    <androidx.cardview.widget.CardView
+        android:id="@+id/CV1nowynapokladzie"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        app:cardCornerRadius="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/CV1zalogujsie"
+        app:layout_constraintEnd_toEndOf="@+id/CV1zalogujsie"
+        app:layout_constraintHorizontal_bias="0.51"
+        app:layout_constraintStart_toStartOf="@+id/CV1zalogujsie">
 
-    <ImageView
-        android:id="@+id/imageView5"
-        android:layout_width="329dp"
-        android:layout_height="70dp"
+        <Button
+            android:id="@+id/BT1nowynapokladzie"
+            android:layout_width="329dp"
+            android:layout_height="40dp"
+            android:background="#30f28b"
+            android:padding="10dp"
+            android:paddingStart="10dp"
+            android:paddingLeft="10dp"
+            android:text="Nowy na Pokładzie"
+            android:textColor="#FFFFFF" />
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/CV1zalogujsie"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:layout_marginBottom="50dp"
+        app:cardCornerRadius="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/zalogujsieteraz"
-        tools:layout_editor_absoluteY="624dp" />
+        app:layout_constraintStart_toStartOf="parent">
+
+        <Button
+            android:id="@+id/BT1zalogujsie"
+            android:layout_width="329dp"
+            android:layout_height="40dp"
+            android:background="#30f28b"
+            android:text="Zaloguj Się Teraz"
+            android:textColor="#FFFFFF" />
+    </androidx.cardview.widget.CardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
