@@ -10,13 +10,14 @@
 
     <ImageView
         android:id="@+id/imageView2"
-        android:layout_width="399dp"
-        android:layout_height="467dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="392dp"
+        android:layout_height="468dp"
+        app:layout_constraintBottom_toTopOf="@+id/CV1nowynapokladzie"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.473"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.265"
+        app:layout_constraintVertical_bias="0.418"
         app:srcCompat="@drawable/witamy" />
 
     <TextView
@@ -149,7 +150,7 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/CV1zalogujsie"
         android:layout_width="wrap_content"
-        android:layout_height="48dp"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="50dp"
         app:cardCornerRadius="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
