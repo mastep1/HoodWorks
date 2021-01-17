@@ -9,161 +9,91 @@
     tools:context=".Activities.MainActivity">
 
     <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="392dp"
-        android:layout_height="468dp"
-        app:layout_constraintBottom_toTopOf="@+id/CV1nowynapokladzie"
+        android:id="@+id/img1Main"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginBottom="50dp"
+        app:layout_constraintBottom_toTopOf="@+id/tx1Dolacz"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.473"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.418"
-        app:srcCompat="@drawable/witamy" />
+        app:srcCompat="@drawable/ic_group_105" />
 
     <TextView
         android:id="@+id/tx1Dolacz"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="252dp"
+        android:layout_marginBottom="20dp"
         android:text="@string/tx1Dolacz"
-        android:textColor="#000000"
-        android:textSize="65sp"
+        android:textColor="#5B5B5B"
+        android:textSize="32sp"
         android:textStyle="bold"
-        android:visibility="invisible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/l1Ikony"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
         android:visibility="visible"
+        app:layout_constraintBottom_toTopOf="@+id/tx1PodMain"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tx1Dolacz">
-
-        <TextView
-            android:id="@+id/tx1Utworz"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
-            android:text="@string/tx1Utworz"
-            android:textColor="#090909"
-            android:textSize="20sp"
-            android:visibility="invisible"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <ImageView
-            android:id="@+id/img1Email"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginStart="25dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="10dp"
-            android:visibility="invisible"
-            app:layout_constraintEnd_toStartOf="@+id/img1FB"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tx1Utworz"
-            app:srcCompat="@drawable/email" />
-
-        <ImageView
-            android:id="@+id/img1FB"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="10dp"
-            android:visibility="invisible"
-            app:layout_constraintEnd_toStartOf="@+id/img1Google"
-            app:layout_constraintStart_toEndOf="@+id/img1Email"
-            app:layout_constraintTop_toBottomOf="@+id/tx1Utworz"
-            app:srcCompat="@drawable/fb" />
-
-        <ImageView
-            android:id="@+id/img1Google"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="10dp"
-            android:visibility="invisible"
-            app:layout_constraintEnd_toStartOf="@+id/img1Phone"
-            app:layout_constraintStart_toEndOf="@+id/img1FB"
-            app:layout_constraintTop_toBottomOf="@+id/tx1Utworz"
-            app:srcCompat="@drawable/common_google_signin_btn_icon_dark" />
-
-        <ImageView
-            android:id="@+id/img1Phone"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="25dp"
-            android:tint="#C50909"
-            android:visibility="invisible"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/img1Google"
-            app:layout_constraintTop_toBottomOf="@+id/tx1Utworz"
-            app:srcCompat="@drawable/fui_ic_phone_white_24dp" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/tx1ZalogujSie"
-        android:layout_width="wrap_content"
+        android:id="@+id/tx1PodMain"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
-        android:text="@string/tx1ZalogujSie"
-        android:textColor="#0C0C0C"
-        android:textSize="20sp"
-        android:visibility="invisible"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginBottom="85dp"
+        android:text="@string/tx1PodMain"
+        android:textAlignment="center"
+        android:textColor="#5B5B5B"
+        android:textSize="13sp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toTopOf="@+id/CV1nowynapokladzie"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/l1Ikony" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/CV1nowynapokladzie"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="5dp"
+        android:layout_marginBottom="20dp"
         app:cardCornerRadius="10dp"
         app:layout_constraintBottom_toTopOf="@+id/CV1zalogujsie"
         app:layout_constraintEnd_toEndOf="@+id/CV1zalogujsie"
-        app:layout_constraintHorizontal_bias="0.51"
         app:layout_constraintStart_toStartOf="@+id/CV1zalogujsie">
 
         <Button
             android:id="@+id/BT1nowynapokladzie"
-            android:layout_width="329dp"
-            android:layout_height="40dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:background="#30f28b"
             android:padding="10dp"
-            android:paddingStart="10dp"
-            android:paddingLeft="10dp"
             android:text="Nowy na Pokładzie"
-            android:textColor="#FFFFFF" />
+            android:textColor="#FFFFFF"
+            android:textSize="20sp" />
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
         android:id="@+id/CV1zalogujsie"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="50dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginBottom="80dp"
+        android:background="#30f28b"
+        app:cardBackgroundColor="#30f28b"
         app:cardCornerRadius="10dp"
+        app:contentPadding="2dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
         <Button
             android:id="@+id/BT1zalogujsie"
-            android:layout_width="329dp"
-            android:layout_height="40dp"
-            android:background="#30f28b"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#FFFFFF"
+            android:padding="10dp"
             android:text="Zaloguj Się Teraz"
-            android:textColor="#FFFFFF" />
+            android:textColor="#30f28b" />
     </androidx.cardview.widget.CardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

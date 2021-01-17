@@ -15,7 +15,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".Activities.ConfirmNewTask"></activity>
+        <activity android:name=".Room"></activity>
+        <activity android:name=".SQLTraining" />
+        <activity android:name=".Activities.ConfirmNewTask" />
         <activity android:name=".Activities.DodajZlecenie" />
         <activity android:name=".Activities.SamouczekAvater" />
         <activity android:name=".Activities.ChatView" />

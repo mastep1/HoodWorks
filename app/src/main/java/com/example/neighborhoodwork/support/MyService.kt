@@ -135,6 +135,8 @@ class MyService : Service(), OnSelectConConversation, OnSelectConConversationV {
 
     }
 
+   
+
     private fun checkReciveMessage(){
 
         lateinit var newMessaesPath: DatabaseReference

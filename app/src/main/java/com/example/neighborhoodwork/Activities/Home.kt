@@ -63,9 +63,10 @@ class Home : AppCompatActivity(), OnMapReadyCallback, NavigationView.OnNavigatio
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
 
-
-
-
+        img2Filter.setOnClickListener {
+            var intent = Intent()
+        }
+        
         if(dane.HomeOnCreate==false){
             auth = FirebaseAuth.getInstance()
             providers = Arrays.asList<AuthUI.IdpConfig>(
@@ -87,7 +88,7 @@ class Home : AppCompatActivity(), OnMapReadyCallback, NavigationView.OnNavigatio
         }
 
 
-        setOnClickListner()
+        setOnClickListners()
     }
 
     override fun onResume() {
@@ -113,7 +114,7 @@ class Home : AppCompatActivity(), OnMapReadyCallback, NavigationView.OnNavigatio
     }
 
 
-    fun setOnClickListner(){
+    fun setOnClickListners(){
 
         FAB2MyLocation.setOnClickListener {
             if (checkPermissionForLocation(this)) {
@@ -255,9 +256,6 @@ class Home : AppCompatActivity(), OnMapReadyCallback, NavigationView.OnNavigatio
             // }
 
         })
-         img2Filter.setOnClickListener {
-             Toast.makeText(applicationContext, "${user.home}", Toast.LENGTH_LONG).show()
-         }
 
 
     }
@@ -268,6 +266,7 @@ class Home : AppCompatActivity(), OnMapReadyCallback, NavigationView.OnNavigatio
         if(tryb==true){
             FAB2MyLocation.hide()
             frag.beginTransaction().add(R.id.l2InfoFrag, infoWindow).commit()
+
         }else{
             FAB2MyLocation.show()
             frag.beginTransaction().remove(infoWindow).commit()

@@ -22,19 +22,15 @@ class MainActivity : AppCompatActivity() {
 
          updateUI(currentUser)
 
-        imageView3.setOnClickListener{
-            var nowaAktywnosc3 = Intent(applicationContext, Loguj::class.java)
-            startActivity(nowaAktywnosc3)
+        BT1nowynapokladzie.setOnClickListener {
+            var intent = Intent(this, SamouczekAvater::class.java)
+            startActivity(intent)
         }
-
-
-        imageView5.setOnClickListener{
-            var samo = Intent(applicationContext, SamouczekAvater::class.java)
-            startActivity(samo)
-        }
+        
     }
 
     fun updateUI(currentUser : FirebaseUser?){
+
         if(currentUser != null){
         var nowaAktywnosc = Intent(applicationContext, Home::class.java)
         startActivity(nowaAktywnosc)

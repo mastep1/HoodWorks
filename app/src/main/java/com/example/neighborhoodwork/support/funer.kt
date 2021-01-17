@@ -9,7 +9,7 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 
-fun adddMessage(context: Context, message: String, date : String, thisUser : Boolean ){
+fun addMessage(context: Context, message: String, date : String, thisUser : Boolean ){
 
     lateinit var SQL_MESSAGE : SQL_MESSAGE
 

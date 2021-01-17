@@ -1,9 +1,9 @@
 <resources>
     <string name="app_name">neighborhoodWork</string>
-    <string name="tx1Dolacz">Dołącz!</string>
+    <string name="tx1Dolacz">Witamy w Just Jobs!</string>
     <string name="tx1Utworz">Utworz konto</string>
     <string name="tx1Email">E-mail lub \nnumer telefonu</string>
-    <string name="tx1ZalogujSie">Masz już konto? Zaloguj się</string>
+    <string name="tx1PodMain">Pomożemy ci zadbać o przydomowe kieszonkowe lub wykonać jakieś przydomowe prace</string>
     <string name="tx2Witaj">Witaj, ponownie!</string>
     <string name="tx2ZalogujSie">Zaloguj Się</string>
     <string name="Etx2Email"><p>  </p>E-mail</string>

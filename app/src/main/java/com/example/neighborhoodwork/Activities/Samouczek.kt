@@ -57,6 +57,8 @@ class Samouczek : AppCompatActivity() {
                     val id = obecny.displayName.toString()
                    baton1.text = dane.UriBuffer.toString()
                     userRef.child(id).child("Data").setValue(doWczytania)
+                    userRef.child(id).child("messagesMeter").setValue("1")
+                    
                 }
 
             }

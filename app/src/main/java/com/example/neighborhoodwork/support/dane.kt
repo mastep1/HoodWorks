@@ -75,6 +75,16 @@ object SQL_BD_CONTACT{
     }
 }
 
+object SQL_DB_MESSAGES_METER{
+
+    class MessagesMeter : BaseColumns {
+        companion object {
+            val TABLE_NAME = "messagesmeter"
+            val NUMBER = "number"
+        }
+    }
+}
+
 
 object SQL_DB_MESSAGE {
 
