@@ -36,7 +36,7 @@ class MyService : Service(), OnSelectConConversation, OnSelectConConversationV {
         dateUser(dane.currentUser)
 
         checkNewTask(dane.googleMap)
-        checkReciveMessage()
+        //checkReciveMessage()
         downloadSQLUSER()
     }
 
@@ -60,9 +60,20 @@ class MyService : Service(), OnSelectConConversation, OnSelectConConversationV {
 
     fun dateUser(currentUser: FirebaseUser?){
 
+
+
         lateinit var contactsBase : SQL_CONTACTS
         lateinit var messageBase : SQL_MESSAGE
         lateinit var userData: DatabaseReference
+
+
+        contactsBase = SQL_CONTACTS(this)
+        dane.Contasts.clear()
+        contactsBase.readAllUsers()
+
+        messageBase = SQL_MESSAGE(this)
+        dane.messages.clear()
+        messageBase.readAllMessages(this)
 
         if (currentUser != null) {
             val fireuserBase = FirebaseDatabase.getInstance()
@@ -121,16 +132,73 @@ class MyService : Service(), OnSelectConConversation, OnSelectConConversationV {
 
 
         }
+        downloadMessage(dane.messages.size)
+    }
 
-        contactsBase = SQL_CONTACTS(this)
-        dane.Contasts.clear()
-        contactsBase.readAllUsers()
+    fun downloadMessage(messageIndex : Int){
 
-        messageBase = SQL_MESSAGE(this)
-        dane.messages.clear()
-        messageBase.readAllMessages(this)
+        lateinit var messaesPath: DatabaseReference
+        val fireuserBase = FirebaseDatabase.getInstance()    /// Połączenie z bazą
+
+        messaesPath = fireuserBase.getReference("Users").child(dane.currentUser.displayName.toString())
+            .child("Conversation").child("${messageIndex + 1}")
 
 
+
+        messaesPath.addValueEventListener( object : ValueEventListener {
+
+            override fun onCancelled(p0: DatabaseError) {
+            }
+
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                if(dataSnapshot.value != null){
+                    messaesPath.removeEventListener(this)
+
+
+                    lateinit var SQL_MESSAGE : SQL_MESSAGE
+
+
+                    val element = dataSnapshot.getValue(MessageModel::class.java)
+                    dane.avoid = 0
+                    dane.messages.add(element!!)                                         /// RAM
+                    SQL_MESSAGE = SQL_MESSAGE(this@MyService)                   /// SQL
+                    SQL_MESSAGE.insert(element)                                          /// SQL
+
+                    if(!checkDoExistConversation(element.user)){
+                        addConversation(element.user)
+                        //rc3.adapter = ChatMenagerAdapter(this@MyService)
+                    }
+
+                    if(dane.currentActivity=="ChatMenager"){
+                        dane.recycler.adapter = ChatMenagerAdapter(this@MyService)
+                    }else if(dane.currentActivity=="ChatView"){
+                        dane.recycler.adapter = ChatViewAdapter(this@MyService)
+                    }else if(dane.currentActivity =="Home"){
+                        dane.newMessage++
+                        dane.tx.text = dane.newMessage.toString()
+                        dane.tx.visibility = View.VISIBLE
+                    }else if(dane.currentActivity =="Profil"){
+                        dane.newMessage++
+                        dane.tx.text = dane.newMessage.toString()
+                        dane.tx.visibility = View.VISIBLE
+                    }
+
+
+
+                    messaesPath.removeValue()
+
+                    downloadMessage(dane.messages.size)
+
+                }
+
+
+
+            }
+
+
+
+
+        })
 
 
     }

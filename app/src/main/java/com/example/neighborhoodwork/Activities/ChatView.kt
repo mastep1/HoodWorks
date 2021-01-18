@@ -57,7 +57,7 @@ class ChatView : AppCompatActivity(), OnSelectConConversationV {
     fun byReadyForsend(){
 
         FAB12Send.setOnClickListener {
-                sendNew()
+            sendToInterlocutor()
         }
     }
 
@@ -97,7 +97,7 @@ class ChatView : AppCompatActivity(), OnSelectConConversationV {
         }
     }
 
-    fun sendNew(){
+    fun sendToInterlocutor(){
         var messageNumber : Int = 0
 
         if(Etx12Message.text.toString() != ""){
@@ -144,14 +144,39 @@ class ChatView : AppCompatActivity(), OnSelectConConversationV {
                     dane.avoid = 0
                     rc12ChatView.adapter = ChatViewAdapter(this@ChatView)
 
-
-                    Toast.makeText(applicationContext, "$messageNumber", Toast.LENGTH_SHORT).show()
+                    sendToYourSelf( MessageModel(message, true, "${date.time}", "${dane.Contasts[dane.openConversation]}", true ), name)
 
 
                 }
             })
        }
 
+    }
+
+    fun sendToYourSelf(message : MessageModel, userName : String){
+        var dataBaseLink = FirebaseDatabase.getInstance()
+
+        var link2 = dataBaseLink.getReference("Users").child(userName)
+            .child("Conversation").child("${dane.messages.size}")
+
+        link2.setValue(message)
+
+        var linkForMessageIndex = dataBaseLink.getReference("Users").child(userName).child("messagesMeter")
+
+        linkForMessageIndex.addValueEventListener(object : ValueEventListener {
+
+            override fun onCancelled(p0: DatabaseError) {
+            }
+
+            override fun onDataChange(p0: DataSnapshot) {
+
+                linkForMessageIndex.removeEventListener(this)
+
+                var messageIndex = p0.value.toString().toInt()
+
+                linkForMessageIndex.setValue(messageIndex + 1)
+            }
+        })
     }
 
 

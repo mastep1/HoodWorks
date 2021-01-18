@@ -20,6 +20,7 @@ import androidx.core.view.GravityCompat
 import com.example.neighborhoodwork.Adapters.InfoWindowAdapter
 import com.example.neighborhoodwork.Fragments.BigInfoWindow
 import com.example.neighborhoodwork.R
+import com.example.neighborhoodwork.Room
 import com.example.neighborhoodwork.support.*
 import com.firebase.ui.auth.AuthUI
 import com.google.android.gms.location.*
@@ -63,9 +64,6 @@ class Home : AppCompatActivity(), OnMapReadyCallback, NavigationView.OnNavigatio
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
 
-        img2Filter.setOnClickListener {
-            var intent = Intent()
-        }
         
         if(dane.HomeOnCreate==false){
             auth = FirebaseAuth.getInstance()
