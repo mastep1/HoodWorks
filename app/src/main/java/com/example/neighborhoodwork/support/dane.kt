@@ -38,6 +38,7 @@ object dane {
     var addTask = 1
     var newTask = ZadanieModel("taklubnie", "taklubnie", "","","taklubnie","","taklubnie", "taklubnie", "","")
     var arrayForAdapter = arrayListOf<String>()
+    lateinit var messageListner :
     }
 
 object time{

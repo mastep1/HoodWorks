@@ -184,9 +184,6 @@ class MyService : Service(), OnSelectConConversation, OnSelectConConversationV {
                     }
 
 
-
-                    messaesPath.removeValue()
-
                     downloadMessage(dane.messages.size)
 
                 }
