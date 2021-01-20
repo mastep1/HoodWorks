@@ -17,6 +17,7 @@ import org.w3c.dom.Text
 import java.io.File
 import java.net.URI
 import java.net.URL
+import kotlin.properties.Delegates
 
 object dane {
     var zadania = arrayListOf<ZadanieModel>()
@@ -39,9 +40,8 @@ object dane {
     var addTask = 1
     var newTask = ZadanieModel("taklubnie", "taklubnie", "","","taklubnie","","taklubnie", "taklubnie", "","")
     var arrayForAdapter = arrayListOf<String>()
-    var blockMessage = false
-    var usun : TextView? = null
-    }
+    var expectedMessage = 0
+}
 
 object time{
     var timeSet = false
