@@ -87,7 +87,7 @@ class SQL_MESSAGE(context: Context) : SQLiteOpenHelper(context,
     }
 
     companion object {
-        val DATABASE_VERSION = 235
+        val DATABASE_VERSION = 266
         val DATABASE_NAME = "Messagecztery.db"
 
         private val SQL_CREATE_ENTRIES = "CREATE TABLE " + SQL_DB_MESSAGE.Message.TABLE_NAME + " (" +

@@ -39,6 +39,8 @@ class ChatView : AppCompatActivity(), OnSelectConConversationV {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.chat_view)
 
+        dane.usun = DAS
+
         dane.currentActivity = "ChatView"
         dane.recycler = rc12ChatView
 
@@ -154,10 +156,13 @@ class ChatView : AppCompatActivity(), OnSelectConConversationV {
     }
 
     fun sendToYourSelf(message : MessageModel, userName : String){
+
         var dataBaseLink = FirebaseDatabase.getInstance()
 
         var link2 = dataBaseLink.getReference("Users").child(userName)
             .child("Conversation").child("${dane.messages.size}")
+
+        dane.blockMessage = true
 
         link2.setValue(message)
 

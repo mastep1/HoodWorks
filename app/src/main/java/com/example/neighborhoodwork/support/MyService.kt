@@ -137,25 +137,41 @@ class MyService : Service(), OnSelectConConversation, OnSelectConConversationV {
 
     fun downloadMessage(messageIndex : Int){
 
+
         lateinit var messaesPath: DatabaseReference
         val fireuserBase = FirebaseDatabase.getInstance()    /// Połączenie z bazą
 
         messaesPath = fireuserBase.getReference("Users").child(dane.currentUser.displayName.toString())
             .child("Conversation").child("${messageIndex + 1}")
 
+       // Toast.makeText(applicationContext, "$messaesPath", Toast.LENGTH_LONG).show()
+
+        if(dane.usun != null){
+            dane.usun!!.text = ""
+            dane.usun!!.text = "$messaesPath"
+        }
+
+
 
 
         messaesPath.addValueEventListener( object : ValueEventListener {
+
 
             override fun onCancelled(p0: DatabaseError) {
             }
 
             override fun onDataChange(dataSnapshot: DataSnapshot) {
-                if(dataSnapshot.value != null){
+
+                ///Toast.makeText(applicationContext, "DATA UPDAYT", Toast.LENGTH_LONG).show()
+
+
+
+                if((dataSnapshot.value != null) && (dane.blockMessage == false)){
                     messaesPath.removeEventListener(this)
 
-
                     lateinit var SQL_MESSAGE : SQL_MESSAGE
+
+                    downloadMessage(dane.messages.size + 1)  //Experimnet
 
 
                     val element = dataSnapshot.getValue(MessageModel::class.java)
@@ -181,11 +197,33 @@ class MyService : Service(), OnSelectConConversation, OnSelectConConversationV {
                         dane.newMessage++
                         dane.tx.text = dane.newMessage.toString()
                         dane.tx.visibility = View.VISIBLE
+
+                    }
+
+                    if(dane.usun != null){
+                       // dane.usun!!.text = "${dane.usun!!.text} +if //error ${dataSnapshot.value} oo"
+                        dane.usun!!.text = "${dataSnapshot.key}"
                     }
 
 
-                    downloadMessage(dane.messages.size)
 
+
+                }else if(dataSnapshot.value == null){
+                    if(dane.usun != null){
+                        //dane.usun!!.text = "${dane.usun!!.text} + czekanie na wiadomość"
+
+                    }
+
+                }else if(dane.blockMessage){
+                    messaesPath.removeEventListener(this)
+
+
+                    dane.blockMessage == false
+
+                    if(dane.usun != null){
+                        dane.usun!!.text = "${dane.usun!!.text} + odebrano wiadomość swoją //Error  ${dane.messages.size}"
+                    }
+                    downloadMessage(dane.messages.size)
                 }
 
 

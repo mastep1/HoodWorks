@@ -13,6 +13,7 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageTask
+import org.w3c.dom.Text
 import java.io.File
 import java.net.URI
 import java.net.URL
@@ -38,7 +39,8 @@ object dane {
     var addTask = 1
     var newTask = ZadanieModel("taklubnie", "taklubnie", "","","taklubnie","","taklubnie", "taklubnie", "","")
     var arrayForAdapter = arrayListOf<String>()
-    lateinit var messageListner :
+    var blockMessage = false
+    var usun : TextView? = null
     }
 
 object time{
