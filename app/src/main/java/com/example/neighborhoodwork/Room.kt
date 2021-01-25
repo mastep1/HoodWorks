@@ -8,7 +8,7 @@ import com.example.neighborhoodwork.Models.SingleDataViewModel
 import com.example.neighborhoodwork.room.SingleData
 import kotlinx.android.synthetic.main.activity_room.*
 
-class Room : AppCompatActivity() {
+class Room6 : AppCompatActivity() {
 
     private lateinit var viewModel : SingleDataViewModel
     private lateinit var viewModel2 : SingleDataViewModel

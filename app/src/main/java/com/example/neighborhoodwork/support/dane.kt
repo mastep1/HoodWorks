@@ -1,5 +1,6 @@
 package com.example.neighborhoodwork.support
 
+import android.graphics.Bitmap
 import android.net.Uri
 import android.provider.BaseColumns
 import android.widget.ImageView
@@ -41,6 +42,8 @@ object dane {
     var newTask = ZadanieModel("taklubnie", "taklubnie", "","","taklubnie","","taklubnie", "taklubnie", "","")
     var arrayForAdapter = arrayListOf<String>()
     var expectedMessage = 0
+    var info = ""
+    var photo : Bitmap? = null
 }
 
 object time{

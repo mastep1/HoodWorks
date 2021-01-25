@@ -6,6 +6,7 @@ import android.util.JsonWriter
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.neighborhoodwork.Adapters.ChatMenagerAdapter
 import com.example.neighborhoodwork.Adapters.ChatViewAdapter
 import com.example.neighborhoodwork.Adapters.OnSelectConConversationV
 import com.example.neighborhoodwork.Models.MessageModel
@@ -48,6 +49,8 @@ class ChatView : AppCompatActivity(), OnSelectConConversationV {
         layoutManager = LinearLayoutManager(this@ChatView)
         addItemDecoration(TopSpacingItemDecoration(30))
         adapter = ChatViewAdapter(this@ChatView)
+
+            
     }
 
     byReadyForsend()

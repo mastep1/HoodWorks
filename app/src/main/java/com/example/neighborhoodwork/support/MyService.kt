@@ -60,8 +60,6 @@ class MyService : Service(), OnSelectConConversation, OnSelectConConversationV {
 
     fun dateUser(currentUser: FirebaseUser?){
 
-
-
         lateinit var contactsBase : SQL_CONTACTS
         lateinit var messageBase : SQL_MESSAGE
         lateinit var userData: DatabaseReference
@@ -174,6 +172,7 @@ class MyService : Service(), OnSelectConConversation, OnSelectConConversationV {
                     if(!checkDoExistConversation(element.user)){
                         addConversation(element.user)
                         //rc3.adapter = ChatMenagerAdapter(this@MyService)
+
                     }
 
                     if(dane.currentActivity=="ChatMenager"){
