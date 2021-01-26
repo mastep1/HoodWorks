@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.neighborhoodwor.ZadanieModel
 import com.example.neighborhoodwork.Models.MessageModel
 import com.example.neighborhoodwork.Models.UserHome
+import com.example.neighborhoodwork.support.RoomDatabaseForUsersAvatars.DataEntityUsersAvatars
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.LatLng
 import com.google.firebase.auth.FirebaseUser
@@ -36,7 +37,6 @@ object dane {
     lateinit var tx : TextView
     var HomeOnCreate = false
     lateinit var googleMap : GoogleMap
-    lateinit var UriBuffer : Uri
     lateinit var superImage : ImageView
     var addTask = 1
     var newTask = ZadanieModel("taklubnie", "taklubnie", "","","taklubnie","","taklubnie", "taklubnie", "","")
@@ -44,6 +44,10 @@ object dane {
     var expectedMessage = 0
     var info = ""
     var photo : Bitmap? = null
+    var photoInBytes: ByteArray?= null
+    var currentUsersData: DataEntityUsersAvatars? = null
+    var contactUsers = arrayListOf<DataEntityUsersAvatars>()
+    var forfor = 0
 }
 
 object time{

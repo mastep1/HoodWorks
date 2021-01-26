@@ -8,7 +8,7 @@ import androidx.room.RoomDatabase
 
 private const val DATABASE = "avatars"
 
-@Database(entities = [DataEntityUsersAvatars::class], version = 5, exportSchema = false)
+@Database(entities = [DataEntityUsersAvatars::class], version = 8, exportSchema = false)
 abstract class UsersAvatarsDatabase : RoomDatabase() {
 
     abstract fun usersAvatarsDao(): UsersAvatarsDao
@@ -25,7 +25,7 @@ abstract class UsersAvatarsDatabase : RoomDatabase() {
         }
 
         private fun buildDatabase(context: Context): UsersAvatarsDatabase{
-            return Room.databaseBuilder(context, UsersAvatarsDatabase::class.java, DATABASE).build()
+            return Room.databaseBuilder(context, UsersAvatarsDatabase::class.java, DATABASE).fallbackToDestructiveMigration().build()
         }
     }
 }

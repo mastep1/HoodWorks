@@ -1,6 +1,7 @@
 package com.example.neighborhoodwork.Activities
 
 import android.content.Intent
+import android.graphics.BitmapFactory
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -88,11 +89,17 @@ class Profil : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListe
         
 
 
-
+         /*
         Glide.with(this)
             .load("https://firebasestorage.googleapis.com/v0/b/hoodworks-6948c.appspot.com/o/Images%2F1596110855207?alt=media&token=234135ad-de87-44bc-9def-6da8bd65fa06")
             .into(img4ZdjProf)
-        
+
+          */
+
+       // var imageBytes = dane.currentUsersData!!.photo
+       // var objectBitmap = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.size)
+
+       // img4ZdjProf.setImageBitmap(objectBitmap)
 
         tx4Imie.text = user.imie
         ratingBar4.rating = user.rating.toFloat()

@@ -13,8 +13,41 @@ data class DataEntityUsersAvatars(
 
     @PrimaryKey
     @ColumnInfo(name = "uid")
-    val uid: String,
+    var uid: String,
 
     @ColumnInfo(name = "photo")
-    val photo: ByteArray
+    var photo: String,
+
+    @ColumnInfo(name = "rating")
+    var rating: Double,
+
+    @ColumnInfo(name = "completed")
+    var completed: Int,
+
+    @ColumnInfo(name = "days_with_app")
+    var daysWithApp: Int,
+
+    @ColumnInfo(name = "likes")
+    var likes: Int,
+
+    @ColumnInfo(name = "dislikes")
+    var dislikes: Int,
+
+    @ColumnInfo(name = "description")
+    var description: String,
+
+    @ColumnInfo(name = "home_x")
+    var homeX: Double,
+
+    @ColumnInfo(name = "home_y")
+    var homeY: Double,
+
+    @ColumnInfo(name = "home_type")
+    var HomeType: Int,
+
+    @ColumnInfo(name = "home_adress")
+    var homeAdress: String,
+
+    @ColumnInfo(name = "version")
+    var Version: Int
 )

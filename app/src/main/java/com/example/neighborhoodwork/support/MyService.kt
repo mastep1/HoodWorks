@@ -15,6 +15,8 @@ import com.example.neighborhoodwork.Adapters.OnSelectConConversation
 import com.example.neighborhoodwork.Adapters.OnSelectConConversationV
 import com.example.neighborhoodwork.Models.MessageModel
 import com.example.neighborhoodwork.Models.UserHome
+import com.example.neighborhoodwork.support.RoomDatabaseForUsersAvatars.DataEntityUsersAvatars
+import com.example.neighborhoodwork.support.RoomDatabaseForUsersAvatars.UsersAvatarsDatabase
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.material.snackbar.Snackbar
@@ -24,25 +26,29 @@ import com.google.firebase.database.*
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import kotlinx.android.synthetic.main.activity_home.*
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 
 class MyService : Service(), OnSelectConConversation, OnSelectConConversationV {
 
     lateinit var sqlUser: SQL_USER
+    lateinit var contactsBase : SQL_CONTACTS
+    lateinit var messageBase : SQL_MESSAGE
+    lateinit var userDataPath: DatabaseReference
+    lateinit var   userDataVersionPath : DatabaseReference
+    lateinit var databaseUserData: UsersAvatarsDatabase
+    lateinit var SQL_CONTACTS_DB : SQL_CONTACTS
+    lateinit var databaseFromFirebaseToSQL: UsersAvatarsDatabase
+
 
     override fun onCreate() {
         super.onCreate()
 
-        dateUser(dane.currentUser)
+        downloadUserDataFromSQL(dane.currentUser)  // pobieranie danych użytkownika, kontaktów, wiadomośći i potem wiadomośći z firebase
 
         checkNewTask(dane.googleMap)
         //checkReciveMessage()
-        downloadSQLUSER()
-    }
-
-    fun downloadSQLUSER(){
-        sqlUser = SQL_USER(this)
-        sqlUser.readOut()
     }
 
     override fun onBind(intent: Intent): IBinder? {
@@ -58,78 +64,127 @@ class MyService : Service(), OnSelectConConversation, OnSelectConConversationV {
         Toast.makeText(this, "Service destroyed by user.", Toast.LENGTH_LONG).show()
     }
 
-    fun dateUser(currentUser: FirebaseUser?){
+    private fun downloadUserDataFromSQL(currentUser: FirebaseUser?){
+        if(currentUser != null){
+            databaseUserData = UsersAvatarsDatabase.getInstance(this)
 
-        lateinit var contactsBase : SQL_CONTACTS
-        lateinit var messageBase : SQL_MESSAGE
-        lateinit var userData: DatabaseReference
+            GlobalScope.launch{
+                var data = databaseUserData.usersAvatarsDao().getAll()
+
+                if(data.isNotEmpty()){
+
+                    var i = 0
+                    while(i != data.size){
+                        if(data[i]!!.uid == currentUser!!.displayName) {
+                            dane.currentUsersData = data[i]
+                        }else{
+                            dane.contactUsers.add(data[i])
+                        }
+                        i++
+                    }
+
+                    checkIfFirebaseUserDataIsNecessary(currentUser)
+                }
+            }
+
+            contactsBase = SQL_CONTACTS(this)
+            dane.Contasts.clear()
+            contactsBase.readAllUsers()
+
+            messageBase = SQL_MESSAGE(this)
+            dane.messages.clear()
+            messageBase.readAllMessages(this)
 
 
-        contactsBase = SQL_CONTACTS(this)
-        dane.Contasts.clear()
-        contactsBase.readAllUsers()
 
-        messageBase = SQL_MESSAGE(this)
-        dane.messages.clear()
-        messageBase.readAllMessages(this)
+        }
+    }
 
-        if (currentUser != null) {
+    private fun checkIfFirebaseUserDataIsNecessary(currentUser: FirebaseUser?){
+
+        val fireuserBase = FirebaseDatabase.getInstance()
+
+        userDataPath = fireuserBase.getReference("Users").child(currentUser!!.displayName.toString()).child("Data")
+        userDataVersionPath = userDataPath.child("version")
+
+        userDataVersionPath.addValueEventListener(object : ValueEventListener {
+
+            override fun onDataChange(p0: DataSnapshot) {
+
+                if(dane.currentUsersData!!.Version.toString().toInt() == p0.value.toString().toInt()){
+                }else{
+                    downloadUserDataFromFirebase(currentUser)
+                    Toast.makeText(applicationContext, "${dane.currentUsersData!!.Version} == ${p0.value}", Toast.LENGTH_LONG).show()
+                }
+            }
+
+            override fun onCancelled(p0: DatabaseError){
+            }
+        })
+
+    }
+
+    private fun downloadUserDataFromFirebase(currentUser: FirebaseUser?){
+
+            lateinit var userDataPath: DatabaseReference
+
             val fireuserBase = FirebaseDatabase.getInstance()
 
-            userData = fireuserBase.getReference("Users").child(currentUser.displayName.toString()).child("Data")
+            userDataPath = fireuserBase.getReference("Users").child(currentUser!!.displayName.toString()).child("Data")
 
-            userData.addValueEventListener(object : ValueEventListener {
+            userDataPath.addValueEventListener(object : ValueEventListener {
 
                 override fun onCancelled(p0: DatabaseError) {
                 }
 
                 override fun onDataChange(dataSnapshot: DataSnapshot) {
+
+                    userDataPath.removeEventListener(this)
+
+                    var newData = DataEntityUsersAvatars("","", 0.0, 0, 0, 0, 0,
+                        "", 0.0, 0.0, 0, "", 1)
+
                     for (i in dataSnapshot.children) {
 
+                        dane.forfor ++
+                        dane.info = i.toString()
                         when(i.key){
-                            "opis" -> user.opis = i.value.toString()
-                            "dislike" -> user.dislike = i.value.toString().toInt()
-                            "like" -> user.like = i.value.toString().toInt()
-                            "dni" -> user.dni = i.value.toString().toInt()
-                            "ukonczone" -> user.ukonczone = i.value.toString().toInt()
-                            "rating" -> user.rating = i.value.toString().toDouble()
-                            "homeAddress" -> user.home.address = i.value.toString()
-                            "homeAddress" -> user.home.address = i.value.toString()
-                            "homeX" -> {
-                                val bufferSecoundParameter = user.home.latLng.longitude
-                                user.home.latLng = LatLng(i.value.toString().toDouble(), bufferSecoundParameter)
-                            }
-                            "homeY" -> {
-                                val bufferFirstParameter = user.home.latLng.latitude
-                                user.home.latLng = LatLng(bufferFirstParameter, i.value.toString().toDouble())
-                            }
-                            "homeType" -> {
-                                 user.home.type = i.value.toString().toInt()
-                            }
+
+                           "description" -> newData.description = i.value.toString()
+                           "dislikes" ->  newData.dislikes = i.value.toString().toInt()
+                           "likes" ->  newData.likes = i.value.toString().toInt()
+                           "daysWithApp" -> newData.daysWithApp = i.value.toString().toInt()
+                           "completed" -> newData.completed = i.value.toString().toInt()
+                           "rating" -> newData.rating = i.value.toString().toDouble()
+                           "homeAdress" -> newData.homeAdress = i.value.toString()
+                           "homeX" -> newData.homeX = i.value.toString().toDouble()
+                           "homeY" -> newData.homeY = i.value.toString().toDouble()
+                           "homeType" -> newData.HomeType = i.value.toString().toInt()
+                           "uid" -> newData.uid = i.value.toString()
+                           "photo" -> {
+                               newData.photo = i.value.toString()
+                               Toast.makeText(applicationContext, "UPDATE", Toast.LENGTH_LONG).show()
+                           }
+                           "version" -> newData.Version = i.value.toString().toInt()
                         }
+                    }
+
+                    if(currentUser.email != null)
+                    {
+                        if(!currentUser.isEmailVerified){
+                            Toast.makeText(applicationContext, "Zweryfikuj swoje konto e-mail ${currentUser.email}", Toast.LENGTH_LONG).show()
+                            dane.currentUser.sendEmailVerification(ActionCodeSettings.zza())
+                        }
+                    }
+
+                    dane.currentUsersData = newData
+
+                    databaseFromFirebaseToSQL = UsersAvatarsDatabase.getInstance(applicationContext)
+                    GlobalScope.launch {
+                        databaseFromFirebaseToSQL.usersAvatarsDao().insertOrUpdate(newData)
                     }
                 }
             })
-
-            if(currentUser.displayName != null)
-            {
-                user.imie = currentUser.displayName.toString()
-            }
-            if(currentUser.email != null)
-            {
-                user.email = currentUser.email.toString()
-                if(!currentUser.isEmailVerified){
-                    Toast.makeText(applicationContext, "Zweryfikuj swoje konto e-mail ${currentUser.email}", Toast.LENGTH_LONG).show()
-                    dane.currentUser.sendEmailVerification(ActionCodeSettings.zza())
-                }
-            }
-            if(currentUser.phoneNumber != null)
-            {
-                user.tel = currentUser.phoneNumber.toString()
-            }
-
-
-        }
 
 
          dane.expectedMessage = dane.messages.size + 1
@@ -201,8 +256,6 @@ class MyService : Service(), OnSelectConConversation, OnSelectConConversationV {
         })
     }
 
-   
-
     private fun checkReciveMessage(){
 
         lateinit var newMessaesPath: DatabaseReference
@@ -272,10 +325,8 @@ class MyService : Service(), OnSelectConConversation, OnSelectConConversationV {
         }
         return false
     }
-    
 
     private fun addConversation(newConversation : String){
-        lateinit var SQL_CONTACTS_DB : SQL_CONTACTS
 
         dane.Contasts.add(newConversation)          /// RAM
 
@@ -318,6 +369,5 @@ class MyService : Service(), OnSelectConConversation, OnSelectConConversationV {
             }
         })
     }
-
 }
 

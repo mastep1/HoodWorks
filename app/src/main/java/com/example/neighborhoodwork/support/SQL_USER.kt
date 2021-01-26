@@ -70,7 +70,7 @@ class SQL_USER(context: Context) : SQLiteOpenHelper(context,
     }
 
     companion object {
-        val DATABASE_VERSION = 208
+        val DATABASE_VERSION = 210
         val DATABASE_NAME = "User.db"
 
 

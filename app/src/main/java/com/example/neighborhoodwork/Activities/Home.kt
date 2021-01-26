@@ -37,6 +37,8 @@ import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.gms.tasks.Task
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.activity_home.*
 import java.util.*
 
@@ -58,16 +60,13 @@ class Home : AppCompatActivity(), OnMapReadyCallback, NavigationView.OnNavigatio
     var dodanoLokalizacje : Boolean = false
     private val mLocationPermissionsGranted = false
 
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
 
         img2Filter.setOnClickListener {
-            var intent = Intent(applicationContext, SQLIMAGEACTIVITY::class.java)
-            startActivity(intent)
+            Toast.makeText(applicationContext, "${dane.currentUsersData}", Toast.LENGTH_LONG).show()
         }
 
         

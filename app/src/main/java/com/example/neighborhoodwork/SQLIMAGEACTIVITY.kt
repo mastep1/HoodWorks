@@ -63,13 +63,13 @@ open class SQLIMAGEACTIVITY : AppCompatActivity() {
                         var nameOfImage = files[files.size - 1].uid
                         var imageBytes = files[files.size - 1].photo
 
-                        var objectBitmap = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.size)
+                       // var objectBitmap = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.size)
 
                         //TestEtx.setText("nameOfImage")
 
                         //TestImg.setImageBitmap(objectBitmap)
                     dane.info = nameOfImage
-                    dane.photo =  objectBitmap
+                   // dane.photo =  objectBitmap
                     }else{
                     dane.info = "no values in database"
                 }
@@ -145,14 +145,14 @@ open class SQLIMAGEACTIVITY : AppCompatActivity() {
                  imagesInBytes = objectByteArrayOutputStream.toByteArray()
 
 
-                 var dataToPush = DataEntityUsersAvatars(TestEtx.text.toString(), imagesInBytes)
-                 Toast.makeText(applicationContext, "$dataToPush,", Toast.LENGTH_LONG).show()
+                 //var dataToPush = DataEntityUsersAvatars(TestEtx.text.toString(), imagesInBytes)
+                // Toast.makeText(applicationContext, "$dataToPush,", Toast.LENGTH_LONG).show()
 
 
                  val local =  UsersAvatarsDatabase.getInstance(this)
-                 GlobalScope.launch{
-                     local.usersAvatarsDao().insertOrUpdate(dataToPush)
-                 }
+                 //GlobalScope.launch{
+                     //local.usersAvatarsDao().insertOrUpdate(dataToPush)
+               //  }
 
              }catch(e : java.lang.Exception){
                  Log.e("Alicja", e.message)
@@ -162,13 +162,6 @@ open class SQLIMAGEACTIVITY : AppCompatActivity() {
 
          }
 
-
-    }
-
-    fun insertUserAvatar(dataEntityUsersAvatars : DataEntityUsersAvatars, dao : UsersAvatarsDao){
-        //CoroutineScope(Dispatchers.IO).launch {
-            //dao.insertAll(dataEntityUsersAvatars)
-       // }
 
     }
 
