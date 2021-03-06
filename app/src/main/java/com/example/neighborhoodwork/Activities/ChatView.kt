@@ -23,6 +23,9 @@ import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.util.JsonMapper
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.chat_view.*
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
@@ -38,7 +41,7 @@ class ChatView : AppCompatActivity(), OnSelectConConversationV {
 
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
+    override fun onCreate(savedInstanceState: Bundle?) = runBlocking{
         super.onCreate(savedInstanceState)
         setContentView(R.layout.chat_view)
 
@@ -51,6 +54,12 @@ class ChatView : AppCompatActivity(), OnSelectConConversationV {
             rc12ChatView.smoothScrollToPosition(rc12ChatView.getAdapter()!!.itemCount - 1)
         }
 
+        val job = GlobalScope.launch {
+            dane.messagesOfSpecificUser = makeListWithMessages()
+        }
+
+        job.join()
+
          rc12ChatView.apply {
             layoutManager = LinearLayoutManager(this@ChatView)
             addItemDecoration(TopSpacingItemDecoration(30))
@@ -58,7 +67,6 @@ class ChatView : AppCompatActivity(), OnSelectConConversationV {
 
          }
 
-         dane.messagesOfSpecificUser = makeListWithMessages()
 
         beReadyForsend()
     }
@@ -123,7 +131,7 @@ class ChatView : AppCompatActivity(), OnSelectConConversationV {
 
             var dataBaseLink = FirebaseDatabase.getInstance()
             var messagesMeter = dataBaseLink.getReference("Users").child("${dane.Contasts[dane.openConversation]}").child("messagesMeter")
-        
+
             messagesMeter.addValueEventListener(object : ValueEventListener {
 
                 override fun onCancelled(p0: DatabaseError) {
@@ -131,12 +139,9 @@ class ChatView : AppCompatActivity(), OnSelectConConversationV {
 
                 override fun onDataChange(p0: DataSnapshot) {
 
-                    Toast.makeText(applicationContext, "Error", Toast.LENGTH_LONG).show()
-                    Log.e("FUCKING_ERROR", "$messagesMeter, ${p0.value}")
+                    messagesMeter.removeEventListener(this)
 
-//                    messagesMeter.removeEventListener(this)
-
-            ///        messageNumber = p0.value.toString().toInt()
+                    messageNumber = p0.value.toString().toInt()
 
                     messagesMeter.setValue(messageNumber + 1)
 
@@ -152,10 +157,12 @@ class ChatView : AppCompatActivity(), OnSelectConConversationV {
 
                     Etx12Message.setText("")
 
+                    dane.messagesOfSpecificUser.add(MessageModel(message, true, "${date.time}", dane.Contasts[dane.openConversation], false))
+
 
                     dane.avoid = 0
                     rc12ChatView.adapter = ChatViewAdapter(this@ChatView)
-                   // rc12ChatView.smoothScrollToPosition(rc12ChatView.getAdapter()!!.itemCount - 1)
+                    rc12ChatView.smoothScrollToPosition(rc12ChatView.getAdapter()!!.itemCount - 1)
 
                     sendToYourSelf( MessageModel(message, true, "${date.time}",
                         dane.Contasts[dane.openConversation], true ), name)

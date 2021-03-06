@@ -36,50 +36,24 @@ class ChatViewAdapter(var clickListnerV: OnSelectConConversationV) : RecyclerVie
         }
     }
     override fun getItemCount(): Int {
-        var howManyMessage =  sayHowMany(dane.Contasts[dane.openConversation])
+        var howManyMessage =  dane.messagesOfSpecificUser.size - 1
         return howManyMessage
     }
 
-    private fun sayHowMany(openConversation : String): Int{
-        var i = 0
-        var toReturn = 0
-        while(i < dane.messages.size)
-        {
-            if(dane.messages[i].user == openConversation){
-                 toReturn++
-            }
-            i++
-        }
-        return toReturn
-    }
+
+
 
     class ViewHolderV
     constructor(itemView: View): RecyclerView.ViewHolder(itemView){
 
         fun initialize2(action : OnSelectConConversationV, position: Int){
+            Log.e("FuckingError", "pozycja $position na ${dane.messagesOfSpecificUser.size - 1}")
+            itemView.tx13Message.text = dane.messagesOfSpecificUser[position].message
 
-            var find = false
-
-             while(find==false){
-
-                 Log.e("FUCKING_ERROR", "${dane.messages.size}")
-
-                 if(dane.avoid + 1 > dane.messages.size){
-                     Log.e("FUCKING_ERROR", "Chat View Apapter got fucked")
-                     find = true
-                 }else if(dane.messages[dane.avoid].user==dane.Contasts[dane.openConversation]){
-                     Log.e("FUCKING_ERROR", "shows ${dane.avoid}, $position")
-
-                  itemView.tx13Message.text = dane.messages[dane.avoid].message
-
-                  if(!dane.messages[dane.avoid].thisUser){
-                      itemView.l13Main.gravity = Gravity.END
-                  }
-                     find = true
-                 }
-                dane.avoid ++
-             }
-        }
+            if(!dane.messagesOfSpecificUser[position].thisUser){
+                itemView.l13Main.gravity = Gravity.END
+            }
+       }
 
     }
 

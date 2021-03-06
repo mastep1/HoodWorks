@@ -18,6 +18,7 @@ import com.example.neighborhoodwork.Adapters.InfoWindowAdapter
 import com.example.neighborhoodwork.Fragments.BigInfoWindow
 import com.example.neighborhoodwork.R
 import com.example.neighborhoodwork.support.*
+import com.example.neighborhoodwork.support.Trials.multiThreading
 import com.example.neighborhoodwork.support.UsersDatabase.DatabaseUsers
 import com.firebase.ui.auth.AuthUI
 import com.google.android.gms.location.*
@@ -30,6 +31,7 @@ import com.google.android.gms.maps.model.Marker
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_home.*
+import kotlinx.coroutines.runBlocking
 import java.util.*
 
 
@@ -51,7 +53,7 @@ class Home : AppCompatActivity(), OnMapReadyCallback, NavigationView.OnNavigatio
     private val mLocationPermissionsGranted = false
     lateinit var databaseUserData: DatabaseUsers
 
-    override fun onCreate(savedInstanceState: Bundle?) {
+    override fun onCreate(savedInstanceState: Bundle?){
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
