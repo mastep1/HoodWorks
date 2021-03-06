@@ -2,22 +2,124 @@ package com.example.neighborhoodwork.support
 
 import android.content.Context
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.util.Log
+import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import com.example.neighborhoodwork.Models.MessageModel
 import com.example.neighborhoodwork.R
-import com.example.neighborhoodwork.support.RoomDatabaseForUsersAvatars.DataEntityUsersAvatars
-import com.example.neighborhoodwork.support.RoomDatabaseForUsersAvatars.UsersAvatarsDatabase
+import com.example.neighborhoodwork.support.PhotosDatabase.DataEntityPhotos
+import com.example.neighborhoodwork.support.PhotosDatabase.DatabasePhotos
+import com.example.neighborhoodwork.support.UsersDatabase.DataEntityUsers
+import com.example.neighborhoodwork.support.UsersDatabase.DatabaseUsers
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
-import kotlinx.android.synthetic.main.activity_s_q_l_i_m_a_g_e_a_c_t_i_v_i_t_y.*
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
+import com.google.firebase.database.*
+import com.google.firebase.storage.FirebaseStorage
+import kotlinx.coroutines.*
 import java.io.ByteArrayOutputStream
 
+
+fun uploadProfilePicture(img : ImageView, Uname : String){
+
+    var iii = 0
+      for(i in dane.contactUsers){
+
+          if(i.uid == Uname){
+              var string = i.photoURL
+              //dane.info = imageBytes
+              var imageBytes = string.toByteArray()
+
+              var objectBitmap = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.size)
+
+              img.setImageBitmap(objectBitmap)
+          }
+          iii++
+      }
+}
+
+fun uploadPhotoToFireStore(photo : ByteArray, Uname : String, context: Context, bt : Button) {
+    var imageRef = FirebaseStorage.getInstance().reference.child("usersAvatars").child(Uname)
+    imageRef.putBytes(photo).addOnSuccessListener { taskSnapshot ->
+
+        imageRef.downloadUrl.addOnCompleteListener { taskSnapshot ->
+            dane.photoURL = taskSnapshot.result.toString()
+            bt.isClickable = true
+        }
+    }
+}
+
+fun uploadPhotoToSQL(photo: ByteArray, Uname: String, context: Context){
+    var db = DatabasePhotos.getInstance(context)
+
+    val sc = GlobalScope.launch {
+        db.daoPhotos().insertOrUpdate(DataEntityPhotos(Uname, photo))
+    }
+    runBlocking {
+       sc.join()
+    }
+
+}
+
+fun downloadSBsProfil(Uname: String, context: Context){
+
+    var fireuserBase = FirebaseDatabase.getInstance()
+    var userDataPath = fireuserBase.getReference("Users").child(Uname).child("Data")
+    userDataPath.addValueEventListener(object : ValueEventListener {
+
+        override fun onDataChange(p0: DataSnapshot) {
+
+            userDataPath.removeEventListener(this)
+
+            var newData = DataEntityUsers("","", 0.0, 0, 0, 0, 0,
+                "", 0.0, 0.0, 0, "", 1)
+
+            for (i in p0.children) {
+
+                when(i.key){
+
+                    "description" -> newData.description = i.value.toString()
+                    "dislikes" ->  newData.dislikes = i.value.toString().toInt()
+                    "likes" ->  newData.likes = i.value.toString().toInt()
+                    "daysWithApp" -> newData.daysWithApp = i.value.toString().toInt()
+                    "completed" -> newData.completed = i.value.toString().toInt()
+                    "rating" -> newData.rating = i.value.toString().toDouble()
+                    "homeAdress" -> newData.homeAdress = i.value.toString()
+                    "homeX" -> newData.homeX = i.value.toString().toDouble()
+                    "homeY" -> newData.homeY = i.value.toString().toDouble()
+                    "homeType" -> newData.HomeType = i.value.toString().toInt()
+                    "uid" -> newData.uid = i.value.toString()
+                    "photo" -> {
+                        newData.photoURL = i.value.toString()
+                    }
+                    "version" -> newData.Version = i.value.toString().toInt()
+                }
+            }
+
+            dane.contactUsers.add(newData)
+
+            var databaseFromFirebaseToSQL = DatabaseUsers.getInstance(context)
+
+            Toast.makeText(context, "$userDataPath", Toast.LENGTH_LONG).show()
+            Log.e("Alicja", "$userDataPath")
+
+            val  globalscope = GlobalScope.launch {
+                dane.info = databaseFromFirebaseToSQL.usersAvatarsDao().insertOrUpdate(newData).toString()
+            }
+            runBlocking {
+                globalscope.join()
+           }
+        }
+
+        override fun onCancelled(p0: DatabaseError){
+        }
+    })
+
+}
 
 fun compressPhotoToBytes(bitmap: Bitmap): ByteArray?{
 
@@ -87,4 +189,22 @@ fun znaczniki(googleMap: GoogleMap) {
 
 
 }
+
+fun makeListWithMessages() : java.util.ArrayList <MessageModel> {
+
+    var listOfMessages = arrayListOf<MessageModel>()
+    var index = 0
+
+    while(index < dane.messages.size){
+        if(dane.messages[index].user==dane.Contasts[dane.openConversation]){
+
+            Log.e("FUCKING_ERROR", "found ${listOfMessages.size + 1}")
+
+            listOfMessages.add(dane.messages[index])
+        }
+        index ++
+    }
+    return listOfMessages
+}
+
 

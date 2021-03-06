@@ -5,24 +5,19 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
-import androidx.core.net.toUri
-import com.example.neighborhoodwork.Models.UserHome
 import kotlinx.android.synthetic.main.activity_samouczek.*
 import com.example.neighborhoodwork.R
-import com.example.neighborhoodwork.Models.UserModel
-import com.example.neighborhoodwork.support.RoomDatabaseForUsersAvatars.DataEntityUsersAvatars
-import com.example.neighborhoodwork.support.RoomDatabaseForUsersAvatars.UsersAvatarsDatabase
+import com.example.neighborhoodwork.support.UsersDatabase.DataEntityUsers
+import com.example.neighborhoodwork.support.UsersDatabase.DatabaseUsers
 import com.example.neighborhoodwork.support.dane
-import com.example.neighborhoodwork.support.user
+import com.example.neighborhoodwork.support.uploadPhotoToFireStore
+import com.example.neighborhoodwork.support.uploadPhotoToSQL
 import com.firebase.ui.auth.AuthUI
-import com.firebase.ui.auth.data.model.User
-import com.google.android.gms.maps.model.LatLng
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 import java.util.*
 
 class Samouczek : AppCompatActivity(){
@@ -44,12 +39,19 @@ class Samouczek : AppCompatActivity(){
         )
         showSignInOptions()
 
+        button4.setOnClickListener {
+            auth = FirebaseAuth.getInstance()
+            val currentU = auth.currentUser
+            uploadPhotoToFireStore(dane.photoInBytes!!, currentU!!.displayName.toString(), this, baton1)
+            uploadPhotoToSQL(dane.photoInBytes!!, currentU.displayName.toString(), this)
+        }
+
         baton1.setOnClickListener {
+            Toast.makeText(applicationContext, "${dane.photoURL}", Toast.LENGTH_LONG).show()
                 textView1.text = "Kliknij button2!"
 
                     try{
                         //  Pobieranie użytkownika
-                        auth = FirebaseAuth.getInstance()
                         val currentU = auth.currentUser
 
                         // Pobieranie ścieżki do Firabase i ustawianie jej na users
@@ -62,35 +64,28 @@ class Samouczek : AppCompatActivity(){
                                 val UName = currentU.displayName.toString()
 
                                 /// Zbieranie danych w model użytkownika w calu wysłania do FireBase, RAM i SQL
-                                val toInsert = DataEntityUsersAvatars(UName, dane.photoInBytes!!.toString(), 0.0, 0, 0, 0,
+                                val toInsert = DataEntityUsers(UName, dane.photoURL, 0.0, 0, 0, 0,
                                     0, editText3.text.toString(), 0.0, 0.0, 0, "", 1)
 
                                 ////Ustawianie licznika wiadomości na 1
                                  userRef.child(UName).child("messagesMeter").setValue("1")
 
                                 ///Ram
-                                 dane.currentUsersData = toInsert
+                                 dane.currentUsersDataUsers = toInsert
                             
                                 ///Wysyłanie danych użytkownika do Firebase
                                 userRef.child(UName).child("Data").setValue(toInsert)
 
 
                                  //// SQL
-                                val local = UsersAvatarsDatabase.getInstance(applicationContext)
+                                val local = DatabaseUsers.getInstance(applicationContext)
                                  GlobalScope.launch {
                                      local.usersAvatarsDao().insertOrUpdate(toInsert)
-                                }
-
-                            /*
+                                 }
 
 
+                                 //Toast.makeText(applicationContext, "I'm right here", Toast.LENGTH_LONG).show()
 
-
-
-                        Toast.makeText(applicationContext, "I'm right here", Toast.LENGTH_LONG).show()
-                    }else{
-                        Toast.makeText(applicationContext, "current Is null", Toast.LENGTH_LONG).show()
-                         */
                         
                         }
 

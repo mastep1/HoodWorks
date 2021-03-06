@@ -1,12 +1,11 @@
 package com.example.neighborhoodwork.support
 
 import android.app.Service
-import android.content.Context
 import android.content.Intent
 import android.os.IBinder
+import android.util.Log
 import android.view.View
 import android.widget.Toast
-import com.bumptech.glide.Glide
 import com.example.neighborhoodwor.ZadanieModel
 import com.example.neighborhoodwork.Activities.ChatView
 import com.example.neighborhoodwork.Adapters.ChatMenagerAdapter
@@ -14,32 +13,28 @@ import com.example.neighborhoodwork.Adapters.ChatViewAdapter
 import com.example.neighborhoodwork.Adapters.OnSelectConConversation
 import com.example.neighborhoodwork.Adapters.OnSelectConConversationV
 import com.example.neighborhoodwork.Models.MessageModel
-import com.example.neighborhoodwork.Models.UserHome
-import com.example.neighborhoodwork.support.RoomDatabaseForUsersAvatars.DataEntityUsersAvatars
-import com.example.neighborhoodwork.support.RoomDatabaseForUsersAvatars.UsersAvatarsDatabase
+import com.example.neighborhoodwork.support.PhotosDatabase.DataEntityPhotos
+import com.example.neighborhoodwork.support.PhotosDatabase.DatabasePhotos
+import com.example.neighborhoodwork.support.UsersDatabase.DataEntityUsers
+import com.example.neighborhoodwork.support.UsersDatabase.DatabaseUsers
 import com.google.android.gms.maps.GoogleMap
-import com.google.android.gms.maps.model.LatLng
-import com.google.android.material.snackbar.Snackbar
-import com.google.firebase.auth.ActionCodeSettings
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.*
-import com.google.firebase.storage.FirebaseStorage
-import com.google.firebase.storage.StorageReference
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
+import java.lang.Exception
 
 
 class MyService : Service(), OnSelectConConversation, OnSelectConConversationV {
 
-    lateinit var sqlUser: SQL_USER
     lateinit var contactsBase : SQL_CONTACTS
     lateinit var messageBase : SQL_MESSAGE
-    lateinit var userDataPath: DatabaseReference
-    lateinit var   userDataVersionPath : DatabaseReference
-    lateinit var databaseUserData: UsersAvatarsDatabase
+    lateinit var photosDatabase : DatabasePhotos
+    lateinit var databaseUserData: DatabaseUsers
     lateinit var SQL_CONTACTS_DB : SQL_CONTACTS
-    lateinit var databaseFromFirebaseToSQL: UsersAvatarsDatabase
+    lateinit var databaseFromFirebaseToSQL: DatabaseUsers
 
 
     override fun onCreate() {
@@ -48,10 +43,9 @@ class MyService : Service(), OnSelectConConversation, OnSelectConConversationV {
         downloadUserDataFromSQL(dane.currentUser)  // pobieranie danych użytkownika, kontaktów, wiadomośći i potem wiadomośći z firebase
 
         checkNewTask(dane.googleMap)
-        //checkReciveMessage()
     }
 
-    override fun onBind(intent: Intent): IBinder? {
+    override fun onBind(intent: Intent): IBinder?{
         return null
     }
 
@@ -65,72 +59,126 @@ class MyService : Service(), OnSelectConConversation, OnSelectConConversationV {
     }
 
     private fun downloadUserDataFromSQL(currentUser: FirebaseUser?){
+
+        /// Kontakty
+        contactsBase = SQL_CONTACTS(this)
+        dane.Contasts.clear()
+        contactsBase.readAllUsers()
+
+        //// Wiadomości
+        messageBase = SQL_MESSAGE(this)
+        dane.messages.clear()
+        messageBase.readAllMessages(this)
+
+        ///
+
+
         if(currentUser != null){
-            databaseUserData = UsersAvatarsDatabase.getInstance(this)
+
+        photosDatabase = DatabasePhotos.getInstance(this)
+
+
+             try{
+                 val sc = GlobalScope.launch{
+                // var photos  = photosDatabase.daoPhotos().getAll()
+
+
+
+
+                   // if(photos!!.isNotEmpty()){
+
+                        var i = 0
+                       // while(i != photos.size){
+
+                         //   if(photos[i].userid == currentUser.displayName) {
+
+                             //   dane.currentUserPhoto = photos[i].photoInBytes
+                           // }else{
+                             //   dane.photos.add(photos[i])
+                           // }
+                           // i++
+                        //}
+                    //}
+
+                 }
+                 runBlocking {
+                     sc.join()
+                 }
+             } catch (e: Exception){
+                 Log.e("Alicja", e.message)
+             }
+
+
+
+
+
+
+
+            databaseUserData = DatabaseUsers.getInstance(this)
 
             GlobalScope.launch{
                 var data = databaseUserData.usersAvatarsDao().getAll()
 
                 if(data.isNotEmpty()){
-
                     var i = 0
                     while(i != data.size){
-                        if(data[i]!!.uid == currentUser!!.displayName) {
-                            dane.currentUsersData = data[i]
+                        if(data[i].uid == currentUser.displayName) {
+                            dane.currentUsersDataUsers = data[i]
                         }else{
                             dane.contactUsers.add(data[i])
                         }
+                        checkIfFirebaseUserDataDownloadIsNecessary(data[i])
                         i++
                     }
-
-                    checkIfFirebaseUserDataIsNecessary(currentUser)
                 }
             }
-
-            contactsBase = SQL_CONTACTS(this)
-            dane.Contasts.clear()
-            contactsBase.readAllUsers()
-
-            messageBase = SQL_MESSAGE(this)
-            dane.messages.clear()
-            messageBase.readAllMessages(this)
-
-
-
         }
     }
 
-    private fun checkIfFirebaseUserDataIsNecessary(currentUser: FirebaseUser?){
+
+    private fun checkIfFirebaseUserDataDownloadIsNecessary(user: DataEntityUsers){
 
         val fireuserBase = FirebaseDatabase.getInstance()
 
-        userDataPath = fireuserBase.getReference("Users").child(currentUser!!.displayName.toString()).child("Data")
-        userDataVersionPath = userDataPath.child("version")
+        var userDataPath = fireuserBase.getReference("Users").child(user.uid).child("Data")
+        var userDataVersionPath = userDataPath.child("version")
 
-        userDataVersionPath.addValueEventListener(object : ValueEventListener {
+        userDataVersionPath.addValueEventListener(object : ValueEventListener{
 
-            override fun onDataChange(p0: DataSnapshot) {
-
-                if(dane.currentUsersData!!.Version.toString().toInt() == p0.value.toString().toInt()){
-                }else{
-                    downloadUserDataFromFirebase(currentUser)
-                    Toast.makeText(applicationContext, "${dane.currentUsersData!!.Version} == ${p0.value}", Toast.LENGTH_LONG).show()
+            override fun onDataChange(p0: DataSnapshot){
+                if(p0.value != null){
+                    if(user.Version.toString().toInt() == p0.value.toString().toInt()){
+                    }else{
+                        userDataVersionPath.removeEventListener(this)
+                        downloadUserDataFromFirebase(user)
+                    }
                 }
+                Toast.makeText(applicationContext, "${user.Version}${p0.value}", Toast.LENGTH_LONG).show()
+
             }
 
             override fun onCancelled(p0: DatabaseError){
             }
         })
 
+        if(dane.forListeningNewMessages){
+            dane.expectedMessage = dane.messages.size + 1
+            downloadMessage(dane.messages.size + 1)
+            dane.forListeningNewMessages = false
+        }
+
+
+
+
     }
 
-    private fun downloadUserDataFromFirebase(currentUser: FirebaseUser?){
+    private fun downloadUserDataFromFirebase(user: DataEntityUsers){
 
             lateinit var userDataPath: DatabaseReference
 
             val fireuserBase = FirebaseDatabase.getInstance()
 
-            userDataPath = fireuserBase.getReference("Users").child(currentUser!!.displayName.toString()).child("Data")
+            userDataPath = fireuserBase.getReference("Users").child(user.uid).child("Data")
 
             userDataPath.addValueEventListener(object : ValueEventListener {
 
@@ -141,13 +189,11 @@ class MyService : Service(), OnSelectConConversation, OnSelectConConversationV {
 
                     userDataPath.removeEventListener(this)
 
-                    var newData = DataEntityUsersAvatars("","", 0.0, 0, 0, 0, 0,
+                    var newData = DataEntityUsers("","", 0.0, 0, 0, 0, 0,
                         "", 0.0, 0.0, 0, "", 1)
 
                     for (i in dataSnapshot.children) {
 
-                        dane.forfor ++
-                        dane.info = i.toString()
                         when(i.key){
 
                            "description" -> newData.description = i.value.toString()
@@ -161,34 +207,31 @@ class MyService : Service(), OnSelectConConversation, OnSelectConConversationV {
                            "homeY" -> newData.homeY = i.value.toString().toDouble()
                            "homeType" -> newData.HomeType = i.value.toString().toInt()
                            "uid" -> newData.uid = i.value.toString()
-                           "photo" -> {
-                               newData.photo = i.value.toString()
-                               Toast.makeText(applicationContext, "UPDATE", Toast.LENGTH_LONG).show()
+                           "photoURL" -> {
+                               Toast.makeText(applicationContext, "PHOTO", Toast.LENGTH_LONG).show()
+                               newData.photoURL = i.value.toString()
                            }
                            "version" -> newData.Version = i.value.toString().toInt()
                         }
                     }
 
-                    if(currentUser.email != null)
-                    {
-                        if(!currentUser.isEmailVerified){
-                            Toast.makeText(applicationContext, "Zweryfikuj swoje konto e-mail ${currentUser.email}", Toast.LENGTH_LONG).show()
-                            dane.currentUser.sendEmailVerification(ActionCodeSettings.zza())
-                        }
+                    if(dane.currentUsersDataUsers!!.uid == newData.uid ){
+                        dane.currentUsersDataUsers = newData
+                    }else{
+                        dane.contactUsers.add(newData)
                     }
 
-                    dane.currentUsersData = newData
+                   checkIfFirebaseUserDataDownloadIsNecessary(newData)
 
-                    databaseFromFirebaseToSQL = UsersAvatarsDatabase.getInstance(applicationContext)
-                    GlobalScope.launch {
+                    databaseFromFirebaseToSQL = DatabaseUsers.getInstance(applicationContext)
+                    val scope = GlobalScope.launch {
                         databaseFromFirebaseToSQL.usersAvatarsDao().insertOrUpdate(newData)
+                    }
+                    runBlocking {
+                        scope.join()
                     }
                 }
             })
-
-
-         dane.expectedMessage = dane.messages.size + 1
-        downloadMessage(dane.messages.size + 1)
     }
 
     fun downloadMessage(messageIndex : Int){
@@ -256,6 +299,7 @@ class MyService : Service(), OnSelectConConversation, OnSelectConConversationV {
         })
     }
 
+
     private fun checkReciveMessage(){
 
         lateinit var newMessaesPath: DatabaseReference
@@ -303,7 +347,7 @@ class MyService : Service(), OnSelectConConversation, OnSelectConConversationV {
                          dane.newMessage++
                          dane.tx.text = dane.newMessage.toString()
                          dane.tx.visibility = View.VISIBLE
-                     }  
+                     }
                 }
 
 
@@ -333,7 +377,7 @@ class MyService : Service(), OnSelectConConversation, OnSelectConConversationV {
         SQL_CONTACTS_DB = SQL_CONTACTS(this)            //// SQL
         SQL_CONTACTS_DB.insertUser("${newConversation}")        /// SQL
 
-
+        downloadSBsProfil(newConversation,  applicationContext)
         dane.newContact = ""             /// wyczyszczenie zmiennej
     }
 

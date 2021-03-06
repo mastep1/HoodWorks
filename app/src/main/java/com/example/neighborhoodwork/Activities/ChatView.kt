@@ -3,8 +3,10 @@ package com.example.neighborhoodwork.Activities
 import android.content.Context
 import android.os.Bundle
 import android.util.JsonWriter
+import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.size
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.neighborhoodwork.Adapters.ChatMenagerAdapter
 import com.example.neighborhoodwork.Adapters.ChatViewAdapter
@@ -45,19 +47,23 @@ class ChatView : AppCompatActivity(), OnSelectConConversationV {
 
         setHeaderLine()
 
+        BT12Settings.setOnClickListener {
+            rc12ChatView.smoothScrollToPosition(rc12ChatView.getAdapter()!!.itemCount - 1)
+        }
+
          rc12ChatView.apply {
-        layoutManager = LinearLayoutManager(this@ChatView)
-        addItemDecoration(TopSpacingItemDecoration(30))
-        adapter = ChatViewAdapter(this@ChatView)
+            layoutManager = LinearLayoutManager(this@ChatView)
+            addItemDecoration(TopSpacingItemDecoration(30))
+            adapter = ChatViewAdapter(this@ChatView)
 
-            
+         }
+
+         dane.messagesOfSpecificUser = makeListWithMessages()
+
+        beReadyForsend()
     }
 
-    byReadyForsend()
-
-    }
-
-    fun byReadyForsend(){
+    fun beReadyForsend(){
 
         FAB12Send.setOnClickListener {
             sendToInterlocutor()
@@ -75,7 +81,7 @@ class ChatView : AppCompatActivity(), OnSelectConConversationV {
 
             addMessage(this, message, date.time.toString(), true)
             var bazaDane = FirebaseDatabase.getInstance()
-            var link = bazaDane.getReference("Users").child("${dane.Contasts[dane.openConversation]}")
+            var link = bazaDane.getReference("Users").child(dane.Contasts[dane.openConversation])
                 .child("Conversation").child("${date.time}")
 
 
@@ -125,9 +131,12 @@ class ChatView : AppCompatActivity(), OnSelectConConversationV {
 
                 override fun onDataChange(p0: DataSnapshot) {
 
-                    messagesMeter.removeEventListener(this)
+                    Toast.makeText(applicationContext, "Error", Toast.LENGTH_LONG).show()
+                    Log.e("FUCKING_ERROR", "$messagesMeter, ${p0.value}")
 
-                    messageNumber = p0.value.toString().toInt()
+//                    messagesMeter.removeEventListener(this)
+
+            ///        messageNumber = p0.value.toString().toInt()
 
                     messagesMeter.setValue(messageNumber + 1)
 
@@ -146,8 +155,10 @@ class ChatView : AppCompatActivity(), OnSelectConConversationV {
 
                     dane.avoid = 0
                     rc12ChatView.adapter = ChatViewAdapter(this@ChatView)
+                   // rc12ChatView.smoothScrollToPosition(rc12ChatView.getAdapter()!!.itemCount - 1)
 
-                    sendToYourSelf( MessageModel(message, true, "${date.time}", "${dane.Contasts[dane.openConversation]}", true ), name)
+                    sendToYourSelf( MessageModel(message, true, "${date.time}",
+                        dane.Contasts[dane.openConversation], true ), name)
 
 
                 }
@@ -179,9 +190,9 @@ class ChatView : AppCompatActivity(), OnSelectConConversationV {
 
                 linkForMessageIndex.removeEventListener(this)
 
-                var messageIndex = p0.value.toString().toInt()
+//                var messageIndex = p0.value.toString().toInt()
 
-                linkForMessageIndex.setValue(messageIndex + 1)
+             //   linkForMessageIndex.setValue(messageIndex + 1)
             }
         })
     }

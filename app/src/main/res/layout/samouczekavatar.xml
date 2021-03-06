@@ -12,13 +12,21 @@
         android:layout_height="300dp"
         android:layout_weight="1"
         app:srcCompat="@drawable/avatar" />
+
     <Button
         android:id="@+id/buttonLoadPicture"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:layout_weight="0"
-        android:text="Load Picture"
-        android:layout_gravity="center"/>
+        android:text="Load Picture" />
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Klikaj przyciski od góry do dołu" />
 
     <Button
         android:id="@+id/button2"

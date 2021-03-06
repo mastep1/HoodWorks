@@ -52,7 +52,7 @@ class SQL_MESSAGE(context: Context) : SQLiteOpenHelper(context,
         var cursor: Cursor? = null
         try {
             cursor = db.rawQuery("select * from " + SQL_DB_MESSAGE.Message.TABLE_NAME, null)
-        } catch (e: SQLiteException) {
+        }catch (e: SQLiteException){
             db.execSQL(SQL_CREATE_ENTRIES)
         }
 
@@ -89,7 +89,7 @@ class SQL_MESSAGE(context: Context) : SQLiteOpenHelper(context,
     }
 
     companion object {
-        val DATABASE_VERSION = 276
+        val DATABASE_VERSION = 309
         val DATABASE_NAME = "Messagecztery.db"
 
         private val SQL_CREATE_ENTRIES = "CREATE TABLE " + SQL_DB_MESSAGE.Message.TABLE_NAME + " (" +

@@ -1,4 +1,4 @@
-package com.example.neighborhoodwork.support.RoomDatabaseForUsersAvatars
+package com.example.neighborhoodwork.support.UsersDatabase
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
@@ -9,14 +9,14 @@ import androidx.room.PrimaryKey
     tableName = "avatars",
     indices =  [Index("uid")]
 )
-data class DataEntityUsersAvatars(
+data class DataEntityUsers(
 
     @PrimaryKey
     @ColumnInfo(name = "uid")
     var uid: String,
 
-    @ColumnInfo(name = "photo")
-    var photo: String,
+    @ColumnInfo(name = "photo_url")
+    var photoURL: String,
 
     @ColumnInfo(name = "rating")
     var rating: Double,

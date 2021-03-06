@@ -21,32 +21,35 @@ class InfoWindowAdapter(private val mContext: Context) :
 
 
     private fun renderWiewText(marker: Marker, okno: View) {
+
         var clicked = 0
         var i = 0
 
             while(i < dane.zadania.size){
-                if(marker.snippet.toLong() == dane.zadania[i].ID.toLong()){
-                    clicked = i
-                    dane.clicked = i
-                    break
-                }else{
-                    i++
-                }
+                  if(marker.snippet.toLong() == dane.zadania[i].ID.toLong()){
+                      clicked = i
+                      dane.clicked = i
+                      break
+                  }else{
+                      i++
+                  }
 
-            okno.img8Info.setImageResource(R.drawable.boy)
+              okno.img8Info.setImageResource(R.drawable.boy)
 
-            okno.tx8Info.setText("${dane.zadania[clicked].title}")
-            okno.tx8Length.setText("${dane.zadania[clicked].length} min")
-            okno.tx8Wynagrodzenie.setText("${dane.zadania[clicked].wynagrodzenie} PLN")
-            val geocoder: Geocoder
-            val addresses: List<Address>
-            geocoder = Geocoder(mContext, Locale.getDefault())
-            addresses = geocoder.getFromLocation(dane.zadania[dane.clicked].x.toDouble(), dane.zadania[dane.clicked].y.toDouble(), 1)
-            val address = addresses[0].getAddressLine(0)
-            okno.tx8Adres.text = address
+              okno.tx8Info.setText("${dane.zadania[clicked].title}")
+              okno.tx8Length.setText("${dane.zadania[clicked].length} min")
+              okno.tx8Wynagrodzenie.setText("${dane.zadania[clicked].wynagrodzenie} PLN")
+              val geocoder: Geocoder
+              val addresses: List<Address>
+              geocoder = Geocoder(mContext, Locale.getDefault())
+              addresses = geocoder.getFromLocation(dane.zadania[dane.clicked].x.toDouble(), dane.zadania[dane.clicked].y.toDouble(), 1)
+              val address = addresses[0].getAddressLine(0)
+              okno.tx8Adres.text = address
         }
 
 
+
+         
     }
 
 

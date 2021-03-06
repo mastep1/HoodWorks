@@ -86,6 +86,13 @@ class Profil : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListe
         circularProgressDrawable.strokeWidth = 5f
         circularProgressDrawable.centerRadius = 30f
         circularProgressDrawable.start()
+
+
+
+           // var bitmap = BitmapFactory.decodeByteArray(dane.currentUserPhoto, 0, dane.currentUserPhoto.size)
+           // img4ZdjProf.setImageBitmap(bitmap)
+
+
         
 
 
@@ -101,29 +108,48 @@ class Profil : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListe
 
        // img4ZdjProf.setImageBitmap(objectBitmap)
 
-        tx4Imie.text = user.imie
-        ratingBar4.rating = user.rating.toFloat()
-        tx4Ukonczone1.text = user.ukonczone.toString()
-        tx4Dni1.text = "${user.dni} dni"
-        tx4Like.text = user.like.toString()
-        tx4DisLike.text = user.dislike.toString()
-        tx4Opis2.text = user.opis
+        tx4Imie.text = dane.currentUser.displayName
+        ratingBar4.rating = dane.currentUsersDataUsers!!.rating.toFloat()
+        tx4Ukonczone1.text = dane.currentUsersDataUsers!!.completed.toString()
+        tx4Dni1.text = "${dane.currentUsersDataUsers!!.daysWithApp} dni"
+        tx4Like.text = dane.currentUsersDataUsers!!.likes.toString()
+        tx4DisLike.text = dane.currentUsersDataUsers!!.dislikes.toString()
+        tx4Opis2.text = dane.currentUsersDataUsers!!.description
 
 
-        if(user.email =="")
+        if(dane.currentUser.email == null)
         {
-            tx4Email.text = "Nie podano"
+            img4Email.setOnClickListener {
+                var intent = Intent(applicationContext, EditProfil::class.java)
+                startActivity(intent)
+            }
+            img4Email.setOnClickListener {
+                var intent = Intent(applicationContext, EditProfil::class.java)
+                startActivity(intent)
+            }
+            tx4Email.text = "Nie podano, (kliknij aby dodać)"
         };else{
-            tx4Email.text = user.email
+            tx4Email.text = dane.currentUser.email
+        }
+        
+
+        if(dane.currentUser.phoneNumber == "")
+        {
+            tx4Tel.setOnClickListener {
+                var intent = Intent(applicationContext, EditProfil::class.java)
+                startActivity(intent)
+            }
+            img4Tel.setOnClickListener {
+                var intent = Intent(applicationContext, EditProfil::class.java)
+                startActivity(intent)
+            }
+            tx4Tel.text = "Nie podano, (kliknij aby dodać)"
+        };else{
+            tx4Tel.text = dane.currentUser.phoneNumber
         }
 
-
-        if(user.tel =="")
-        {
-            tx4Tel.text = "Nie podano"
-        };else{
-            tx4Tel.text = user.tel
-        }
+        tx4UserChat.visibility = View.GONE
+        img4UserChat.visibility = View.GONE
     }
 
     fun setOnClickListner(){

@@ -8,8 +8,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.neighborhoodwork.R
 import com.example.neighborhoodwork.support.dane
+import com.example.neighborhoodwork.support.uploadProfilePicture
 import kotlinx.android.synthetic.main.row_chat.view.*
-
 
 class ChatMenagerAdapter(var clickListner: OnSelectConConversation) : RecyclerView.Adapter<ViewHolder>() {
 
@@ -42,6 +42,7 @@ class ViewHolder constructor(itemView: View) : RecyclerView.ViewHolder(itemView)
             action.onItemClick(itemView.tx9Imie.text.toString(), position)
         }
         itemView.tx9Imie.text = dane.Contasts[position]
+        uploadProfilePicture(itemView.img9Profil, dane.Contasts[position] )
     }
 
 

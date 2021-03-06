@@ -84,7 +84,7 @@ class DodajZlecenie : AppCompatActivity() {
 
                 6 ->{
                     val timestamp = System.currentTimeMillis()
-                    dane.newTask.ID = "${dane.currentUser.providerId}$timestamp"
+                    dane.newTask.ID = "$timestamp"
                     dane.newTask.pracodawca = dane.currentUser.displayName.toString()
                     var intent = Intent(this, ConfirmNewTask::class.java)
                     startActivity(intent)

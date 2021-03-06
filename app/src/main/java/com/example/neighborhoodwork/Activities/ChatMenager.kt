@@ -20,12 +20,15 @@ class ChatMenager : AppCompatActivity(), NavigationView.OnNavigationItemSelected
 
 
     lateinit var SQL_CONTACTS_DB : SQL_CONTACTS
-    lateinit var userConversationOther: DatabaseReference
-    lateinit var newMessaesPath: DatabaseReference
 
+    @ExperimentalStdlibApi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chat)
+
+        img3filter.setOnClickListener {
+            Toast.makeText(applicationContext, dane.info, Toast.LENGTH_LONG).show()
+        }
 
         dane.currentActivity = "ChatMenager"
         dane.recycler = rc3
@@ -73,14 +76,18 @@ class ChatMenager : AppCompatActivity(), NavigationView.OnNavigationItemSelected
         }
     }
 
+
+
     private fun addConversation(newConversation : String){
         dane.Contasts.add(newConversation)          /// RAM
 
         SQL_CONTACTS_DB = SQL_CONTACTS(this)            //// SQL
         SQL_CONTACTS_DB.insertUser("${newConversation}")        /// SQL
 
-
+        downloadSBsProfil(dane.newContact,  applicationContext)
         dane.newContact = ""             /// wyczyszczenie zmiennej
+
+
     }
 
     override fun onNavigationItemSelected(p0: MenuItem): Boolean {
@@ -124,6 +131,7 @@ class ChatMenager : AppCompatActivity(), NavigationView.OnNavigationItemSelected
         return true
     }
 
+    @ExperimentalStdlibApi
     fun setOnClickListnerAndRecyclerApply() {
 
 

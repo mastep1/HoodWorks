@@ -23,7 +23,7 @@ import java.util.*
 
 class BigInfoWindow(contextBuffor : Context) : Fragment() {
 
-    var xxxxxxx = contextBuffor
+    var contextX = contextBuffor
 
     override fun onCreateView( inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.info_window_big, container, false )
@@ -33,7 +33,7 @@ class BigInfoWindow(contextBuffor : Context) : Fragment() {
     override fun onStart() {
         super.onStart()
 
-        setAll(xxxxxxx)
+        setAll(contextX)
 
 
     }

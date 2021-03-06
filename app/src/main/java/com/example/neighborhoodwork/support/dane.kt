@@ -1,7 +1,6 @@
 package com.example.neighborhoodwork.support
 
 import android.graphics.Bitmap
-import android.net.Uri
 import android.provider.BaseColumns
 import android.widget.ImageView
 import android.widget.TextView
@@ -9,17 +8,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.neighborhoodwor.ZadanieModel
 import com.example.neighborhoodwork.Models.MessageModel
 import com.example.neighborhoodwork.Models.UserHome
-import com.example.neighborhoodwork.support.RoomDatabaseForUsersAvatars.DataEntityUsersAvatars
+import com.example.neighborhoodwork.support.PhotosDatabase.DataEntityPhotos
+import com.example.neighborhoodwork.support.UsersDatabase.DataEntityUsers
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.LatLng
 import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.storage.FirebaseStorage
-import com.google.firebase.storage.StorageTask
-import org.w3c.dom.Text
-import java.io.File
-import java.net.URI
-import java.net.URL
-import kotlin.properties.Delegates
 
 object dane {
     var zadania = arrayListOf<ZadanieModel>()
@@ -45,9 +38,13 @@ object dane {
     var info = ""
     var photo : Bitmap? = null
     var photoInBytes: ByteArray?= null
-    var currentUsersData: DataEntityUsersAvatars? = null
-    var contactUsers = arrayListOf<DataEntityUsersAvatars>()
-    var forfor = 0
+    var currentUsersDataUsers: DataEntityUsers? = null
+    var contactUsers = arrayListOf<DataEntityUsers>()
+    var forListeningNewMessages = true
+    var photoURL = ""
+    var photos = arrayListOf<DataEntityPhotos>()
+    lateinit var currentUserPhoto : ByteArray
+    var messagesOfSpecificUser = arrayListOf<MessageModel>()
 }
 
 object time{

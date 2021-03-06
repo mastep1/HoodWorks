@@ -35,35 +35,34 @@ class EditProfil : AppCompatActivity() {
     }
 
     private fun afterStart(){
-        if(user.imie == "") {
+        if(dane.currentUser.displayName == "") {
             Etx7Imie.hint = "NIE PODANO"
         } else{
-            Etx7Imie.setText(user.imie)
+            Etx7Imie.setText(dane.currentUser.displayName)
         }
-        if(user.email == "") {
+        if(dane.currentUser.email == "") {
             Etx7Email.hint = "NIE PODANO"
         } else{
-            Etx7Email.setText(user.email)
+            Etx7Email.setText(dane.currentUser.email)
         }
-        if(user.tel == "") {
+        if(dane.currentUser.phoneNumber == "") {
             Etx7Tel.hint = "NIE PODANO"
         } else{
-            Etx7Tel.setText(user.tel)
+            Etx7Tel.setText(dane.currentUser.phoneNumber)
         }
-        if(user.opis == "") {
+        if(dane.currentUsersDataUsers!!.description == "") {
             Etx7Opis.hint = "NIE PODANO"
         } else{
-            Etx7Opis.setText(user.opis)
+            Etx7Opis.setText(dane.currentUsersDataUsers!!.description)
         }
 
         Etx7Imie.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(p0: Editable?) {
-                if(Etx7Imie.text.toString()!= user.imie){
+                if(Etx7Imie.text.toString()!= dane.currentUser.displayName){
                     tx7ZmianyImie.visibility = View.VISIBLE
                 }else{
                     tx7ZmianyImie.visibility = View.INVISIBLE
                 }
-
             }
 
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
@@ -75,7 +74,7 @@ class EditProfil : AppCompatActivity() {
 
         Etx7Email.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(p0: Editable?) {
-                if(Etx7Email.text.toString()!= user.email){
+                if(Etx7Email.text.toString()!= dane.currentUser.email){
                     if(tx7EmailError.visibility != View.VISIBLE){
                         tx7ZmianyEmail.visibility = View.VISIBLE
                     }
@@ -99,7 +98,7 @@ class EditProfil : AppCompatActivity() {
         Etx7Tel.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(p0: Editable?) {
                 if(tx7ErrorTel.visibility != View.VISIBLE){
-                    if(Etx7Tel.text.toString()!= user.tel){
+                    if(Etx7Tel.text.toString()!= dane.currentUser.phoneNumber){
                         tx7ZmianyTel.visibility = View.VISIBLE
                     }else{
                         tx7ZmianyTel.visibility = View.INVISIBLE
@@ -119,7 +118,7 @@ class EditProfil : AppCompatActivity() {
 
         Etx7Opis.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(p0: Editable?) {
-                if(Etx7Opis.text.toString()!= user.opis){
+                if(Etx7Opis.text.toString()!= dane.currentUsersDataUsers!!.description){
                     tx7ZmianyOpis.visibility = View.VISIBLE
                 }else{
                     tx7ZmianyOpis.visibility = View.INVISIBLE

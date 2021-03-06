@@ -33,6 +33,9 @@ class SamouczekAvater : Activity() {
 
         buttonLoadPicture!!.setOnClickListener { openGallery() }
 
+        button3.setOnClickListener {
+        }
+
         button2.setOnClickListener {
 
             dane.photoInBytes = compressPhotoToBytes(bitmap!!)

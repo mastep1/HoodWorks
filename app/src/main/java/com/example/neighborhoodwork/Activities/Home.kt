@@ -4,15 +4,12 @@ import android.Manifest
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.location.Location
 import android.location.LocationManager
 import android.os.Build
 import android.os.Bundle
-import android.os.Looper
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
-import androidx.annotation.NonNull
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -20,25 +17,18 @@ import androidx.core.view.GravityCompat
 import com.example.neighborhoodwork.Adapters.InfoWindowAdapter
 import com.example.neighborhoodwork.Fragments.BigInfoWindow
 import com.example.neighborhoodwork.R
-import com.example.neighborhoodwork.Room6
-import com.example.neighborhoodwork.SQLIMAGEACTIVITY
 import com.example.neighborhoodwork.support.*
+import com.example.neighborhoodwork.support.UsersDatabase.DatabaseUsers
 import com.firebase.ui.auth.AuthUI
 import com.google.android.gms.location.*
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
-import com.google.android.gms.maps.model.MarkerOptions
-import com.google.android.gms.tasks.OnCompleteListener
-import com.google.android.gms.tasks.Task
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.activity_home.*
 import java.util.*
 
@@ -59,6 +49,7 @@ class Home : AppCompatActivity(), OnMapReadyCallback, NavigationView.OnNavigatio
     lateinit var locationMarker : Marker
     var dodanoLokalizacje : Boolean = false
     private val mLocationPermissionsGranted = false
+    lateinit var databaseUserData: DatabaseUsers
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -66,10 +57,11 @@ class Home : AppCompatActivity(), OnMapReadyCallback, NavigationView.OnNavigatio
         setContentView(R.layout.activity_home)
 
         img2Filter.setOnClickListener {
-            Toast.makeText(applicationContext, "${dane.currentUsersData}", Toast.LENGTH_LONG).show()
-        }
+           // var intent = Intent(applicationContext, SQLIMAGEACTIVITY::class.java)
+            //startActivity(intent)
 
-        
+            Toast.makeText(applicationContext, dane.currentUsersDataUsers.toString(), Toast.LENGTH_LONG).show()
+        }
         if(dane.HomeOnCreate==false){
             auth = FirebaseAuth.getInstance()
             providers = Arrays.asList<AuthUI.IdpConfig>(
@@ -89,8 +81,6 @@ class Home : AppCompatActivity(), OnMapReadyCallback, NavigationView.OnNavigatio
 
 
         }
-
-
         setOnClickListners()
     }
 
@@ -113,7 +103,6 @@ class Home : AppCompatActivity(), OnMapReadyCallback, NavigationView.OnNavigatio
         }else{
             tx2NewMessage.visibility = View.INVISIBLE
         }
-
     }
 
 

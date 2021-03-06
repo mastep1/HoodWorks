@@ -13,20 +13,15 @@ import android.view.View
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.lifecycleScope
-import androidx.room.Dao
-import androidx.room.Room
-import androidx.room.Room.databaseBuilder
-import com.example.neighborhoodwork.Models.ForeignUser
 import com.example.neighborhoodwork.support.ForeignUserDatabaseHandler
-import com.example.neighborhoodwork.support.RoomDatabaseForUsersAvatars.DataEntityUsersAvatars
-import com.example.neighborhoodwork.support.RoomDatabaseForUsersAvatars.UsersAvatarsDao
-import com.example.neighborhoodwork.support.RoomDatabaseForUsersAvatars.UsersAvatarsDatabase
+import com.example.neighborhoodwork.support.UsersDatabase.DatabaseUsers
 import com.example.neighborhoodwork.support.dane
-import com.firebase.ui.auth.data.model.User
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.activity_s_q_l_i_m_a_g_e_a_c_t_i_v_i_t_y.*
 import kotlinx.coroutines.*
 import java.io.ByteArrayOutputStream
+import java.nio.charset.Charset
 
 open class SQLIMAGEACTIVITY : AppCompatActivity() {
 
@@ -54,14 +49,14 @@ open class SQLIMAGEACTIVITY : AppCompatActivity() {
         }
 
         TestGetAll.setOnClickListener {
-            val local = UsersAvatarsDatabase.getInstance(this)
+            val local = DatabaseUsers.getInstance(this)
             var tyt = GlobalScope.launch{
                 var files = local.usersAvatarsDao().getAll()
 
                 if(files.size != 0){
                     
                         var nameOfImage = files[files.size - 1].uid
-                        var imageBytes = files[files.size - 1].photo
+                        //var imageBytes = files[files.size - 1].photo
 
                        // var objectBitmap = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.size)
 
@@ -123,37 +118,57 @@ open class SQLIMAGEACTIVITY : AppCompatActivity() {
          }
     }
 
+
     fun storageImage(){
 
          if (TestEtx.text.toString() == "" || imageToStore == null){
-
-                Toast.makeText(applicationContext, "Please write description or imageTOStore is null", Toast.LENGTH_LONG).show()
+             Toast.makeText(applicationContext, "Please write description or imageTOStore is null", Toast.LENGTH_LONG).show()
 
          }else{
 
              try{
 
-                 var objectByteArrayOutputStream: ByteArrayOutputStream?
 
-                 objectByteArrayOutputStream = ByteArrayOutputStream()
+                 lateinit var userDataPath: DatabaseReference
+
+                 val fireuserBase = FirebaseDatabase.getInstance()
+
+                 userDataPath = fireuserBase.getReference("Users2")
+
+
+
+                 val charset: Charset = Charsets.UTF_8
+
+                 var objectByteArrayOutputStream = ByteArrayOutputStream()
 
                  imageToStore!!.compress(Bitmap.CompressFormat.JPEG, 100, objectByteArrayOutputStream)
 
 
-                 var imagesInBytes: ByteArray?
+                  var po = objectByteArrayOutputStream.toByteArray().contentToString()
 
-                 imagesInBytes = objectByteArrayOutputStream.toByteArray()
+                 userDataPath.setValue(po)
+
+                 Log.e("Alicja", po)
+                  //var string = String(po, charset)
+
+                 Toast.makeText(applicationContext, " ||| ${po.length}", Toast.LENGTH_LONG).show()
+
+                 var PiS = po.toByteArray(charset)
+                
+                 
+                 var objectBitmap17 = BitmapFactory.decodeByteArray(PiS, 0, PiS.size)
+
+                TestImg.setImageBitmap(objectBitmap17)
 
 
                  //var dataToPush = DataEntityUsersAvatars(TestEtx.text.toString(), imagesInBytes)
                 // Toast.makeText(applicationContext, "$dataToPush,", Toast.LENGTH_LONG).show()
 
 
-                 val local =  UsersAvatarsDatabase.getInstance(this)
+                 val local =  DatabaseUsers.getInstance(this)
                  //GlobalScope.launch{
                      //local.usersAvatarsDao().insertOrUpdate(dataToPush)
                //  }
-
              }catch(e : java.lang.Exception){
                  Log.e("Alicja", e.message)
                  Toast.makeText(applicationContext,  e.message, Toast.LENGTH_LONG).show()
@@ -167,3 +182,4 @@ open class SQLIMAGEACTIVITY : AppCompatActivity() {
 
 
 }
+
