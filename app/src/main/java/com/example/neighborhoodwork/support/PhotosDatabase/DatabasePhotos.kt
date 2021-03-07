@@ -9,7 +9,7 @@ import androidx.room.RoomDatabase
 private const val DATABASE = "photos"
 
 
-@Database(entities = [DataEntityPhotos::class], version = 2, exportSchema = false)
+@Database(entities = [DataEntityPhotos::class], version = 3, exportSchema = false)
 abstract class DatabasePhotos : RoomDatabase() {
 
     abstract fun daoPhotos(): DaoPhotos

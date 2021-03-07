@@ -21,6 +21,7 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_home.*
+import kotlinx.android.synthetic.main.chat_view.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
@@ -39,6 +40,7 @@ class MyService : Service(), OnSelectConConversation, OnSelectConConversationV {
 
     override fun onCreate() {
         super.onCreate()
+        experimente()
 
         downloadUserDataFromSQL(dane.currentUser)  // pobieranie danych użytkownika, kontaktów, wiadomośći i potem wiadomośći z firebase
 
@@ -132,6 +134,14 @@ class MyService : Service(), OnSelectConConversation, OnSelectConConversationV {
                     }
                 }
             }
+        }
+    }
+
+    private fun experimente(){
+        photosDatabase = DatabasePhotos.getInstance(this)
+
+        GlobalScope.launch {
+            var data = photosDatabase.daoPhotos().getAll()
         }
     }
 
@@ -267,6 +277,14 @@ class MyService : Service(), OnSelectConConversation, OnSelectConConversationV {
                     SQL_MESSAGE = SQL_MESSAGE(this@MyService)                   /// SQL
                     SQL_MESSAGE.insert(element)                                          /// SQL
 
+
+
+
+                    if(dane.currentActivity == "ChatView"){
+
+
+                    }
+
                     if(!checkDoExistConversation(element.user)){
                         addConversation(element.user)
                         //rc3.adapter = ChatMenagerAdapter(this@MyService)
@@ -276,7 +294,10 @@ class MyService : Service(), OnSelectConConversation, OnSelectConConversationV {
                     if(dane.currentActivity=="ChatMenager"){
                         dane.recycler.adapter = ChatMenagerAdapter(this@MyService)
                     }else if(dane.currentActivity=="ChatView"){
+                        ///////////////// Jeżeli user jest w widoku Cgatu trza dodać mu wiadomość bo Adapter bieże wiadomości z  dane.messagesOfSpecificUser
+                        dane.messagesOfSpecificUser.add(element)
                         dane.recycler.adapter = ChatViewAdapter(this@MyService)
+                        dane.recycler.smoothScrollToPosition(  dane.recycler.getAdapter()!!.itemCount - 1)
                     }else if(dane.currentActivity =="Home"){
                         dane.newMessage++
                         dane.tx.text = dane.newMessage.toString()

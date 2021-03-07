@@ -39,6 +39,12 @@ class ChatView : AppCompatActivity(), OnSelectConConversationV {
         super.onResume()
         dane.avoid = 0
 
+        dane.newMessage = 0
+
+        if(rc12ChatView.size != 0){
+            rc12ChatView.smoothScrollToPosition(rc12ChatView.getAdapter()!!.itemCount - 1)
+        }
+
     }
 
     override fun onCreate(savedInstanceState: Bundle?) = runBlocking{
@@ -52,6 +58,7 @@ class ChatView : AppCompatActivity(), OnSelectConConversationV {
 
         BT12Settings.setOnClickListener {
             rc12ChatView.smoothScrollToPosition(rc12ChatView.getAdapter()!!.itemCount - 1)
+            Log.e("12345", dane.messagesOfSpecificUser.last().toString())
         }
 
         val job = GlobalScope.launch {
@@ -64,7 +71,6 @@ class ChatView : AppCompatActivity(), OnSelectConConversationV {
             layoutManager = LinearLayoutManager(this@ChatView)
             addItemDecoration(TopSpacingItemDecoration(30))
             adapter = ChatViewAdapter(this@ChatView)
-
          }
 
 
@@ -152,7 +158,7 @@ class ChatView : AppCompatActivity(), OnSelectConConversationV {
                     val currentUser = auth.currentUser
                     val name = currentUser!!.displayName.toString()
 
-                    var messageToPush = MessageModel(message, false, "${date.time}", name, false )
+                    var messageToPush = MessageModel(message, false, "${date.time}", name, false)
                     link.setValue(messageToPush)
 
                     Etx12Message.setText("")
@@ -197,9 +203,8 @@ class ChatView : AppCompatActivity(), OnSelectConConversationV {
 
                 linkForMessageIndex.removeEventListener(this)
 
-//                var messageIndex = p0.value.toString().toInt()
-
-             //   linkForMessageIndex.setValue(messageIndex + 1)
+                var messageIndex = p0.value.toString().toInt()
+                linkForMessageIndex.setValue(messageIndex + 1)
             }
         })
     }

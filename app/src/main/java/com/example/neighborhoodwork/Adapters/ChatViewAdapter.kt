@@ -36,7 +36,7 @@ class ChatViewAdapter(var clickListnerV: OnSelectConConversationV) : RecyclerVie
         }
     }
     override fun getItemCount(): Int {
-        var howManyMessage =  dane.messagesOfSpecificUser.size - 1
+        var howManyMessage =  dane.messagesOfSpecificUser.size 
         return howManyMessage
     }
 

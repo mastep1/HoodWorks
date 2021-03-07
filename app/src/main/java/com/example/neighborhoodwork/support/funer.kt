@@ -1,6 +1,7 @@
 package com.example.neighborhoodwork.support
 
 import android.content.Context
+import android.database.CursorWindow
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.util.Log
@@ -24,7 +25,7 @@ import kotlinx.coroutines.*
 import java.io.ByteArrayOutputStream
 
 
-fun uploadProfilePicture(img : ImageView, Uname : String){
+fun uploadProfilePicture(img: ImageView, Uname: String){
 
     var iii = 0
       for(i in dane.contactUsers){
@@ -42,7 +43,7 @@ fun uploadProfilePicture(img : ImageView, Uname : String){
       }
 }
 
-fun uploadPhotoToFireStore(photo : ByteArray, Uname : String, context: Context, bt : Button) {
+fun uploadPhotoToFireStore(photo: ByteArray, Uname: String, context: Context, bt: Button) {
     var imageRef = FirebaseStorage.getInstance().reference.child("usersAvatars").child(Uname)
     imageRef.putBytes(photo).addOnSuccessListener { taskSnapshot ->
 
@@ -75,16 +76,18 @@ fun downloadSBsProfil(Uname: String, context: Context){
 
             userDataPath.removeEventListener(this)
 
-            var newData = DataEntityUsers("","", 0.0, 0, 0, 0, 0,
-                "", 0.0, 0.0, 0, "", 1)
+            var newData = DataEntityUsers(
+                "", "", 0.0, 0, 0, 0, 0,
+                "", 0.0, 0.0, 0, "", 1
+            )
 
             for (i in p0.children) {
 
-                when(i.key){
+                when (i.key) {
 
                     "description" -> newData.description = i.value.toString()
-                    "dislikes" ->  newData.dislikes = i.value.toString().toInt()
-                    "likes" ->  newData.likes = i.value.toString().toInt()
+                    "dislikes" -> newData.dislikes = i.value.toString().toInt()
+                    "likes" -> newData.likes = i.value.toString().toInt()
                     "daysWithApp" -> newData.daysWithApp = i.value.toString().toInt()
                     "completed" -> newData.completed = i.value.toString().toInt()
                     "rating" -> newData.rating = i.value.toString().toDouble()
@@ -107,21 +110,24 @@ fun downloadSBsProfil(Uname: String, context: Context){
             Toast.makeText(context, "$userDataPath", Toast.LENGTH_LONG).show()
             Log.e("Alicja", "$userDataPath")
 
-            val  globalscope = GlobalScope.launch {
-                dane.info = databaseFromFirebaseToSQL.usersAvatarsDao().insertOrUpdate(newData).toString()
+            val globalscope = GlobalScope.launch {
+                dane.info =
+                    databaseFromFirebaseToSQL.usersAvatarsDao().insertOrUpdate(newData).toString()
             }
             runBlocking {
                 globalscope.join()
-           }
+            }
         }
 
-        override fun onCancelled(p0: DatabaseError){
+        override fun onCancelled(p0: DatabaseError) {
         }
     })
 
 }
 
 fun compressPhotoToBytes(bitmap: Bitmap): ByteArray?{
+
+
 
     try{
         var photoInBytes : ByteArray? = null
@@ -137,25 +143,35 @@ fun compressPhotoToBytes(bitmap: Bitmap): ByteArray?{
 
         return photoInBytes
         
-    }catch(e : Exception){
-       Log.e( "errorKrystian", e.message)
+    }catch (e: Exception){
+       Log.e("errorKrystian", e.message)
 
     }
+
+
     return null
 }
 
-fun addMessage(context: Context, message: String, date : String, thisUser : Boolean ){
+fun addMessage(context: Context, message: String, date: String, thisUser: Boolean){
 
     lateinit var SQL_MESSAGE : SQL_MESSAGE
 
     SQL_MESSAGE = SQL_MESSAGE(context)            //// SQL
-    SQL_MESSAGE.insert(MessageModel(message, true,"$date", dane.Contasts[dane.openConversation], true ))             /// SQL
+    SQL_MESSAGE.insert(
+        MessageModel(
+            message,
+            true,
+            "$date",
+            dane.Contasts[dane.openConversation],
+            true
+        )
+    )             /// SQL
 
     dane.messages.add(MessageModel(message, true, date, dane.Contasts[dane.openConversation], true))         /// RAM
 
 }
 
-fun setCurrentActivity(tx : TextView, activityName : String){
+fun setCurrentActivity(tx: TextView, activityName: String){
     dane.tx = tx
     dane.currentActivity =  activityName
 }
@@ -190,7 +206,7 @@ fun znaczniki(googleMap: GoogleMap) {
 
 }
 
-fun makeListWithMessages() : java.util.ArrayList <MessageModel> {
+fun makeListWithMessages() : java.util.ArrayList<MessageModel> {
 
     var listOfMessages = arrayListOf<MessageModel>()
     var index = 0

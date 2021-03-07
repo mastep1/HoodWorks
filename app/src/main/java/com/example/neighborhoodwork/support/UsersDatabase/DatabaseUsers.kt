@@ -8,7 +8,7 @@ import androidx.room.RoomDatabase
 
 private const val DATABASE = "avatars"
 
-@Database(entities = [DataEntityUsers::class], version = 23, exportSchema = false)
+@Database(entities = [DataEntityUsers::class], version = 24, exportSchema = false)
 abstract class DatabaseUsers : RoomDatabase() {
 
     abstract fun usersAvatarsDao(): DaoUsers
