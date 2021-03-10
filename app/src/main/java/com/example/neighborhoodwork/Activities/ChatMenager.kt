@@ -3,6 +3,7 @@ package com.example.neighborhoodwork.Activities
 import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
@@ -15,6 +16,7 @@ import com.firebase.ui.auth.AuthUI
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_chat.*
+import kotlinx.android.synthetic.main.activity_home.*
 
 class ChatMenager : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, OnSelectConConversation{
 
@@ -29,8 +31,8 @@ class ChatMenager : AppCompatActivity(), NavigationView.OnNavigationItemSelected
         img3filter.setOnClickListener {
             Toast.makeText(applicationContext, dane.info, Toast.LENGTH_LONG).show()
         }
-
-        dane.currentActivity = "ChatMenager"
+        
+        setCurrentActivity(tx3NewMessages, "ChatMenager")
         dane.recycler = rc3
 
         addContactIfShould()
@@ -42,6 +44,19 @@ class ChatMenager : AppCompatActivity(), NavigationView.OnNavigationItemSelected
 
 
 
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        setCurrentActivity(tx3NewMessages, "ChatMenager")
+
+        if(dane.newMessage!=0){
+            tx3NewMessages.text = dane.newMessage.toString()
+            tx3NewMessages.visibility = View.VISIBLE
+        }else{
+            tx3NewMessages.visibility = View.INVISIBLE
+        }
     }
 
     private fun checkDoExistConversation(conversation : String) : Boolean{
@@ -146,6 +161,7 @@ class ChatMenager : AppCompatActivity(), NavigationView.OnNavigationItemSelected
         img3Mapa.setOnClickListener {
             val mapa = Intent(applicationContext, Home::class.java)
             startActivity(mapa)
+            finish()
             overridePendingTransition(
                 R.anim.slide_in_right,
                 R.anim.slide_out_left
@@ -155,6 +171,7 @@ class ChatMenager : AppCompatActivity(), NavigationView.OnNavigationItemSelected
         img3Profil.setOnClickListener {
             val profil = Intent(applicationContext, Profil::class.java)
             startActivity(profil)
+            finish()
             overridePendingTransition(
                 R.anim.slide_in_right,
                 R.anim.slide_out_left

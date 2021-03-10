@@ -7,7 +7,9 @@ import android.database.sqlite.SQLiteConstraintException
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteException
 import android.database.sqlite.SQLiteOpenHelper
+import android.view.View
 import com.example.neighborhoodwork.Models.MessageModel
+import kotlinx.android.synthetic.main.activity_home.*
 
 
 class SQL_MESSAGE(context: Context) : SQLiteOpenHelper(context,
@@ -83,6 +85,12 @@ class SQL_MESSAGE(context: Context) : SQLiteOpenHelper(context,
                 cursor.moveToNext()
                 dane.newMessage++
             }
+        }
+        if(dane.newMessage!=0){
+            dane.tx.text = dane.newMessage.toString()
+            dane.tx.visibility = View.VISIBLE
+        }else{
+            dane.tx.visibility = View.INVISIBLE
         }
         
 

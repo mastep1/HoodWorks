@@ -7,6 +7,7 @@ import android.content.pm.PackageManager
 import android.location.LocationManager
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
@@ -30,6 +31,7 @@ import com.google.android.gms.maps.model.Marker
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_home.*
+import kotlinx.android.synthetic.main.profil.*
 import java.util.*
 
 
@@ -56,11 +58,9 @@ class Home : AppCompatActivity(), OnMapReadyCallback, NavigationView.OnNavigatio
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
 
-        img2Filter.setOnClickListener {
+        img2Filter.setOnClickListener{
            // var intent = Intent(applicationContext, SQLIMAGEACTIVITY::class.java)
             //startActivity(intent)
-
-            Toast.makeText(applicationContext, dane.currentUsersDataUsers.toString(), Toast.LENGTH_LONG).show()
         }
         if(dane.HomeOnCreate==false){
             auth = FirebaseAuth.getInstance()
@@ -73,7 +73,7 @@ class Home : AppCompatActivity(), OnMapReadyCallback, NavigationView.OnNavigatio
 
             val currentUser = auth.currentUser
 
-            if (currentUser != null) {
+            if(currentUser != null){
                 dane.currentUser = currentUser
             }
             dane.superImage = img2Mapa
@@ -84,7 +84,7 @@ class Home : AppCompatActivity(), OnMapReadyCallback, NavigationView.OnNavigatio
         setOnClickListners()
     }
 
-    override fun onResume() {
+    override fun onResume(){
         super.onResume()
 
         setCurrentActivity(tx2NewMessage, "Home")
@@ -128,6 +128,7 @@ class Home : AppCompatActivity(), OnMapReadyCallback, NavigationView.OnNavigatio
         img2Chat.setOnClickListener {
             val chat = Intent(applicationContext, ChatMenager::class.java)
             startActivity(chat)
+            finish()
             overridePendingTransition(
                 R.anim.slide_in_left,
                 R.anim.slide_out_right
@@ -136,7 +137,9 @@ class Home : AppCompatActivity(), OnMapReadyCallback, NavigationView.OnNavigatio
 
         img2Profil.setOnClickListener {
             val profil = Intent(applicationContext, Profil::class.java)
+            profil.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
             startActivity(profil)
+            finish()
             overridePendingTransition(
                 R.anim.slide_in_right,
                 R.anim.slide_out_left
@@ -155,8 +158,10 @@ class Home : AppCompatActivity(), OnMapReadyCallback, NavigationView.OnNavigatio
             if (context.checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
                 true
             } else {
-                ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),
-                    REQUEST_PERMISSION_LOCATION)
+                ActivityCompat.requestPermissions(
+                    this, arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),
+                    REQUEST_PERMISSION_LOCATION
+                )
                 false
             }
         } else {
@@ -164,10 +169,14 @@ class Home : AppCompatActivity(), OnMapReadyCallback, NavigationView.OnNavigatio
         }
     }
 
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
         if (requestCode == REQUEST_PERMISSION_LOCATION) {
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                Toast.makeText(this,"Permission granted",Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Permission granted", Toast.LENGTH_SHORT).show()
                 startLocationUpdates()
             }
         }
@@ -254,7 +263,7 @@ class Home : AppCompatActivity(), OnMapReadyCallback, NavigationView.OnNavigatio
 
 
 
-    fun bigInfoWindow(tryb : Boolean){
+    fun bigInfoWindow(tryb: Boolean){
         if(tryb==true){
             FAB2MyLocation.hide()
             frag.beginTransaction().add(R.id.l2InfoFrag, infoWindow).commit()
@@ -275,7 +284,7 @@ class Home : AppCompatActivity(), OnMapReadyCallback, NavigationView.OnNavigatio
                 ltlng, 15f
             )
             googleMap!!.animateCamera(cameraUpdate)
-            var lokalizacjaDoZapisania = LatLng( location.latitude, location.longitude)
+            var lokalizacjaDoZapisania = LatLng(location.latitude, location.longitude)
             dane.lokalizacjaAktualna = lokalizacjaDoZapisania
         }
 
@@ -313,7 +322,8 @@ class Home : AppCompatActivity(), OnMapReadyCallback, NavigationView.OnNavigatio
                     startActivity(main)
                     finish()
                 }.addOnFailureListener { e ->
-                    Toast.makeText(this@Home, "Wylogowanie nie powidło się", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@Home, "Wylogowanie nie powidło się", Toast.LENGTH_SHORT)
+                        .show()
                 }
             }
         }

@@ -42,8 +42,6 @@ object dane {
     var contactUsers = arrayListOf<DataEntityUsers>()
     var forListeningNewMessages = true
     var photoURL = ""
-    var photos = arrayListOf<DataEntityPhotos>()
-    lateinit var currentUserPhoto : ByteArray
     var messagesOfSpecificUser = arrayListOf<MessageModel>()
 }
 

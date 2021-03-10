@@ -174,7 +174,8 @@ fun addMessage(context: Context, message: String, date: String, thisUser: Boolea
 fun setCurrentActivity(tx: TextView, activityName: String){
     dane.tx = tx
     dane.currentActivity =  activityName
-}
+    Log.e("FUCKINGERROR1", "${dane.tx.text},  $activityName")
+}                             
 
 fun znaczniki(googleMap: GoogleMap) {
     var i = 0

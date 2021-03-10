@@ -40,7 +40,7 @@ class MyService : Service(), OnSelectConConversation, OnSelectConConversationV {
 
     override fun onCreate() {
         super.onCreate()
-        experimente()
+        //experimente()
 
         downloadUserDataFromSQL(dane.currentUser)  // pobieranie danych użytkownika, kontaktów, wiadomośći i potem wiadomośći z firebase
 
@@ -290,7 +290,6 @@ class MyService : Service(), OnSelectConConversation, OnSelectConConversationV {
                         //rc3.adapter = ChatMenagerAdapter(this@MyService)
 
                     }
-
                     if(dane.currentActivity=="ChatMenager"){
                         dane.recycler.adapter = ChatMenagerAdapter(this@MyService)
                     }else if(dane.currentActivity=="ChatView"){
@@ -307,6 +306,9 @@ class MyService : Service(), OnSelectConConversation, OnSelectConConversationV {
                         dane.tx.text = dane.newMessage.toString()
                         dane.tx.visibility = View.VISIBLE
 
+                    }else{
+                        Log.e("FUCKINGERROR", "NOACTIVITY")
+                        Toast.makeText(applicationContext, "NoActivity", Toast.LENGTH_LONG).show()
                     }
                 }else if(dataSnapshot.value == null){
 

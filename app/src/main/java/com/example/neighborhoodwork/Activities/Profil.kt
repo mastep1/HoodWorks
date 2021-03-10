@@ -157,6 +157,7 @@ class Profil : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListe
         img4Mapa.setOnClickListener {
             val map = Intent(applicationContext,  Home::class.java)
             startActivity(map)
+            finish()
             overridePendingTransition(
                 R.anim.slide_in_left,
                 R.anim.slide_out_right
@@ -166,6 +167,7 @@ class Profil : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListe
         img4Chat.setOnClickListener {
             val chat = Intent(applicationContext,  ChatMenager::class.java)
             startActivity(chat)
+            finish()
             overridePendingTransition(
                 R.anim.slide_in_left,
                 R.anim.slide_out_right
@@ -185,7 +187,7 @@ class Profil : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListe
         menu4.setNavigationItemSelectedListener(this)
 
 
-        FAB4.setOnClickListener {
+        FAB4.setOnClickListener{
             val editProfil = Intent(applicationContext,  EditProfil::class.java)
             startActivity(editProfil)
         }

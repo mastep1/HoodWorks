@@ -102,7 +102,7 @@
                     android:id="@+id/img3Chat"
                     android:layout_width="70dp"
                     android:layout_height="70dp"
-                    android:layout_marginBottom="10dp"
+                    android:layout_marginBottom="5dp"
                     android:background="@android:color/transparent"
                     android:paddingLeft="5dp"
                     android:paddingTop="5dp"
@@ -111,6 +111,20 @@
                     app:layout_constraintEnd_toStartOf="@+id/img3Mapa"
                     app:layout_constraintStart_toStartOf="parent"
                     app:srcCompat="@drawable/poprawione" />
+
+                <TextView
+                    android:id="@+id/tx3NewMessages"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="60dp"
+                    android:layout_marginBottom="67dp"
+                    android:text="1"
+                    android:textColor="#FD0303"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:visibility="invisible"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/img3Chat" />
 
                 <ImageView
                     android:id="@+id/img3Mapa"

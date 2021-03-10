@@ -4,19 +4,12 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.View
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.FragmentActivity
-import bolts.Task
 import com.example.neighborhoodwork.R
 import com.example.neighborhoodwork.support.dane
-import com.example.neighborhoodwork.support.fireBaseConnection
 import com.example.neighborhoodwork.support.user
-import com.google.android.gms.auth.api.credentials.Credential
-import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.*
 import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.edit_profil.*
@@ -58,9 +51,9 @@ class EditProfil : AppCompatActivity() {
 
         Etx7Imie.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(p0: Editable?) {
-                if(Etx7Imie.text.toString()!= dane.currentUser.displayName){
+                if (Etx7Imie.text.toString() != dane.currentUser.displayName) {
                     tx7ZmianyImie.visibility = View.VISIBLE
-                }else{
+                } else {
                     tx7ZmianyImie.visibility = View.INVISIBLE
                 }
             }
@@ -74,14 +67,14 @@ class EditProfil : AppCompatActivity() {
 
         Etx7Email.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(p0: Editable?) {
-                if(Etx7Email.text.toString()!= dane.currentUser.email){
-                    if(tx7EmailError.visibility != View.VISIBLE){
+                if (Etx7Email.text.toString() != dane.currentUser.email) {
+                    if (tx7EmailError.visibility != View.VISIBLE) {
                         tx7ZmianyEmail.visibility = View.VISIBLE
                     }
-                }else{
-                    if(tx7EmailError.visibility == View.VISIBLE){
+                } else {
+                    if (tx7EmailError.visibility == View.VISIBLE) {
                         tx7ZmianyEmail.visibility = View.INVISIBLE
-                    }else{
+                    } else {
                         tx7ZmianyEmail.visibility = View.GONE
                     }
                 }
@@ -97,13 +90,13 @@ class EditProfil : AppCompatActivity() {
 
         Etx7Tel.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(p0: Editable?) {
-                if(tx7ErrorTel.visibility != View.VISIBLE){
-                    if(Etx7Tel.text.toString()!= dane.currentUser.phoneNumber){
+                if (tx7ErrorTel.visibility != View.VISIBLE) {
+                    if (Etx7Tel.text.toString() != dane.currentUser.phoneNumber) {
                         tx7ZmianyTel.visibility = View.VISIBLE
-                    }else{
+                    } else {
                         tx7ZmianyTel.visibility = View.INVISIBLE
                     }
-                }else{
+                } else {
                     tx7ZmianyTel.visibility = View.INVISIBLE
                 }
 
@@ -118,9 +111,9 @@ class EditProfil : AppCompatActivity() {
 
         Etx7Opis.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(p0: Editable?) {
-                if(Etx7Opis.text.toString()!= dane.currentUsersDataUsers!!.description){
+                if (Etx7Opis.text.toString() != dane.currentUsersDataUsers!!.description) {
                     tx7ZmianyOpis.visibility = View.VISIBLE
-                }else{
+                } else {
                     tx7ZmianyOpis.visibility = View.INVISIBLE
                 }
 
@@ -274,7 +267,7 @@ class EditProfil : AppCompatActivity() {
                         credital = loginUser(current)
                         signInUser = true
                     }
-                changePassword(credital,new, tx7HasloZmiany)
+                changePassword(credital, new, tx7HasloZmiany)
             }
 
             else if(current==""||
@@ -309,7 +302,7 @@ class EditProfil : AppCompatActivity() {
     }
 
 
-    private fun commmitDescription(opis : String){
+    private fun commmitDescription(opis: String){
          if(opis!=user.opis){
              changeDescription(opis)
              finishIFShould()
@@ -323,12 +316,18 @@ class EditProfil : AppCompatActivity() {
     private fun loginUser(currentPasword: String) : AuthCredential {
 
         if(dane.currentUser != null && dane.currentUser.email != null){
-            val credentialEmail = EmailAuthProvider.getCredential(dane.currentUser.email!!, currentPasword)
+            val credentialEmail = EmailAuthProvider.getCredential(
+                dane.currentUser.email!!,
+                currentPasword
+            )
 
             return credentialEmail
 
         }else{
-            val credentialPhone = PhoneAuthProvider.getCredential(dane.currentUser.phoneNumber!!, currentPasword)
+            val credentialPhone = PhoneAuthProvider.getCredential(
+                dane.currentUser.phoneNumber!!,
+                currentPasword
+            )
             return credentialPhone
         }
     }
@@ -344,7 +343,12 @@ class EditProfil : AppCompatActivity() {
         finishIFShould()
     }
 
-    private fun changeEmail(credential : AuthCredential, newEmail : String, tx : TextView, bait : TextView){
+    private fun changeEmail(
+        credential: AuthCredential,
+        newEmail: String,
+        tx: TextView,
+        bait: TextView
+    ){
 
         dane.currentUser?.reauthenticate(credential)
             ?.addOnCompleteListener {
@@ -375,7 +379,7 @@ class EditProfil : AppCompatActivity() {
             }
     }
 
-    private fun changeUsername(newUsername : String){
+    private fun changeUsername(newUsername: String){
 
         var newProfileException = UserProfileChangeRequest.Builder()
             .setDisplayName(newUsername)
@@ -390,7 +394,12 @@ class EditProfil : AppCompatActivity() {
         user.imie = Etx7Imie.text.toString()
     }
 
-    private fun changeTel(credital: AuthCredential, newNumber: Int, txError: TextView, txZmiany: TextView) {
+    private fun changeTel(
+        credital: AuthCredential,
+        newNumber: Int,
+        txError: TextView,
+        txZmiany: TextView
+    ) {
         
         dane.currentUser?.reauthenticate(credital)
             ?.addOnCompleteListener {
@@ -422,7 +431,7 @@ class EditProfil : AppCompatActivity() {
             }
     }
 
-    private fun changePassword(credential : AuthCredential, newPassword : String, tx : TextView){
+    private fun changePassword(credential: AuthCredential, newPassword: String, tx: TextView){
         dane.currentUser?.reauthenticate(credential)
             ?.addOnCompleteListener {
                 if(it.isSuccessful){
@@ -452,9 +461,11 @@ class EditProfil : AppCompatActivity() {
 
         wykonano++
         if(wykonano==5){
-            var powrot = Intent(applicationContext , Profil::class.java)
+
+            var powrot = Intent(applicationContext, Profil::class.java)
+            powrot.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
             startActivity(powrot)
-            finish()
+            this@EditProfil.finish()
         }
 
     }
